@@ -25,7 +25,7 @@ public class Customer {
 		} 
 		else {
 			System.out.println("That is not a valid customer type code.");		//Is there a better way to handle this?
-			System.out.println("Valid customer codes: G, C, V.");
+			System.out.println("Valid customer type codes: G, C, V.");
 		}
 	}
 	
