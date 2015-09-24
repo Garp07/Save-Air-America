@@ -7,14 +7,7 @@ public class Address {
 	private String zipcode;
 	private String country;
 	
-	/**
-	 * Constructor for Address class
-	 * @param street the street to be set
-	 * @param city the city to be set
-	 * @param state the state to be set
-	 * @param zipcode the zipcode to be set
-	 * @param country the country to be set
-	 */
+	//Address constructor
 	public Address(String street, String city, String state, String zipcode, String country) {
 		this.setStreet(street);
 		this.setCity(city);
@@ -23,71 +16,52 @@ public class Address {
 		this.setCountry(country);
 	}
 	
-	public String getFullAddress() {
-		return "TODO: getFullAddress if we need it";
-	}
-	
-	/**
-	 * @return the street
-	 */
+	//street getter
 	public String getStreet() {
 		return street;
 	}
-	/**
-	 * @param street the street to set
-	 */
+	
+	//street setter
 	public void setStreet(String street) {
 		this.street = street;
 	}
 	
-	/**
-	 * @return the city
-	 */
+	//city getter
 	public String getCity() {
 		return city;
 	}
-	/**
-	 * @param city the city to set
-	 */
+	
+	//city setter
 	public void setCity(String city) {
 		this.city = city;
 	}
 	
-	/**
-	 * @return the state
-	 */
+	//state getter
 	public String getState() {
 		return state;
 	}
-	/**
-	 * @param state the state to set
-	 */
+
+	//state setter
 	public void setState(String state) {
 		this.state = state;
 	}
 	
-	/**
-	 * @return the zipcode
-	 */
+	//zipcode getter
 	public String getZipcode() {
 		return zipcode;
 	}
-	/**
-	 * @param zipcode the zipcode to set
-	 */
+
+	//zipcode setter
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
 	
-	/**
-	 * @return the country
-	 */
+	//country getter
 	public String getCountry() {
 		return country;
 	}
-	/**
-	 * @param country the country to set
-	 */
+
+	//country setter
 	public void setCountry(String country) {
 		this.country = country;
 	}
