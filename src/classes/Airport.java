@@ -14,8 +14,8 @@ public class Airport {
 		this.setAirportCode(airportCode);
 		this.setName(name);
 		this.setAddress(address);
-		this.setLatitude(latDegs + latMins / 60);
-		this.setLongitude(lonDegs + lonMins / 60);
+		this.setLatitude(latDegs + latMins / 60.0);				//typecast to double
+		this.setLongitude(lonDegs + lonMins / 60.0);
 		this.setPassengerFacilityFee(passengerFacilityFee);
 	}
 	
