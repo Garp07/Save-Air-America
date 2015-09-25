@@ -45,19 +45,9 @@ public class PersonConverter {
 						String state = addressTokens[2];							//state...
 						String zipCode = addressTokens[3];							//zip code...
 						String country = addressTokens[4];							//and finally country
-						String phoneNumber = null;
+						String phoneNumber = tokens[3];
 						ArrayList<String> emails = new ArrayList<String>();
-					if(tokens.length == 4) {										//Case if either telephone number or emails is omitted
-						if(!tokens[3].contains("@")) {								//Case if telephone number is given, but not email
-							phoneNumber = tokens[3];							
-						} else {
-							String emailTokens[] = tokens[3].split(",");			//Multiple emails are split by commas
-							for(int j = 0; j < emailTokens.length; j++) {
-								emails.add(emailTokens[j]);							//Populate array with emails
-							}
-						}
-					} else if(tokens.length == 5) {									//Case if both telephone and emails are provided
-						phoneNumber = tokens[3];
+					if(tokens.length == 5) {										//Case if both telephone and emails are provided
 						String emailTokens[] = tokens[4].split(",");					
 						for(int j = 0; j < emailTokens.length; j++) {
 							emails.add(emailTokens[j]);	
@@ -66,7 +56,7 @@ public class PersonConverter {
 					
 					add = new Address(street, city, state, zipCode, country);		//Populate address with attributes
 					
-					if(phoneNumber != null) {										//If we have a phone number
+					if(phoneNumber.length() != 0) {										//If we have a phone number
 						human = new Person(personCode, firstName, lastName, add, phoneNumber);
 					} else {
 						human = new Person(personCode, firstName, lastName, add);	//If we don't have a phone number
