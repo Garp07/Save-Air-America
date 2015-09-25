@@ -4,10 +4,8 @@ public class Airport {
 	private String airportCode;
 	private String name;
 	private Address address;
-	private int latDegs;
-	private int latMins;
-	private int lonDegs;
-	private int lonMins;
+	private double latitude;
+	private double longitude;
 	private double passengerFacilityFee;
 	
 	//Airport constructor
@@ -16,13 +14,10 @@ public class Airport {
 		this.setAirportCode(airportCode);
 		this.setName(name);
 		this.setAddress(address);
-		this.setLatDegs(latDegs);
-		this.setLatMins(latMins);
-		this.setLonDegs(lonDegs);
-		this.setLonMins(lonMins);
+		this.setLatitude(latDegs + latMins / 60);
+		this.setLongitude(lonDegs + lonMins / 60);
 		this.setPassengerFacilityFee(passengerFacilityFee);
 	}
-	
 	
 	//airportCode getter
 	public String getAirportCode() {
@@ -54,46 +49,26 @@ public class Airport {
 		this.address = address;
 	}
 	
-	//latDegs getter
-	public int getLatDegs() {
-		return latDegs;
+	//latitude getter
+	public double getLatitude() {
+		return latitude;
 	}
 	
-	//latDegs setter
-	public void setLatDegs(int latDegs) {
-		this.latDegs = latDegs;
+	//latitude setter
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
 	}
 	
-	//latMins getter
-	public int getLatMins() {
-		return latMins;
-	}
-	
-	//latMins setter
-	public void setLatMins(int latMins) {
-		this.latMins = latMins;
-	}
-	
-	//lonDegs getter
-	public int getLonDegs() {
-		return lonDegs;
+	//longitude getter
+	public double getLongitude() {
+		return longitude;
 	}
 
-	//lonDegs setter
-	public void setLonDegs(int lonDegs) {
-		this.lonDegs = lonDegs;
+	//longitude setter
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
 	}
-	
-	//lonMins getter
-	public int getLonMins() {
-		return lonMins;
-	}
-	
-	//lonMins setter
-	public void setLonMins(int lonMins) {
-		this.lonMins = lonMins;
-	}
-	
+
 	//passengerFacilityFee getter
 	public double getPassengerFacilityFee() {
 		return passengerFacilityFee;

@@ -3,10 +3,20 @@ package classes;
 public class Customer {
 	private String code;
 	private String type;
-	private String primaryContact;							
+	private Person primaryContact;							
 	private String name;
-	private int airlineMiles;								
+	private double airlineMiles;
 	
+	//name getter
+	public String getname() {
+		return name;
+	}
+	
+	//name setter
+	public void setame(String name) {
+		this.name = name;
+	}
+
 	public String getCode() {								//Customer code getter
 		return code;
 	}
@@ -29,36 +39,24 @@ public class Customer {
 		}
 	}
 	
-	public String getPrimaryContact() {						//Customer primary contact getter
+	public Person getPrimaryContact() {						//Customer primary contact getter
 		return primaryContact;
 	}
 	
-	public void setPrimaryContact(String primaryContact) {	//Customer primary contact setter
+	public void setPrimaryContact(Person primaryContact) {	//Customer primary contact setter
 		this.primaryContact = primaryContact;
 	}
 	
-	public String getName() {								//Customer name getter
-		return name;
-	}
 	
-	public void setName(String name) {						//Customer name setter
-		if(name != null) {
-			this.name = name;
-		}
-		else {
-			System.out.println("Please use a valid name.");	//Is there a better way to handle this?
-		}
-	}
-	
-	public int getAirlineMiles() {							//Customer airline miles getter
+	public double getAirlineMiles() {							//Customer airline miles getter
 		return airlineMiles;
 	}
 	
-	public void setAirlineMiles(int airlineMiles) {			//Customer airline miles setter
+	public void setAirlineMiles(double airlineMiles) {			//Customer airline miles setter
 		this.airlineMiles = airlineMiles;
 	}
 	
-	public Customer(String code, String type, String primaryContact, String name, int airlineMiles) {			//Customer constructor
+	public Customer(String code, String type, Person primaryContact, String name, double airlineMiles) {			//Customer constructor
 		this.code = code;
 		this.type = type;
 		this.primaryContact = primaryContact;

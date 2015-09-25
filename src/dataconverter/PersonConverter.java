@@ -32,8 +32,8 @@ public class PersonConverter {
 			for(int i = 0; i < count; i++) {										//Loop through rest of lines
 				String line = s.nextLine();
 				if(!line.trim().isEmpty()) {										//If line isn't blank
-					Person human = null;											//Create an empty person object
-					Address add = null;												//Create an empty address object
+					Person person = null;											//Create an empty person object
+					Address address = null;												//Create an empty address object
 					String tokens[] = line.split(";");								//Split up the line at ;
 					String personCode = tokens[0];									//First thing in a line should be person code
 					String nameTokens[] = tokens[1].split(",");						//Names are connected by , so need to be split further
@@ -54,19 +54,19 @@ public class PersonConverter {
 						}
 					}
 					
-					add = new Address(street, city, state, zipCode, country);		//Populate address with attributes
+					address = new Address(street, city, state, zipCode, country);		//Populate address with attributes
 					
 					if(phoneNumber.length() != 0) {										//If we have a phone number
-						human = new Person(personCode, firstName, lastName, add, phoneNumber);
+						person = new Person(personCode, firstName, lastName, address, phoneNumber);
 					} else {
-						human = new Person(personCode, firstName, lastName, add);	//If we don't have a phone number
+						person = new Person(personCode, firstName, lastName, address);	//If we don't have a phone number
 					}
 					
 					if(emails.size() != 0) {										//If we have emails
-						human.addEmail(emails);
+						person.setEmails(emails);
 					}
 					
-					persons.add(human);
+					persons.add(person);
 				}
 			}
 			s.close();	
