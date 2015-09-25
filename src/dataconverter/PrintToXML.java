@@ -87,7 +87,7 @@ public class PrintToXML {
 
 	}
 	
-	//prints products to XML file
+	//prints customers to XML file
 	public static void PrintCustomersXML(ArrayList<Customer> Customers) {
 		
 		XStream xstream = new XStream();

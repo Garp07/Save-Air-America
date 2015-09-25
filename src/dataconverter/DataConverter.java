@@ -16,12 +16,12 @@ public class DataConverter {
 		PersonConverter persons = new PersonConverter("data/Persons.dat");						//Create array list of persons
 		ArrayList<Person> personsArray = persons.parsePersons();
 		
-		ProductConverter products = new ProductConverter("data/Products.dat");					//Create array list of products
+		ProductConverter products = new ProductConverter("data/Products.dat", airportsArray);					//Create array list of products
 		ArrayList<Product> productsArray = products.parseProducts();
 		
-		CustomerConverter customers = new CustomerConverter("data/Customers.dat");				//Create array list of customers
+		CustomerConverter customers = new CustomerConverter("data/Customers.dat", personsArray);				//Create array list of customers
 		//assign persons ArrayList to the customer converter
-		customers.setPersons(personsArray);
+		//customers.setPersons(personsArray);
 		ArrayList<Customer> customersArray = customers.parseCustomers();
 		
 		

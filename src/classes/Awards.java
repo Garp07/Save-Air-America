@@ -11,11 +11,11 @@ public class Awards extends Ticket { 				//This sub of standard for awards
 		this.pointsPerMile = pointsPerMile;
 	}
 	
-	public Awards(String code, String type, String depAirportCode, 	//Awards ticket constructor
-			String arrAirportCode, String depTime, String arrTime, 
+	public Awards(String code, String type, Airport depAirport, 	//Awards ticket constructor
+			Airport arrAirport, String depTime, String arrTime, 
 			String flightNo, String flightClass, String aircraftType,
 			double pointsPerMile) {
-		super(code, type, depAirportCode, arrAirportCode, depTime, arrTime, flightNo, flightClass, aircraftType);
+		super(code, type, depAirport, arrAirport, depTime, arrTime, flightNo, flightClass, aircraftType);
 		this.pointsPerMile = pointsPerMile;
 	}
 	

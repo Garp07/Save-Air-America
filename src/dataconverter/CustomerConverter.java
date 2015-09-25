@@ -23,8 +23,9 @@ public class CustomerConverter {
 		this.inputFile = inputFile;
 	}
 
-	public CustomerConverter(String inputFile) {												//Constructor
+	public CustomerConverter(String inputFile, ArrayList<Person> Persons) {						//Constructor
 		this.inputFile = inputFile;
+		this.Persons = Persons;
 	}
 	
 	public ArrayList<Customer> parseCustomers() {												//Method for reading customers file

@@ -1,28 +1,28 @@
 package classes;
 
 public class Ticket extends Product {					//This sub for standard tickets
-	private String depAirportCode;						//These refer to airports, maybe need to be of class Airport? Yep
-	private String arrAirportCode;
+	private Airport depAirport;							//These refer to airports, maybe need to be of class Airport? Yep *Sass*
+	private Airport arrAirport;
 	private String depTime;								//Times are strings of hh:mm
 	private String arrTime;
-	private String flightNo;							//Could an int type be used here?
+	private String flightNo;							
 	private String flightClass;							//Two letter code
 	private String aircraftType;
 	
-	public String getDepAirportCode() {					//Departing airport code getter
-		return depAirportCode;
+	public Airport getDepAirport() {					//Departing airport code getter
+		return depAirport;
 	}
 
-	public void setDepAirportCode(String depAirportCode) {  	//Departing airport code setter
-		this.depAirportCode = depAirportCode;
+	public void setDepAirport(Airport depAirport) {  	//Departing airport code setter
+		this.depAirport = depAirport;
 	}
 
-	public String getArrAirportCode() {					//Arriving airport code getter
-		return arrAirportCode;
+	public Airport getArrAirport() {					//Arriving airport code getter
+		return arrAirport;
 	}
 
-	public void setArrAirportCode(String arrAirportCode) {		//Arriving airport code setter
-		this.arrAirportCode = arrAirportCode;
+	public void setArrAirport(Airport arrAirport) {		//Arriving airport code setter
+		this.arrAirport = arrAirport;
 	}
 
 	public String getDepTime() {						//Departure time getter
@@ -71,11 +71,11 @@ public class Ticket extends Product {					//This sub for standard tickets
 		this.aircraftType = aircraftType;
 	}
 
-	public Ticket(String code, String type, String depAirportCode, String arrAirportCode, String depTime,			//Ticket constructor
+	public Ticket(String code, String type, Airport depAirport, Airport arrAirport, String depTime,			//Ticket constructor
 			String arrTime, String flightNo, String flightClass, String aircraftType) {
 		super(code, type);
-		this.depAirportCode = depAirportCode;
-		this.arrAirportCode = arrAirportCode;
+		this.depAirport = depAirport;
+		this.arrAirport = arrAirport;
 		this.depTime = depTime;
 		this.arrTime = arrTime;
 		this.flightNo = flightNo;
