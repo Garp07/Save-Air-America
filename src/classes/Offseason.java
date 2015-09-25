@@ -29,10 +29,11 @@ public class Offseason extends Ticket {				//This sub of standard for off-season
 		this.rebate = rebate;
 	}
 	
-	public Offseason(String code, String type, String depAirportCode, 		//Off-season ticket constructor
+	public Offseason(String code, String type, String seasonStartDate, 				//Offseason constructor
+			String seasonEndDate, String depAirportCode, 
 			String arrAirportCode, String depTime, String arrTime, 
 			String flightNo, String flightClass, String aircraftType, 
-			String seasonStartDate, String seasonEndDate, double rebate) {
+			double rebate) {
 		super(code, type, depAirportCode, arrAirportCode, depTime, arrTime, flightNo, flightClass, aircraftType);
 		this.seasonStartDate = seasonStartDate;
 		this.seasonEndDate = seasonEndDate;

@@ -2,10 +2,10 @@ package classes;
 
 public class Customer {
 	private String code;
-	private char type;
-	private String primaryContact;							//Change class to Person once person class is integrated?
+	private String type;
+	private String primaryContact;							
 	private String name;
-	private int airlineMiles;								//Should this be an int?
+	private int airlineMiles;								
 	
 	public String getCode() {								//Customer code getter
 		return code;
@@ -15,12 +15,12 @@ public class Customer {
 		this.code = code;
 	}
 	
-	public char getType() {									//Customer type getter		
+	public String getType() {									//Customer type getter		
 		return type;
 	}
 	
-	public void setType(char type) {						//Customer type setter
-		if(type == 'G' || type == 'C' || type == 'V') {
+	public void setType(String type) {						//Customer type setter
+		if(type == "G" || type == "C" || type == "V") {
 			this.type = type;
 		} 
 		else {
@@ -58,7 +58,7 @@ public class Customer {
 		this.airlineMiles = airlineMiles;
 	}
 	
-	public Customer(String code, char type, String primaryContact, String name, int airlineMiles) {			//Customer constructor
+	public Customer(String code, String type, String primaryContact, String name, int airlineMiles) {			//Customer constructor
 		this.code = code;
 		this.type = type;
 		this.primaryContact = primaryContact;

@@ -1,7 +1,7 @@
 package classes;
 
 public class CheckedBaggage extends Product {
-	private String ticketCode;							//Could an int type be used here?
+	private String ticketCode;							
 
 	public String getTicketCode() {						//Ticket code getter
 		return ticketCode;
