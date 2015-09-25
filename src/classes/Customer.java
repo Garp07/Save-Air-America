@@ -30,12 +30,10 @@ public class Customer {
 	}
 	
 	public void setType(String type) {						//Customer type setter
-		if(type == "G" || type == "C" || type == "V") {
-			this.type = type;
-		} 
-		else {
-			System.out.println("That is not a valid customer type code.");		//Is there a better way to handle this?
-			System.out.println("Valid customer type codes: G, C, V.");
+		switch(type) {
+			case "G": this.type = "general"; break;
+			case "C": this.type = "corporate"; break;
+			case "V": this.type = "government"; break;
 		}
 	}
 	
@@ -58,7 +56,7 @@ public class Customer {
 	
 	public Customer(String code, String type, Person primaryContact, String name, double airlineMiles) {			//Customer constructor
 		this.code = code;
-		this.type = type;
+		this.setType(type);
 		this.primaryContact = primaryContact;
 		this.name = name;
 		this.airlineMiles = airlineMiles;

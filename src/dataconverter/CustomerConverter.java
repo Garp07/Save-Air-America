@@ -53,7 +53,7 @@ public class CustomerConverter {
 					
 					//must set persons ArrayList before this method will work
 					for(Person p : Persons) {
-						if(p.getPersonCode() == primaryContactCode) {
+						if(p.getPersonCode().equals(primaryContactCode)) {
 							primaryContact = p;
 						}
 					}
