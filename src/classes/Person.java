@@ -36,8 +36,9 @@ public class Person {
 	}
 	
 	//add individual email to emailAddress list
-	public void addEmail(ArrayList<String> emails) {
-		this.emailAddress.addAll(emails);
+	//..this should be a single string otherwise its the same behavior as the setEmails method
+	public void addEmail(String email) {
+		this.emailAddress.add(email);
 	}
 	
 	//personCode getter

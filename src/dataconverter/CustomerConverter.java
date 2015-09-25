@@ -5,10 +5,16 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import classes.Customer;
+import classes.Person;
 
 public class CustomerConverter {
+	private ArrayList<Person> Persons;
 	private String inputFile;
-
+	
+	public void setPersons(ArrayList<Person> Persons) {
+		this.Persons = Persons;
+	}
+	
 	public String getInputFile() {																//Input file getter
 		return inputFile;
 	}
@@ -31,17 +37,30 @@ public class CustomerConverter {
 			for(int i = 0; i < count; i++) {
 				String line = s.nextLine();
 				if(!line.trim().isEmpty()) {													//If line isn't blank
-					Customer client = null;														//Create empty instance of customer
 					String tokens[] = line.split(";");											//Split lines at ;
 					String code = tokens[0];													//First item is a customer code
 					String type = tokens[1];													//Customer type
-					String primaryContact = tokens[2];											//Primary contact person code
+					String primaryContactCode = tokens[2];											//Primary contact person code
 					String name = tokens[3];													//Customer name
-					int airlineMiles = Integer.parseInt(tokens[4]);								//Airline miles
+					double airlineMiles = 0.0;
+					
+					//optional field
+					if(tokens.length == 5) {
+						airlineMiles = Double.parseDouble(tokens[4]);								//Airline miles
+					}
+					
+					Person primaryContact = null;
+					
+					//must set persons ArrayList before this method will work
+					for(Person p : Persons) {
+						if(p.getPersonCode().equals(primaryContactCode)) {
+							primaryContact = p;
+						}
+					}
 				
-					client = new Customer(code, type, primaryContact, name, airlineMiles);		//Customer object
+					Customer customer = new Customer(code, type, primaryContact, name, airlineMiles);		//Customer object
 				
-					customers.add(client);
+					customers.add(customer);
 				}
 			}
 			s.close();

@@ -1,7 +1,7 @@
 package classes;
 
 public class Ticket extends Product {					//This sub for standard tickets
-	private String depAirportCode;						//These refer to airports, maybe need to be of class Airport?
+	private String depAirportCode;						//These refer to airports, maybe need to be of class Airport? Yep
 	private String arrAirportCode;
 	private String depTime;								//Times are strings of hh:mm
 	private String arrTime;

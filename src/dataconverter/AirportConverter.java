@@ -32,8 +32,8 @@ public class AirportConverter {
 			for(int i = 0; i < count; i++) {											//Loop through the rest of the lines
 				String line = s.nextLine();
 				if(!line.trim().isEmpty()) {											//If the line isn't blank
-					Airport air = null;													//Create an instance of airport
-					Address add = null; 												//Create an instance of address
+					Airport airport = null;													//Create an instance of airport
+					Address address = null; 												//Create an instance of address
 					String tokens[] = line.split(";");									//Split the line up at ;'s
 					String airportCode = tokens[0];										//First item should be the code
 					String name = tokens[1];											//Second item should be the airport name
@@ -50,11 +50,11 @@ public class AirportConverter {
 						int lonMins = Integer.parseInt(latLongTokens[3]);				//and longitude in minutes
 					double passengerFacilityFee = Double.parseDouble(tokens[4]);		//Final item on a line is the facility fee
 					
-					add = new Address(street, city, state, zipCode, country);			//Populate objects with attributes
-					air = new Airport(airportCode, name, add, latDegs, latMins, 
+					address = new Address(street, city, state, zipCode, country);			//Populate objects with attributes
+					airport = new Airport(airportCode, name, address, latDegs, latMins, 
 							lonDegs, lonMins, passengerFacilityFee);
 					
-					airports.add(air);													//Add airport object to the array list
+					airports.add(airport);													//Add airport object to the array list
 				}
 			}
 			s.close();																	//Close scanner

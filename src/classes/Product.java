@@ -2,7 +2,9 @@ package classes;
 
 public class Product {
 	private String code;									//Should this have private access restrictions?
-	private String type;									//How do private attributes interact with sub-classes?
+	private String type;									//How do private attributes interact with sub-classes? - probably want to make
+															//						them protected. if we ever move packages we lose functionality.
+	
 	
 	public String getCode() {								//Product code getter
 		return code;
@@ -28,7 +30,7 @@ public class Product {
 		}
 	}
 	
-	public Product (String code, String type) {				//Product constructor
+	public Product(String code, String type) {				//Product constructor
 		this.code = code;
 		this.type = type;
 	}
