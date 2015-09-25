@@ -54,7 +54,7 @@ public class PrintToXML {
 		pw.print("<persons>\n");
 
 		for(Person p : Persons) {
-			pw.print(xstream.toXML(p) + "\n");
+			pw.print(xstream.toXML(p).replaceAll("&apos;", "'").replaceAll("&amp;", "&") + "\n");
 		}
 		
 		pw.print("</persons>" + "\n");
