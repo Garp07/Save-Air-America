@@ -4,15 +4,16 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.airamerica.product.AwardTicket;
+import com.airamerica.product.CheckedBaggage;
+import com.airamerica.product.Insurance;
+import com.airamerica.product.Offseason;
+import com.airamerica.product.Product;
+import com.airamerica.product.Refreshment;
+import com.airamerica.product.SpecAssist;
+import com.airamerica.product.Ticket;
+
 import classes.Airport;
-import classes.Awards;
-import classes.CheckedBaggage;
-import classes.Insurance;
-import classes.Offseason;
-import classes.Product;
-import classes.Refreshment;
-import classes.SpecAssist;
-import classes.Ticket;
 
 public class ProductConverter {
 	private String inputFile;
@@ -135,7 +136,7 @@ public class ProductConverter {
 							}
 						}
 						
-						thing = new Awards(code, type, depAirport, arrAirport, 				//Awards ticket object
+						thing = new AwardTicket(code, type, depAirport, arrAirport, 				//Awards ticket object
 								depTime, arrTime, flightNo, flightClass, aircraftType,	
 								pointsPerMile);
 					}

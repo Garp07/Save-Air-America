@@ -1,4 +1,4 @@
-package classes;
+package com.airamerica.product;
 
 public class SpecAssist extends Product {
 	private String typeOfService;						//Is this the right data type?

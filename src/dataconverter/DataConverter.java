@@ -2,10 +2,11 @@ package dataconverter;
 
 import java.util.ArrayList;
 
+import com.airamerica.product.Product;
+
 import classes.Airport;
 import classes.Customer;
 import classes.Person;
-import classes.Product;
 
 public class DataConverter {
 

@@ -1,4 +1,4 @@
-package classes;
+package com.airamerica.product;
 
 public class Refreshment extends Product {
 	private String name;

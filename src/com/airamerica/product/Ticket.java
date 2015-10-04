@@ -1,6 +1,33 @@
-package classes;
+package com.airamerica.product;
 
-public class Ticket extends Product {					//This sub for standard tickets
+import org.joda.time.DateTime;
+
+import classes.Airport;
+
+public class Ticket extends Product {
+	protected Airport depAirport;
+	protected Airport arrAirport;
+	protected DateTime depTime;
+	protected DateTime arrTime;
+	protected String flightNo;
+	protected String flightClass;
+	protected String aircraftType;
+	
+	//Ticket Constructor
+	public Ticket(String code, Airport depAirport, Airport arrAirport, DateTime depTime, 
+			DateTime arrTime, String flightNo, String flightClass, String aircraftType) {
+		super(code);
+		this.depAirport = depAirport;
+		this.arrAirport = arrAirport;
+		this.depTime = depTime;
+		this.arrTime = arrTime;
+		this.flightNo = flightNo;
+		this.flightClass = flightClass;
+		this.aircraftType = aircraftType;
+	}
+}
+
+/*public class Tickets extends Product {					//This sub for standard tickets
 	private Airport depAirport;							//These refer to airports, maybe need to be of class Airport? Yep *Sass*
 	private Airport arrAirport;
 	private String depTime;								//Times are strings of hh:mm
@@ -83,4 +110,4 @@ public class Ticket extends Product {					//This sub for standard tickets
 		this.aircraftType = aircraftType;
 	}
 
-}
+}*/
