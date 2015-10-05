@@ -2,9 +2,8 @@ package com.airamerica.product.ticket;
 
 import org.joda.time.DateTime;
 
+import com.airamerica.airport.Airport;
 import com.airamerica.product.Product;
-
-import classes.Airport;
 
 abstract public class Ticket extends Product {
 	protected Airport depAirport;
@@ -17,7 +16,7 @@ abstract public class Ticket extends Product {
 	
 	//Ticket Constructor
 	public Ticket(String code, Airport depAirport, Airport arrAirport, DateTime depTime, 
-			DateTime arrTime, String flightNo, String flightClass, String aircraftType) {
+			DateTime arrTime, String flightNo, FlightClass flightClass, String aircraftType) {
 		super(code);
 		this.depAirport = depAirport;
 		this.arrAirport = arrAirport;
