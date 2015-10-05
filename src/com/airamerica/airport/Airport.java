@@ -1,4 +1,6 @@
-package classes;
+package com.airamerica.airport;
+
+import com.airamerica.other.Address;
 
 public class Airport {
 	private String airportCode;

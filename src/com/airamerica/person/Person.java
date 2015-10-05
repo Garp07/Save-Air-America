@@ -1,6 +1,8 @@
-package classes;
+package com.airamerica.person;
 
 import java.util.ArrayList;
+
+import com.airamerica.other.Address;
 
 public class Person {
 	private String personCode;
@@ -12,20 +14,20 @@ public class Person {
 	
 	//Person constructor - no phone number
 	public Person(String personCode, String firstName, String lastName, Address address) {
-		this.setPersonCode(personCode);
-		this.setFirstName(firstName);
-		this.setLastName(lastName);
-		this.setAddress(address);
+		this.personCode = personCode;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
 		this.emailAddress = new ArrayList<String>();
 	}
 	
 	//Person constructor - w/ phone number
 	public Person(String personCode, String firstName, String lastName, Address address, String phoneNumber) {
-		this.setPersonCode(personCode);
-		this.setFirstName(firstName);
-		this.setLastName(lastName);
-		this.setAddress(address);
-		this.setPhoneNumber(phoneNumber);
+		this.personCode = personCode;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
 		this.emailAddress = new ArrayList<String>();
 	}
 	
@@ -40,53 +42,43 @@ public class Person {
 	public void addEmail(String email) {
 		this.emailAddress.add(email);
 	}
-	
-	//personCode getter
+
 	public String getPersonCode() {
 		return personCode;
 	}
-	
-	//personCode setter
+
 	public void setPersonCode(String personCode) {
 		this.personCode = personCode;
 	}
 
-	//firstName getter
 	public String getFirstName() {
 		return firstName;
 	}
-	
-	//firstName setter
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
-	//lastName getter
 	public String getLastName() {
 		return lastName;
 	}
 
-	//lastName setter
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
-	//address getter
 	public Address getAddress() {
 		return address;
 	}
 	
-	//address setter
 	public void setAddress(Address address) {
 		this.address = address;
 	}
 
-	//phoneNumber getter
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 	
-	//phoneNumber setter
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
