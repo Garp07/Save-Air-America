@@ -4,11 +4,11 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import com.airamerica.customer.Customer;
 import com.airamerica.product.Product;
 import com.thoughtworks.xstream.XStream;
 
 import classes.Airport;
-import classes.Customer;
 import classes.Person;
 
 public class PrintToXML {

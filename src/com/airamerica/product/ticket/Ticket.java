@@ -1,16 +1,18 @@
-package com.airamerica.product;
+package com.airamerica.product.ticket;
 
 import org.joda.time.DateTime;
 
+import com.airamerica.product.Product;
+
 import classes.Airport;
 
-public class Ticket extends Product {
+abstract public class Ticket extends Product {
 	protected Airport depAirport;
 	protected Airport arrAirport;
 	protected DateTime depTime;
 	protected DateTime arrTime;
 	protected String flightNo;
-	protected String flightClass;
+	protected FlightClass flightClass;
 	protected String aircraftType;
 	
 	//Ticket Constructor

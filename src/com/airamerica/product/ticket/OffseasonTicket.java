@@ -1,4 +1,4 @@
-package com.airamerica.product;
+package com.airamerica.product.ticket;
 
 import org.joda.time.DateTime;
 
@@ -9,6 +9,31 @@ public class OffseasonTicket extends Ticket {
 	private DateTime seasonEndDate;
 	private double rebate;							
 	
+	public DateTime getSeasonStartDate() {
+		return seasonStartDate;
+	}
+
+	public void setSeasonStartDate(DateTime seasonStartDate) {
+		this.seasonStartDate = seasonStartDate;
+	}
+
+	public DateTime getSeasonEndDate() {
+		return seasonEndDate;
+	}
+
+	public void setSeasonEndDate(DateTime seasonEndDate) {
+		this.seasonEndDate = seasonEndDate;
+	}
+
+	public double getRebate() {
+		return rebate;
+	}
+
+	public void setRebate(double rebate) {
+		this.rebate = rebate;
+	}
+	
+	//OffseasonTicket constructor
 	public OffseasonTicket(String code, DateTime seasonStartDate,
 			DateTime seasonEndDate, Airport depAirport, 
 			Airport arrAirport, DateTime depTime, DateTime arrTime, 
@@ -18,5 +43,6 @@ public class OffseasonTicket extends Ticket {
 		this.seasonStartDate = seasonStartDate;
 		this.seasonEndDate = seasonEndDate;
 		this.rebate = rebate;
+		this.type = "TO";
 	}
 }

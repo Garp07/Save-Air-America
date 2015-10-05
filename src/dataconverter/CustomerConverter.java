@@ -4,7 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import classes.Customer;
+import com.airamerica.customer.Customer;
+
 import classes.Person;
 
 public class CustomerConverter {

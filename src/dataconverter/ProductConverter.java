@@ -4,14 +4,14 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.airamerica.product.AwardTicket;
-import com.airamerica.product.CheckedBaggage;
-import com.airamerica.product.Insurance;
 import com.airamerica.product.Offseason;
 import com.airamerica.product.Product;
-import com.airamerica.product.Refreshment;
-import com.airamerica.product.SpecAssist;
-import com.airamerica.product.Ticket;
+import com.airamerica.product.service.CheckedBaggage;
+import com.airamerica.product.service.Insurance;
+import com.airamerica.product.service.Refreshment;
+import com.airamerica.product.service.SpecAssist;
+import com.airamerica.product.ticket.AwardTicket;
+import com.airamerica.product.ticket.Ticket;
 
 import classes.Airport;
 
