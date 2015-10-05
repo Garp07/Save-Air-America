@@ -6,6 +6,7 @@ import com.airamerica.airport.Airport;
 import com.airamerica.customer.Customer;
 import com.airamerica.person.Person;
 import com.airamerica.product.Product;
+import com.airamerica.product.ticket.Ticket;
 
 public class DataConverter {
 
@@ -15,14 +16,17 @@ public class DataConverter {
 		AirportConverter airports = new AirportConverter("data/Airports.dat");					
 		ArrayList<Airport> airportsArray = airports.parseAirports();
 		
-		System.out.println("HELLO");
-		
 		//Create array list of persons
 		PersonConverter persons = new PersonConverter("data/Persons.dat");						
 		ArrayList<Person> personsArray = persons.parsePersons();
 		
-		//Create array list of products
-		ProductConverter products = new ProductConverter("data/Products.dat", airportsArray);					
+		/* 
+		 * Create array list of products - first go through and find all tickets, 
+		 * then go through file again to make complete objects
+		 */
+		ProductConverter products = new ProductConverter("data/Products.dat", airportsArray);	
+		ArrayList<Ticket> ticketsArray = products.parseTickets();
+		products = new ProductConverter("data/Products.dat", airportsArray, ticketsArray);
 		ArrayList<Product> productsArray = products.parseProducts();
 		
 		//Create array list of customers

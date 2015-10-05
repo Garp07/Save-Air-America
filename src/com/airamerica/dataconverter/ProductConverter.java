@@ -10,7 +10,6 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import com.airamerica.airport.Airport;
-import com.airamerica.customer.Customer;
 import com.airamerica.product.Product;
 import com.airamerica.product.service.CheckedBaggage;
 import com.airamerica.product.service.Insurance;
@@ -26,20 +25,28 @@ import com.airamerica.product.ticket.StandardTicket;
 import com.airamerica.product.ticket.Ticket;
 
 public class ProductConverter extends DataReader {
-	private ArrayList<Airport> Airports;
+	private ArrayList<Airport> airports;
+	private ArrayList<Ticket> tickets;
 	
-	public void setAirports(ArrayList<Airport> Airports){
-		this.Airports = Airports;
+	public void setAirports(ArrayList<Airport> airports){
+		this.airports = airports;
 	}
 
 	public ArrayList<Airport> getAirports() {
-		return Airports;
+		return airports;
 	}
 	
 	//Constructor
-	public ProductConverter(String inputFile, ArrayList<Airport> Airports) {										
+	public ProductConverter(String inputFile, ArrayList<Airport> airports, ArrayList<Ticket> tickets) {										
 		super(inputFile);
-		this.Airports = Airports;
+		this.airports = airports;
+		this.tickets = tickets;
+	}
+	
+	public ProductConverter(String inputFile, ArrayList<Airport> airports) {
+		super(inputFile);
+		this.airports = airports;
+		this.tickets = new ArrayList<Ticket>();
 	}
 	
 	//parse product.dat file
@@ -74,6 +81,66 @@ public class ProductConverter extends DataReader {
 		return products;
 	}
 	
+	public ArrayList<Ticket> parseTickets() {
+		ArrayList<Ticket> tickets = new ArrayList<Ticket>();
+		Scanner scanner = null;
+		
+		try {
+			scanner = new Scanner(new File(inputFile));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		//First line is number of products
+		int count = 0;
+		try {
+			count = Integer.parseInt(scanner.nextLine());	
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		
+		for(int i = 0; i < count; i++) {
+			String line = scanner.nextLine();
+			if(!line.trim().isEmpty()) {
+				Ticket ticket = null;
+				ticket = this.parseTicket(line);
+				if(ticket != null) {
+					tickets.add(ticket);
+				}
+			}
+		}
+		
+		scanner.close();
+		return tickets;
+	}
+	
+	private Ticket parseTicket(String productString) {
+		Product product = null;
+		/*
+		 * item order
+		 * code; type; [type dependent]
+		 */
+		String tokens[] = productString.split(";");
+		
+		String type = tokens[1].trim();
+		
+		switch(type) {
+			case "TS":
+				product = this.parseStandardTicket(tokens);
+				break;
+			case "TO":
+				product = this.parseOffseasonTicket(tokens);
+				break;
+			case "TA":
+				product = this.parseAwardTicket(tokens);
+				break;
+			default:
+				break;
+		}
+		
+		return ((Ticket) product);
+	}
+	
 	private Product parseProduct(String productString) {
 		
 		Product product = null;
@@ -81,8 +148,8 @@ public class ProductConverter extends DataReader {
 		 * item order
 		 * code; type; [type dependent]
 		 */
-		String tokens[] = productString.split(";");					
-		String code = tokens[0].trim();
+		String tokens[] = productString.split(";");
+		
 		String type = tokens[1].trim();
 		
 		switch(type) {
@@ -136,11 +203,12 @@ public class ProductConverter extends DataReader {
 	}
 	
 	private Airport findAirport(String airportCode) {
-		for(Airport a : Airports) {
+		for(Airport a : airports) {
 			if(a.getAirportCode() == airportCode) {
 				return a;
 			}
 		}
+		return null;
 	}
 	
 	private Product parseStandardTicket(String[] tokens) {
@@ -151,14 +219,14 @@ public class ProductConverter extends DataReader {
 		 */
 		DateTimeFormatter format = DateTimeFormat.forPattern("HH:mm");
 		
-		String code = tokens[0];
-		String depAirportCode = tokens[2];
-		String arrAirportCode = tokens[3];									
-		DateTime depTime = format.parseDateTime(tokens[4]);
-		DateTime arrTime = format.parseDateTime(tokens[5]);
-		String flightNo = tokens[6];	
-		FlightClass flightClass = this.parseFlightClass(tokens[7]);
-		String aircraftType = tokens[8];
+		String code = tokens[0].trim();
+		String depAirportCode = tokens[2].trim();
+		String arrAirportCode = tokens[3].trim();									
+		DateTime depTime = format.parseDateTime(tokens[4].trim());
+		DateTime arrTime = format.parseDateTime(tokens[5].trim());
+		String flightNo = tokens[6].trim();	
+		FlightClass flightClass = this.parseFlightClass(tokens[7].trim());
+		String aircraftType = tokens[8].trim();
 		
 		Airport depAirport = this.findAirport(depAirportCode);
 		Airport arrAirport = this.findAirport(arrAirportCode);
@@ -178,16 +246,16 @@ public class ProductConverter extends DataReader {
 		DateTimeFormatter format = DateTimeFormat.forPattern("HH:mm");
 		DateTimeFormatter formatSeason = DateTimeFormat.forPattern("yyyy-MM-dd");
 		
-		String code = tokens[0];
-		DateTime seasonStart = formatSeason.parseDateTime(tokens[2]);
-		DateTime seasonEnd = formatSeason.parseDateTime(tokens[3]);
-		String depAirportCode = tokens[4];
-		String arrAirportCode = tokens[5];									
-		DateTime depTime = format.parseDateTime(tokens[6]);
-		DateTime arrTime = format.parseDateTime(tokens[7]);
-		String flightNo = tokens[8];	
-		FlightClass flightClass = this.parseFlightClass(tokens[9]);
-		String aircraftType = tokens[10];
+		String code = tokens[0].trim();
+		DateTime seasonStart = formatSeason.parseDateTime(tokens[2].trim());
+		DateTime seasonEnd = formatSeason.parseDateTime(tokens[3].trim());
+		String depAirportCode = tokens[4].trim();
+		String arrAirportCode = tokens[5].trim();									
+		DateTime depTime = format.parseDateTime(tokens[6].trim());
+		DateTime arrTime = format.parseDateTime(tokens[7].trim());
+		String flightNo = tokens[8].trim();	
+		FlightClass flightClass = this.parseFlightClass(tokens[9].trim());
+		String aircraftType = tokens[10].trim();
 		
 		double rebate = 0.0;
 		try {
@@ -214,14 +282,14 @@ public class ProductConverter extends DataReader {
 		 */
 		DateTimeFormatter format = DateTimeFormat.forPattern("HH:mm");
 		
-		String code = tokens[0];
-		String depAirportCode = tokens[2];
-		String arrAirportCode = tokens[3];									
-		DateTime depTime = format.parseDateTime(tokens[4]);
-		DateTime arrTime = format.parseDateTime(tokens[5]);
-		String flightNo = tokens[6];	
-		FlightClass flightClass = this.parseFlightClass(tokens[7]);
-		String aircraftType = tokens[8];
+		String code = tokens[0].trim();
+		String depAirportCode = tokens[2].trim();
+		String arrAirportCode = tokens[3].trim();									
+		DateTime depTime = format.parseDateTime(tokens[4].trim());
+		DateTime arrTime = format.parseDateTime(tokens[5].trim());
+		String flightNo = tokens[6].trim();	
+		FlightClass flightClass = this.parseFlightClass(tokens[7].trim());
+		String aircraftType = tokens[8].trim();
 		
 		double pointsPerMile = 0.0;
 		try {
@@ -240,37 +308,59 @@ public class ProductConverter extends DataReader {
 		return product;
 	}
 	
-	
-	
-	
-		
-		else if(type.equals("SC")) {											//Case for checked baggage
-			String ticketCode = tokens[2];									//Ticket code
-			thing = new CheckedBaggage(code, type, ticketCode);					//Checked baggage object
-		}
-		else if(type.equals("SI")) {											//Case for insurance
-			String name = tokens[2];										//Name
-			String ageClass = tokens[3];									//Age class
-			double costPerMile = Double.parseDouble(tokens[4]);				//Cost per mile
-			thing = new Insurance(code, type, name, ageClass, costPerMile);		//Insurance object
-		}
-		else if(type.equals("SR")) {											//Case for refreshments
-			String name = tokens[2];										//Name
-			double cost = Double.parseDouble(tokens[3]);					//Cost
-			thing = new Refreshment(code, type, name, cost);					//Refreshment object
-		}
-		else {															//Case for special assistance SS
-			String typeOfService = tokens[2];								//Type of service
-			thing = new SpecAssist(code, type, typeOfService);					//Special assistance object
-					}
-					
-					products.add(thing);
-				}
+	private Ticket findTicket(String ticketCode) {
+		for(Ticket t : tickets) {
+			if(t.getCode() == ticketCode) {
+				return t;
 			}
-			s.close();
-		} catch(Exception darn) {
-			darn.printStackTrace();
 		}
-		return products;
+		return null;
+	}
+	
+	private Product parseCheckedBaggage(String[] tokens) {
+		String code = tokens[0].trim();
+		Ticket ticket = this.findTicket(tokens[2].trim());
+		
+		Product product = new CheckedBaggage(code, ticket);
+		return product;
+	}
+	
+	private Product parseInsurance(String[] tokens) {
+		String code = tokens[0].trim();
+		String name = tokens[2].trim();
+		String ageClass = tokens[3].trim();
+		
+		double costPerMile = 0.0;
+		try {
+			costPerMile = Double.parseDouble(tokens[4]);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		
+		Product product = new Insurance(code, name, ageClass, costPerMile);
+		return product;
+	}
+		
+	private Product parseRefreshments(String[] tokens) {
+		String code = tokens[0].trim();
+		String name = tokens[2].trim();
+		
+		double cost = 0.0;
+		try {
+			cost = Double.parseDouble(tokens[3]);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		
+		Product product = new Refreshment(code, name, cost);
+		return product;
+	}
+	
+	private Product parseAssistanceService(String[] tokens) {
+		String code = tokens[0].trim();
+		String typeOfService = tokens[2].trim();
+		
+		Product product = new SpecAssist(code, typeOfService);
+		return product;
 	}
 }

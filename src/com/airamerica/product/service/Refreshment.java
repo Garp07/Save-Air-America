@@ -21,8 +21,7 @@ public class Refreshment extends Service {
 	}
 	
 	//Refreshment constructor
-	public Refreshment(String code, String type,	
-			String name, double cost) {
+	public Refreshment(String code, String name, double cost) {
 		super(code);
 		this.name = name;
 		this.cost = cost;
