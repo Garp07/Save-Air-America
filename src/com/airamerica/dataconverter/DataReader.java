@@ -18,7 +18,7 @@ public class DataReader {
 	}
 	
 	//parses an address string
-	public Address parseAddress(String addressString) {
+	protected Address parseAddress(String addressString) {
 		/*
 		 * item order
 		 * street, city, state, zipcode, country
@@ -33,4 +33,5 @@ public class DataReader {
 		Address address = new Address(street, city, state, zipcode, country);
 		return address;
 	}
+	
 }

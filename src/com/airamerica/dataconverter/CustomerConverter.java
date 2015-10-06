@@ -84,7 +84,7 @@ public class CustomerConverter extends DataReader {
 		Person primaryContact = null;
 		
 		for(Person p : persons) {
-			if(p.getPersonCode() == primaryContactCode) {
+			if(p.getCode() == primaryContactCode) {
 				primaryContact = p;
 			}
 		}

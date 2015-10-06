@@ -1,10 +1,30 @@
 package com.airamerica.product.service;
 
+import com.airamerica.product.ticket.Ticket;
+
 public class Insurance extends Service {
 	private String name;
 	private String ageClass;
 	private double costPerMile;
+	private int quantity;
+	private Ticket ticket;
 	
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public Ticket getTicket() {
+		return ticket;
+	}
+
+	public void setTicket(Ticket ticket) {
+		this.ticket = ticket;
+	}
+
 	public String getName() {
 		return name;
 	}
