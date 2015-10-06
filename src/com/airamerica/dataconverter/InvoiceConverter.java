@@ -96,7 +96,7 @@ public class InvoiceConverter extends DataReader {
 	
 	private Customer findCustomer(String customerCode) {
 		for(Customer c : customers) {
-			if(c.getCode() == customerCode) {
+			if(c.getCode().equals(customerCode)) {
 				return c;
 			}
 		}
@@ -105,7 +105,7 @@ public class InvoiceConverter extends DataReader {
 	
 	private Person findPerson(String personCode) {
 		for(Person p : persons) {
-			if(p.getCode() == personCode) {
+			if(p.getCode().equals(personCode)) {
 				return p;
 			}
 		}
@@ -114,7 +114,7 @@ public class InvoiceConverter extends DataReader {
 	
 	private Product findProduct(String productCode) {
 		for(Product p : products) {
-			if(p.getCode() == productCode) {
+			if(p.getCode().equals(productCode)) {
 				return p;
 			}
 		}
@@ -208,7 +208,7 @@ public class InvoiceConverter extends DataReader {
 		String tokens[] = productString.split(",");
 		
 		for(int i=1; i<tokens.length; i++) {
-			Product product = this.findProduct(tokens[i]);
+			Product product = this.findProduct(tokens[i].split(":")[0]);
 			switch(product.getType()) {
 				case "TI":
 				case "TS":		//all tickets

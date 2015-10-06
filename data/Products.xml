@@ -1,643 +1,559 @@
-<?xml version="1.0"?>
 <products>
-<specialassistance>
-  <productCode>xer1</productCode>
-  <type>PrioritySeating</type>
-</specialassistance>
-<standard>
-  <productCode>1261</productCode>
-  <departureCity>
-    <airportCode>ORD</airportCode>
-    <airportName>Chicago O&apos;Hare International</airportName>
-    <address>
-      <street>10000 W O&apos;Hare Ave</street>
-      <city>Chicago</city>
-      <state>IL</state>
-      <zip>60666</zip>
-      <country>IL</country>
-    </address>
-    <latitude>41.833333333333336</latitude>
-    <longitude>87.61666666666666</longitude>
-    <passengerFacilityFee>4.5</passengerFacilityFee>
-  </departureCity>
-  <arrivalCity>
-    <airportCode>PHX</airportCode>
-    <airportName>Phoenix Sky Harbor International</airportName>
-    <address>
-      <street>3400 E Sky Harbor Blvd</street>
-      <city>Phoenix</city>
-      <state>AZ</state>
-      <zip>85034</zip>
-      <country>USA</country>
-    </address>
-    <latitude>33.483333333333334</latitude>
-    <longitude>112.06666666666666</longitude>
-    <passengerFacilityFee>4.5</passengerFacilityFee>
-  </arrivalCity>
-  <departureDateTime>09:09</departureDateTime>
-  <arrivalDateTime>11:06</arrivalDateTime>
-  <flightNo>N725</flightNo>
-  <flightClass>BC</flightClass>
-  <aircraftType>Airbus-A319</aircraftType>
-  <costPerMile>0.5</costPerMile>
-</standard>
-<offseason>
-  <productCode>1262</productCode>
-  <departureCity>
-    <airportCode>PHX</airportCode>
-    <airportName>Phoenix Sky Harbor International</airportName>
-    <address>
-      <street>3400 E Sky Harbor Blvd</street>
-      <city>Phoenix</city>
-      <state>AZ</state>
-      <zip>85034</zip>
-      <country>USA</country>
-    </address>
-    <latitude>33.483333333333334</latitude>
-    <longitude>112.06666666666666</longitude>
-    <passengerFacilityFee>4.5</passengerFacilityFee>
-  </departureCity>
-  <arrivalCity>
-    <airportCode>ORD</airportCode>
-    <airportName>Chicago O&apos;Hare International</airportName>
-    <address>
-      <street>10000 W O&apos;Hare Ave</street>
-      <city>Chicago</city>
-      <state>IL</state>
-      <zip>60666</zip>
-      <country>IL</country>
-    </address>
-    <latitude>41.833333333333336</latitude>
-    <longitude>87.61666666666666</longitude>
-    <passengerFacilityFee>4.5</passengerFacilityFee>
-  </arrivalCity>
-  <departureDateTime>14:24</departureDateTime>
-  <arrivalDateTime>19:56</arrivalDateTime>
-  <flightNo>N2000</flightNo>
-  <flightClass>BC</flightClass>
-  <aircraftType>Airbus-A320</aircraftType>
-  <costPerMile>0.5</costPerMile>
-  <seasonStartDate>2015-00-01</seasonStartDate>
-  <seasonEndDate>2016-00-12</seasonEndDate>
-  <rebate>0.15</rebate>
-</offseason>
-<insurance>
-  <productCode>ff23</productCode>
+<com.airamerica.product.service.Insurance>
+  <code>ff23</code>
+  <type>SI</type>
   <name>NationalInsurance</name>
   <ageClass>0-20</ageClass>
   <costPerMile>0.07</costPerMile>
-</insurance>
-<specialassistance>
-  <productCode>xer2</productCode>
-  <type>WheelChair</type>
-</specialassistance>
-<offseason>
-  <productCode>1263</productCode>
-  <departureCity>
-    <airportCode>PHX</airportCode>
-    <airportName>Phoenix Sky Harbor International</airportName>
-    <address>
-      <street>3400 E Sky Harbor Blvd</street>
-      <city>Phoenix</city>
-      <state>AZ</state>
-      <zip>85034</zip>
-      <country>USA</country>
-    </address>
-    <latitude>33.483333333333334</latitude>
-    <longitude>112.06666666666666</longitude>
-    <passengerFacilityFee>4.5</passengerFacilityFee>
-  </departureCity>
-  <arrivalCity>
-    <airportCode>ORD</airportCode>
-    <airportName>Chicago O&apos;Hare International</airportName>
-    <address>
-      <street>10000 W O&apos;Hare Ave</street>
-      <city>Chicago</city>
-      <state>IL</state>
-      <zip>60666</zip>
-      <country>IL</country>
-    </address>
-    <latitude>41.833333333333336</latitude>
-    <longitude>87.61666666666666</longitude>
-    <passengerFacilityFee>4.5</passengerFacilityFee>
-  </arrivalCity>
-  <departureDateTime>07:10</departureDateTime>
-  <arrivalDateTime>12:42</arrivalDateTime>
-  <flightNo>N488</flightNo>
-  <flightClass>EC</flightClass>
-  <aircraftType>Airbus-A320</aircraftType>
-  <costPerMile>0.15</costPerMile>
-  <seasonStartDate>2015-00-15</seasonStartDate>
-  <seasonEndDate>2016-00-29</seasonEndDate>
-  <rebate>0.25</rebate>
-</offseason>
-<insurance>
-  <productCode>ff24</productCode>
-  <name>Progressive</name>
-  <ageClass>55-68</ageClass>
-  <costPerMile>0.09</costPerMile>
-</insurance>
-<specialassistance>
-  <productCode>xer4</productCode>
-  <type>BabyBassinet</type>
-</specialassistance>
-<insurance>
-  <productCode>ff25</productCode>
+  <quantity>0</quantity>
+</com.airamerica.product.service.Insurance>
+<com.airamerica.product.ticket.StandardTicket>
+  <code>1255</code>
+  <type>TS</type>
+  <depTime>
+    <iMillis>55800000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" resolves-to="org.joda.time.chrono.ISOChronology$Stub" serialization="custom">
+      <org.joda.time.chrono.ISOChronology_-Stub>
+        <org.joda.time.tz.CachedDateTimeZone resolves-to="org.joda.time.DateTimeZone$Stub" serialization="custom">
+          <org.joda.time.DateTimeZone_-Stub>
+            <string>America/Chicago</string>
+          </org.joda.time.DateTimeZone_-Stub>
+        </org.joda.time.tz.CachedDateTimeZone>
+      </org.joda.time.chrono.ISOChronology_-Stub>
+    </iChronology>
+  </depTime>
+  <arrTime>
+    <iMillis>78900000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../depTime/iChronology"/>
+  </arrTime>
+  <flightNo>NA2222</flightNo>
+  <flightClass class="com.airamerica.product.ticket.BusinessClass">
+    <type>BC</type>
+    <costPerMile>0.2</costPerMile>
+  </flightClass>
+  <aircraftType>Boeing757</aircraftType>
+</com.airamerica.product.ticket.StandardTicket>
+<com.airamerica.product.service.CheckedBaggage>
+  <code>90fa</code>
+  <type>SC</type>
+  <noOfBags>3</noOfBags>
+</com.airamerica.product.service.CheckedBaggage>
+<com.airamerica.product.ticket.StandardTicket>
+  <code>1238</code>
+  <type>TS</type>
+  <depTime>
+    <iMillis>43200000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" resolves-to="org.joda.time.chrono.ISOChronology$Stub" serialization="custom">
+      <org.joda.time.chrono.ISOChronology_-Stub>
+        <org.joda.time.tz.CachedDateTimeZone resolves-to="org.joda.time.DateTimeZone$Stub" serialization="custom">
+          <org.joda.time.DateTimeZone_-Stub>
+            <string>America/Chicago</string>
+          </org.joda.time.DateTimeZone_-Stub>
+        </org.joda.time.tz.CachedDateTimeZone>
+      </org.joda.time.chrono.ISOChronology_-Stub>
+    </iChronology>
+  </depTime>
+  <arrTime>
+    <iMillis>54480000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../depTime/iChronology"/>
+  </arrTime>
+  <flightNo>NA4889</flightNo>
+  <flightClass class="com.airamerica.product.ticket.Economy">
+    <type>EC</type>
+    <costPerMile>0.15</costPerMile>
+  </flightClass>
+  <aircraftType>CRJ900</aircraftType>
+</com.airamerica.product.ticket.StandardTicket>
+<com.airamerica.product.service.SpecAssist>
+  <code>xer2</code>
+  <type>SS</type>
+  <typeOfService>WheelChair</typeOfService>
+</com.airamerica.product.service.SpecAssist>
+<com.airamerica.product.ticket.OffseasonTicket>
+  <code>1240</code>
+  <type>TO</type>
+  <depTime>
+    <iMillis>43200000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" resolves-to="org.joda.time.chrono.ISOChronology$Stub" serialization="custom">
+      <org.joda.time.chrono.ISOChronology_-Stub>
+        <org.joda.time.tz.CachedDateTimeZone resolves-to="org.joda.time.DateTimeZone$Stub" serialization="custom">
+          <org.joda.time.DateTimeZone_-Stub>
+            <string>America/Chicago</string>
+          </org.joda.time.DateTimeZone_-Stub>
+        </org.joda.time.tz.CachedDateTimeZone>
+      </org.joda.time.chrono.ISOChronology_-Stub>
+    </iChronology>
+  </depTime>
+  <arrTime>
+    <iMillis>54480000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../depTime/iChronology"/>
+  </arrTime>
+  <flightNo>NA4889</flightNo>
+  <flightClass class="com.airamerica.product.ticket.Economy">
+    <type>EC</type>
+    <costPerMile>0.15</costPerMile>
+  </flightClass>
+  <aircraftType>CRJ900</aircraftType>
+  <seasonStartDate>
+    <iMillis>1444194000000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../depTime/iChronology"/>
+  </seasonStartDate>
+  <seasonEndDate>
+    <iMillis>1454047200000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../depTime/iChronology"/>
+  </seasonEndDate>
+  <rebate>0.1</rebate>
+</com.airamerica.product.ticket.OffseasonTicket>
+<com.airamerica.product.ticket.StandardTicket>
+  <code>1241</code>
+  <type>TS</type>
+  <depTime>
+    <iMillis>98100000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" resolves-to="org.joda.time.chrono.ISOChronology$Stub" serialization="custom">
+      <org.joda.time.chrono.ISOChronology_-Stub>
+        <org.joda.time.tz.CachedDateTimeZone resolves-to="org.joda.time.DateTimeZone$Stub" serialization="custom">
+          <org.joda.time.DateTimeZone_-Stub>
+            <string>America/Chicago</string>
+          </org.joda.time.DateTimeZone_-Stub>
+        </org.joda.time.tz.CachedDateTimeZone>
+      </org.joda.time.chrono.ISOChronology_-Stub>
+    </iChronology>
+  </depTime>
+  <arrTime>
+    <iMillis>103320000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../depTime/iChronology"/>
+  </arrTime>
+  <flightNo>NA4871</flightNo>
+  <flightClass class="com.airamerica.product.ticket.Economy">
+    <type>EC</type>
+    <costPerMile>0.15</costPerMile>
+  </flightClass>
+  <aircraftType>CRJ900</aircraftType>
+  <travelDate>
+    <iMillis>1442898000000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../depTime/iChronology"/>
+  </travelDate>
+  <seats>
+    <com.airamerica.product.ticket.Seat>
+      <seatNumber>12C</seatNumber>
+      <person>
+        <code>321na</code>
+        <firstName>Jon</firstName>
+        <lastName>Pertwee</lastName>
+        <address>
+          <street>301 Front St W</street>
+          <city>Toronto</city>
+          <state>ON</state>
+          <zipcode>M5V 2T6</zipcode>
+          <country>Canada</country>
+        </address>
+        <phoneNumber>323-541-3210</phoneNumber>
+        <emailAddress>
+          <string>jpet@whofan.com</string>
+        </emailAddress>
+      </person>
+      <idNumber>FS12345</idNumber>
+      <age>43</age>
+      <nationality>Mexico</nationality>
+    </com.airamerica.product.ticket.Seat>
+  </seats>
+  <ticketNote>None</ticketNote>
+</com.airamerica.product.ticket.StandardTicket>
+<com.airamerica.product.service.Insurance>
+  <code>ff25</code>
+  <type>SI</type>
   <name>Progressive</name>
   <ageClass>69-102</ageClass>
   <costPerMile>0.1</costPerMile>
-</insurance>
-<awards>
-  <productCode>1260</productCode>
-  <departureCity>
-    <airportCode>ORD</airportCode>
-    <airportName>Chicago O&apos;Hare International</airportName>
-    <address>
-      <street>10000 W O&apos;Hare Ave</street>
-      <city>Chicago</city>
-      <state>IL</state>
-      <zip>60666</zip>
-      <country>IL</country>
-    </address>
-    <latitude>41.833333333333336</latitude>
-    <longitude>87.61666666666666</longitude>
-    <passengerFacilityFee>4.5</passengerFacilityFee>
-  </departureCity>
-  <arrivalCity>
-    <airportCode>PHX</airportCode>
-    <airportName>Phoenix Sky Harbor International</airportName>
-    <address>
-      <street>3400 E Sky Harbor Blvd</street>
-      <city>Phoenix</city>
-      <state>AZ</state>
-      <zip>85034</zip>
-      <country>USA</country>
-    </address>
-    <latitude>33.483333333333334</latitude>
-    <longitude>112.06666666666666</longitude>
-    <passengerFacilityFee>4.5</passengerFacilityFee>
-  </arrivalCity>
-  <departureDateTime>09:09</departureDateTime>
-  <arrivalDateTime>11:06</arrivalDateTime>
-  <flightNo>N725</flightNo>
-  <flightClass>EP</flightClass>
-  <aircraftType>Airbus-A319</aircraftType>
-  <costPerMile>0.2</costPerMile>
-  <redeemptionFee>30.0</redeemptionFee>
-  <pointsPerMile>110.0</pointsPerMile>
-</awards>
-<insurance>
-  <productCode>fh23</productCode>
-  <name>NationalInsurance</name>
-  <ageClass>21-60</ageClass>
-  <costPerMile>0.085</costPerMile>
-</insurance>
-<offseason>
-  <productCode>1240</productCode>
-  <departureCity>
-    <airportCode>LNK</airportCode>
-    <airportName>Lincoln Municipal</airportName>
-    <address>
-      <street>2400 W Adams St</street>
-      <city>Lincoln</city>
-      <state>NE</state>
-      <zip>68524</zip>
-      <country>USA</country>
-    </address>
-    <latitude>40.833333333333336</latitude>
-    <longitude>96.66666666666667</longitude>
-    <passengerFacilityFee>0.0</passengerFacilityFee>
-  </departureCity>
-  <arrivalCity>
-    <airportCode>ATL</airportCode>
-    <airportName>Hartsfield Jackson Atlanta International Airport</airportName>
-    <address>
-      <street>6000 N Terminal Pkwy</street>
-      <city>Atlanta</city>
-      <state>GA</state>
-      <zip>30320</zip>
-      <country>USA</country>
-    </address>
-    <latitude>33.75</latitude>
-    <longitude>84.38333333333334</longitude>
-    <passengerFacilityFee>4.5</passengerFacilityFee>
-  </arrivalCity>
-  <departureDateTime>06:00</departureDateTime>
-  <arrivalDateTime>09:08</arrivalDateTime>
-  <flightNo>NA4889</flightNo>
-  <flightClass>EC</flightClass>
-  <aircraftType>CRJ900</aircraftType>
-  <costPerMile>0.15</costPerMile>
-  <seasonStartDate>2015-00-07</seasonStartDate>
-  <seasonEndDate>2016-00-29</seasonEndDate>
-  <rebate>0.1</rebate>
-</offseason>
-<standard>
-  <productCode>1241</productCode>
-  <departureCity>
-    <airportCode>ATL</airportCode>
-    <airportName>Hartsfield Jackson Atlanta International Airport</airportName>
-    <address>
-      <street>6000 N Terminal Pkwy</street>
-      <city>Atlanta</city>
-      <state>GA</state>
-      <zip>30320</zip>
-      <country>USA</country>
-    </address>
-    <latitude>33.75</latitude>
-    <longitude>84.38333333333334</longitude>
-    <passengerFacilityFee>4.5</passengerFacilityFee>
-  </departureCity>
-  <arrivalCity>
-    <airportCode>LNK</airportCode>
-    <airportName>Lincoln Municipal</airportName>
-    <address>
-      <street>2400 W Adams St</street>
-      <city>Lincoln</city>
-      <state>NE</state>
-      <zip>68524</zip>
-      <country>USA</country>
-    </address>
-    <latitude>40.833333333333336</latitude>
-    <longitude>96.66666666666667</longitude>
-    <passengerFacilityFee>0.0</passengerFacilityFee>
-  </arrivalCity>
-  <departureDateTime>21:15</departureDateTime>
-  <arrivalDateTime>22:42</arrivalDateTime>
+  <quantity>0</quantity>
+</com.airamerica.product.service.Insurance>
+<com.airamerica.product.ticket.OffseasonTicket>
+  <code>1243</code>
+  <type>TO</type>
+  <depTime>
+    <iMillis>98100000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" resolves-to="org.joda.time.chrono.ISOChronology$Stub" serialization="custom">
+      <org.joda.time.chrono.ISOChronology_-Stub>
+        <org.joda.time.tz.CachedDateTimeZone resolves-to="org.joda.time.DateTimeZone$Stub" serialization="custom">
+          <org.joda.time.DateTimeZone_-Stub>
+            <string>America/Chicago</string>
+          </org.joda.time.DateTimeZone_-Stub>
+        </org.joda.time.tz.CachedDateTimeZone>
+      </org.joda.time.chrono.ISOChronology_-Stub>
+    </iChronology>
+  </depTime>
+  <arrTime>
+    <iMillis>103320000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../depTime/iChronology"/>
+  </arrTime>
   <flightNo>NA4871</flightNo>
-  <flightClass>EC</flightClass>
+  <flightClass class="com.airamerica.product.ticket.EconomyPremium">
+    <type>EP</type>
+    <costPerMile>0.5</costPerMile>
+  </flightClass>
   <aircraftType>CRJ900</aircraftType>
-  <costPerMile>0.15</costPerMile>
-</standard>
-<offseason>
-  <productCode>1243</productCode>
-  <departureCity>
-    <airportCode>ATL</airportCode>
-    <airportName>Hartsfield Jackson Atlanta International Airport</airportName>
-    <address>
-      <street>6000 N Terminal Pkwy</street>
-      <city>Atlanta</city>
-      <state>GA</state>
-      <zip>30320</zip>
-      <country>USA</country>
-    </address>
-    <latitude>33.75</latitude>
-    <longitude>84.38333333333334</longitude>
-    <passengerFacilityFee>4.5</passengerFacilityFee>
-  </departureCity>
-  <arrivalCity>
-    <airportCode>LNK</airportCode>
-    <airportName>Lincoln Municipal</airportName>
-    <address>
-      <street>2400 W Adams St</street>
-      <city>Lincoln</city>
-      <state>NE</state>
-      <zip>68524</zip>
-      <country>USA</country>
-    </address>
-    <latitude>40.833333333333336</latitude>
-    <longitude>96.66666666666667</longitude>
-    <passengerFacilityFee>0.0</passengerFacilityFee>
-  </arrivalCity>
-  <departureDateTime>21:15</departureDateTime>
-  <arrivalDateTime>22:42</arrivalDateTime>
-  <flightNo>NA4871</flightNo>
-  <flightClass>EP</flightClass>
-  <aircraftType>CRJ900</aircraftType>
-  <costPerMile>0.2</costPerMile>
-  <seasonStartDate>2015-00-07</seasonStartDate>
-  <seasonEndDate>2016-00-29</seasonEndDate>
+  <seasonStartDate>
+    <iMillis>1444194000000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../depTime/iChronology"/>
+  </seasonStartDate>
+  <seasonEndDate>
+    <iMillis>1454047200000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../depTime/iChronology"/>
+  </seasonEndDate>
   <rebate>0.2</rebate>
-</offseason>
-<checkedbaggage>
-  <productCode>90fc</productCode>
-  <ticket class="awards">
-    <productCode>1260</productCode>
-    <departureCity>
-      <airportCode>ORD</airportCode>
-      <airportName>Chicago O&apos;Hare International</airportName>
-      <address>
-        <street>10000 W O&apos;Hare Ave</street>
-        <city>Chicago</city>
-        <state>IL</state>
-        <zip>60666</zip>
-        <country>IL</country>
-      </address>
-      <latitude>41.833333333333336</latitude>
-      <longitude>87.61666666666666</longitude>
-      <passengerFacilityFee>4.5</passengerFacilityFee>
-    </departureCity>
-    <arrivalCity>
-      <airportCode>PHX</airportCode>
-      <airportName>Phoenix Sky Harbor International</airportName>
-      <address>
-        <street>3400 E Sky Harbor Blvd</street>
-        <city>Phoenix</city>
-        <state>AZ</state>
-        <zip>85034</zip>
-        <country>USA</country>
-      </address>
-      <latitude>33.483333333333334</latitude>
-      <longitude>112.06666666666666</longitude>
-      <passengerFacilityFee>4.5</passengerFacilityFee>
-    </arrivalCity>
-    <departureDateTime>09:09</departureDateTime>
-    <arrivalDateTime>11:06</arrivalDateTime>
-    <flightNo>N725</flightNo>
-    <flightClass>EP</flightClass>
-    <aircraftType>Airbus-A319</aircraftType>
-    <costPerMile>0.2</costPerMile>
-    <redeemptionFee>30.0</redeemptionFee>
-    <pointsPerMile>110.0</pointsPerMile>
-  </ticket>
-  <fCost>25.0</fCost>
-  <nextCost>35.0</nextCost>
-</checkedbaggage>
-<checkedbaggage>
-  <productCode>90fb</productCode>
-  <ticket class="standard">
-    <productCode>1241</productCode>
-    <departureCity>
-      <airportCode>ATL</airportCode>
-      <airportName>Hartsfield Jackson Atlanta International Airport</airportName>
-      <address>
-        <street>6000 N Terminal Pkwy</street>
-        <city>Atlanta</city>
-        <state>GA</state>
-        <zip>30320</zip>
-        <country>USA</country>
-      </address>
-      <latitude>33.75</latitude>
-      <longitude>84.38333333333334</longitude>
-      <passengerFacilityFee>4.5</passengerFacilityFee>
-    </departureCity>
-    <arrivalCity>
-      <airportCode>LNK</airportCode>
-      <airportName>Lincoln Municipal</airportName>
-      <address>
-        <street>2400 W Adams St</street>
-        <city>Lincoln</city>
-        <state>NE</state>
-        <zip>68524</zip>
-        <country>USA</country>
-      </address>
-      <latitude>40.833333333333336</latitude>
-      <longitude>96.66666666666667</longitude>
-      <passengerFacilityFee>0.0</passengerFacilityFee>
-    </arrivalCity>
-    <departureDateTime>21:15</departureDateTime>
-    <arrivalDateTime>22:42</arrivalDateTime>
-    <flightNo>NA4871</flightNo>
-    <flightClass>EC</flightClass>
-    <aircraftType>CRJ900</aircraftType>
+</com.airamerica.product.ticket.OffseasonTicket>
+<com.airamerica.product.service.CheckedBaggage>
+  <code>90fb</code>
+  <type>SC</type>
+  <noOfBags>0</noOfBags>
+</com.airamerica.product.service.CheckedBaggage>
+<com.airamerica.product.ticket.StandardTicket>
+  <code>1256</code>
+  <type>TS</type>
+  <depTime>
+    <iMillis>55800000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" resolves-to="org.joda.time.chrono.ISOChronology$Stub" serialization="custom">
+      <org.joda.time.chrono.ISOChronology_-Stub>
+        <org.joda.time.tz.CachedDateTimeZone resolves-to="org.joda.time.DateTimeZone$Stub" serialization="custom">
+          <org.joda.time.DateTimeZone_-Stub>
+            <string>America/Chicago</string>
+          </org.joda.time.DateTimeZone_-Stub>
+        </org.joda.time.tz.CachedDateTimeZone>
+      </org.joda.time.chrono.ISOChronology_-Stub>
+    </iChronology>
+  </depTime>
+  <arrTime>
+    <iMillis>78900000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../depTime/iChronology"/>
+  </arrTime>
+  <flightNo>NA2222</flightNo>
+  <flightClass class="com.airamerica.product.ticket.EconomyPremium">
+    <type>EP</type>
+    <costPerMile>0.5</costPerMile>
+  </flightClass>
+  <aircraftType>Boeing757</aircraftType>
+</com.airamerica.product.ticket.StandardTicket>
+<com.airamerica.product.ticket.AwardTicket>
+  <code>1257</code>
+  <type>TA</type>
+  <depTime>
+    <iMillis>58500000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" resolves-to="org.joda.time.chrono.ISOChronology$Stub" serialization="custom">
+      <org.joda.time.chrono.ISOChronology_-Stub>
+        <org.joda.time.tz.CachedDateTimeZone resolves-to="org.joda.time.DateTimeZone$Stub" serialization="custom">
+          <org.joda.time.DateTimeZone_-Stub>
+            <string>America/Chicago</string>
+          </org.joda.time.DateTimeZone_-Stub>
+        </org.joda.time.tz.CachedDateTimeZone>
+      </org.joda.time.chrono.ISOChronology_-Stub>
+    </iChronology>
+  </depTime>
+  <arrTime>
+    <iMillis>87180000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../depTime/iChronology"/>
+  </arrTime>
+  <flightNo>NA101</flightNo>
+  <flightClass class="com.airamerica.product.ticket.EconomyPremium">
+    <type>EP</type>
+    <costPerMile>0.5</costPerMile>
+  </flightClass>
+  <aircraftType>Boeing737-900ER</aircraftType>
+  <pointsPerMile>90.0</pointsPerMile>
+</com.airamerica.product.ticket.AwardTicket>
+<com.airamerica.product.ticket.StandardTicket>
+  <code>1258</code>
+  <type>TS</type>
+  <depTime>
+    <iMillis>60600000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" resolves-to="org.joda.time.chrono.ISOChronology$Stub" serialization="custom">
+      <org.joda.time.chrono.ISOChronology_-Stub>
+        <org.joda.time.tz.CachedDateTimeZone resolves-to="org.joda.time.DateTimeZone$Stub" serialization="custom">
+          <org.joda.time.DateTimeZone_-Stub>
+            <string>America/Chicago</string>
+          </org.joda.time.DateTimeZone_-Stub>
+        </org.joda.time.tz.CachedDateTimeZone>
+      </org.joda.time.chrono.ISOChronology_-Stub>
+    </iChronology>
+  </depTime>
+  <arrTime>
+    <iMillis>67800000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../depTime/iChronology"/>
+  </arrTime>
+  <flightNo>NA1555</flightNo>
+  <flightClass class="com.airamerica.product.ticket.Economy">
+    <type>EC</type>
     <costPerMile>0.15</costPerMile>
-  </ticket>
-  <fCost>25.0</fCost>
-  <nextCost>35.0</nextCost>
-</checkedbaggage>
-<insurance>
-  <productCode>fg23</productCode>
+  </flightClass>
+  <aircraftType>Boeing737-900ER</aircraftType>
+</com.airamerica.product.ticket.StandardTicket>
+<com.airamerica.product.service.Refreshment>
+  <code>32f4</code>
+  <type>SR</type>
+  <name>Italian Buffet</name>
+  <cost>18.0</cost>
+  <quantity>3</quantity>
+</com.airamerica.product.service.Refreshment>
+<com.airamerica.product.ticket.AwardTicket>
+  <code>1260</code>
+  <type>TA</type>
+  <depTime>
+    <iMillis>54540000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" resolves-to="org.joda.time.chrono.ISOChronology$Stub" serialization="custom">
+      <org.joda.time.chrono.ISOChronology_-Stub>
+        <org.joda.time.tz.CachedDateTimeZone resolves-to="org.joda.time.DateTimeZone$Stub" serialization="custom">
+          <org.joda.time.DateTimeZone_-Stub>
+            <string>America/Chicago</string>
+          </org.joda.time.DateTimeZone_-Stub>
+        </org.joda.time.tz.CachedDateTimeZone>
+      </org.joda.time.chrono.ISOChronology_-Stub>
+    </iChronology>
+  </depTime>
+  <arrTime>
+    <iMillis>61560000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../depTime/iChronology"/>
+  </arrTime>
+  <flightNo>N725</flightNo>
+  <flightClass class="com.airamerica.product.ticket.EconomyPremium">
+    <type>EP</type>
+    <costPerMile>0.5</costPerMile>
+  </flightClass>
+  <aircraftType>Airbus-A319</aircraftType>
+  <pointsPerMile>110.0</pointsPerMile>
+</com.airamerica.product.ticket.AwardTicket>
+<com.airamerica.product.service.SpecAssist>
+  <code>xer4</code>
+  <type>SS</type>
+  <typeOfService>BabyBassinet</typeOfService>
+  <person>
+    <code>321na</code>
+    <firstName>Jon</firstName>
+    <lastName>Pertwee</lastName>
+    <address>
+      <street>301 Front St W</street>
+      <city>Toronto</city>
+      <state>ON</state>
+      <zipcode>M5V 2T6</zipcode>
+      <country>Canada</country>
+    </address>
+    <phoneNumber>323-541-3210</phoneNumber>
+    <emailAddress>
+      <string>jpet@whofan.com</string>
+    </emailAddress>
+  </person>
+</com.airamerica.product.service.SpecAssist>
+<com.airamerica.product.ticket.StandardTicket>
+  <code>1261</code>
+  <type>TS</type>
+  <depTime>
+    <iMillis>54540000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" resolves-to="org.joda.time.chrono.ISOChronology$Stub" serialization="custom">
+      <org.joda.time.chrono.ISOChronology_-Stub>
+        <org.joda.time.tz.CachedDateTimeZone resolves-to="org.joda.time.DateTimeZone$Stub" serialization="custom">
+          <org.joda.time.DateTimeZone_-Stub>
+            <string>America/Chicago</string>
+          </org.joda.time.DateTimeZone_-Stub>
+        </org.joda.time.tz.CachedDateTimeZone>
+      </org.joda.time.chrono.ISOChronology_-Stub>
+    </iChronology>
+  </depTime>
+  <arrTime>
+    <iMillis>61560000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../depTime/iChronology"/>
+  </arrTime>
+  <flightNo>N725</flightNo>
+  <flightClass class="com.airamerica.product.ticket.BusinessClass">
+    <type>BC</type>
+    <costPerMile>0.2</costPerMile>
+  </flightClass>
+  <aircraftType>Airbus-A319</aircraftType>
+</com.airamerica.product.ticket.StandardTicket>
+<com.airamerica.product.service.Insurance>
+  <code>ff24</code>
+  <type>SI</type>
+  <name>Progressive</name>
+  <ageClass>55-68</ageClass>
+  <costPerMile>0.09</costPerMile>
+  <quantity>0</quantity>
+</com.airamerica.product.service.Insurance>
+<com.airamerica.product.ticket.OffseasonTicket>
+  <code>1262</code>
+  <type>TO</type>
+  <depTime>
+    <iMillis>73440000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" resolves-to="org.joda.time.chrono.ISOChronology$Stub" serialization="custom">
+      <org.joda.time.chrono.ISOChronology_-Stub>
+        <org.joda.time.tz.CachedDateTimeZone resolves-to="org.joda.time.DateTimeZone$Stub" serialization="custom">
+          <org.joda.time.DateTimeZone_-Stub>
+            <string>America/Chicago</string>
+          </org.joda.time.DateTimeZone_-Stub>
+        </org.joda.time.tz.CachedDateTimeZone>
+      </org.joda.time.chrono.ISOChronology_-Stub>
+    </iChronology>
+  </depTime>
+  <arrTime>
+    <iMillis>93360000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../depTime/iChronology"/>
+  </arrTime>
+  <flightNo>N2000</flightNo>
+  <flightClass class="com.airamerica.product.ticket.BusinessClass">
+    <type>BC</type>
+    <costPerMile>0.2</costPerMile>
+  </flightClass>
+  <aircraftType>Airbus-A320</aircraftType>
+  <seasonStartDate>
+    <iMillis>1441083600000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../depTime/iChronology"/>
+  </seasonStartDate>
+  <seasonEndDate>
+    <iMillis>1476248400000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../depTime/iChronology"/>
+  </seasonEndDate>
+  <rebate>0.15</rebate>
+</com.airamerica.product.ticket.OffseasonTicket>
+<com.airamerica.product.ticket.OffseasonTicket>
+  <code>1263</code>
+  <type>TO</type>
+  <depTime>
+    <iMillis>47400000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" resolves-to="org.joda.time.chrono.ISOChronology$Stub" serialization="custom">
+      <org.joda.time.chrono.ISOChronology_-Stub>
+        <org.joda.time.tz.CachedDateTimeZone resolves-to="org.joda.time.DateTimeZone$Stub" serialization="custom">
+          <org.joda.time.DateTimeZone_-Stub>
+            <string>America/Chicago</string>
+          </org.joda.time.DateTimeZone_-Stub>
+        </org.joda.time.tz.CachedDateTimeZone>
+      </org.joda.time.chrono.ISOChronology_-Stub>
+    </iChronology>
+  </depTime>
+  <arrTime>
+    <iMillis>67320000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../depTime/iChronology"/>
+  </arrTime>
+  <flightNo>N488</flightNo>
+  <flightClass class="com.airamerica.product.ticket.Economy">
+    <type>EC</type>
+    <costPerMile>0.15</costPerMile>
+  </flightClass>
+  <aircraftType>Airbus-A320</aircraftType>
+  <seasonStartDate>
+    <iMillis>1442293200000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../depTime/iChronology"/>
+  </seasonStartDate>
+  <seasonEndDate>
+    <iMillis>1482991200000</iMillis>
+    <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../depTime/iChronology"/>
+  </seasonEndDate>
+  <rebate>0.25</rebate>
+</com.airamerica.product.ticket.OffseasonTicket>
+<com.airamerica.product.service.Insurance>
+  <code>fg23</code>
+  <type>SI</type>
   <name>Progressive</name>
   <ageClass>21-54</ageClass>
   <costPerMile>0.08</costPerMile>
-</insurance>
-<checkedbaggage>
-  <productCode>90fa</productCode>
-  <ticket class="standard">
-    <productCode>1255</productCode>
-    <departureCity>
-      <airportCode>LAX</airportCode>
-      <airportName>Los Angeles International Airport</airportName>
-      <address>
-        <street>1 World Way</street>
-        <city>Los Angeles</city>
-        <state>CA</state>
-        <zip>90045</zip>
-        <country>USA</country>
-      </address>
-      <latitude>34.05</latitude>
-      <longitude>118.25</longitude>
-      <passengerFacilityFee>4.5</passengerFacilityFee>
-    </departureCity>
-    <arrivalCity>
-      <airportCode>ATL</airportCode>
-      <airportName>Hartsfield Jackson Atlanta International Airport</airportName>
-      <address>
-        <street>6000 N Terminal Pkwy</street>
-        <city>Atlanta</city>
-        <state>GA</state>
-        <zip>30320</zip>
-        <country>USA</country>
-      </address>
-      <latitude>33.75</latitude>
-      <longitude>84.38333333333334</longitude>
-      <passengerFacilityFee>4.5</passengerFacilityFee>
-    </arrivalCity>
-    <departureDateTime>09:30</departureDateTime>
-    <arrivalDateTime>15:55</arrivalDateTime>
-    <flightNo>NA2222</flightNo>
-    <flightClass>BC</flightClass>
-    <aircraftType>Boeing757</aircraftType>
-    <costPerMile>0.5</costPerMile>
+  <quantity>2</quantity>
+  <ticket class="com.airamerica.product.ticket.OffseasonTicket">
+    <code>1262</code>
+    <type>TO</type>
+    <depTime>
+      <iMillis>73440000</iMillis>
+      <iChronology class="org.joda.time.chrono.ISOChronology" resolves-to="org.joda.time.chrono.ISOChronology$Stub" serialization="custom">
+        <org.joda.time.chrono.ISOChronology_-Stub>
+          <org.joda.time.tz.CachedDateTimeZone resolves-to="org.joda.time.DateTimeZone$Stub" serialization="custom">
+            <org.joda.time.DateTimeZone_-Stub>
+              <string>America/Chicago</string>
+            </org.joda.time.DateTimeZone_-Stub>
+          </org.joda.time.tz.CachedDateTimeZone>
+        </org.joda.time.chrono.ISOChronology_-Stub>
+      </iChronology>
+    </depTime>
+    <arrTime>
+      <iMillis>93360000</iMillis>
+      <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../depTime/iChronology"/>
+    </arrTime>
+    <flightNo>N2000</flightNo>
+    <flightClass class="com.airamerica.product.ticket.BusinessClass">
+      <type>BC</type>
+      <costPerMile>0.2</costPerMile>
+    </flightClass>
+    <aircraftType>Airbus-A320</aircraftType>
+    <seasonStartDate>
+      <iMillis>1441083600000</iMillis>
+      <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../depTime/iChronology"/>
+    </seasonStartDate>
+    <seasonEndDate>
+      <iMillis>1476248400000</iMillis>
+      <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../depTime/iChronology"/>
+    </seasonEndDate>
+    <rebate>0.15</rebate>
   </ticket>
-  <fCost>25.0</fCost>
-  <nextCost>35.0</nextCost>
-</checkedbaggage>
-<standard>
-  <productCode>1238</productCode>
-  <departureCity>
-    <airportCode>LNK</airportCode>
-    <airportName>Lincoln Municipal</airportName>
+</com.airamerica.product.service.Insurance>
+<com.airamerica.product.service.Insurance>
+  <code>fh23</code>
+  <type>SI</type>
+  <name>NationalInsurance</name>
+  <ageClass>21-60</ageClass>
+  <costPerMile>0.085</costPerMile>
+  <quantity>2</quantity>
+  <ticket class="com.airamerica.product.ticket.StandardTicket">
+    <code>1255</code>
+    <type>TS</type>
+    <depTime>
+      <iMillis>55800000</iMillis>
+      <iChronology class="org.joda.time.chrono.ISOChronology" resolves-to="org.joda.time.chrono.ISOChronology$Stub" serialization="custom">
+        <org.joda.time.chrono.ISOChronology_-Stub>
+          <org.joda.time.tz.CachedDateTimeZone resolves-to="org.joda.time.DateTimeZone$Stub" serialization="custom">
+            <org.joda.time.DateTimeZone_-Stub>
+              <string>America/Chicago</string>
+            </org.joda.time.DateTimeZone_-Stub>
+          </org.joda.time.tz.CachedDateTimeZone>
+        </org.joda.time.chrono.ISOChronology_-Stub>
+      </iChronology>
+    </depTime>
+    <arrTime>
+      <iMillis>78900000</iMillis>
+      <iChronology class="org.joda.time.chrono.ISOChronology" reference="../../depTime/iChronology"/>
+    </arrTime>
+    <flightNo>NA2222</flightNo>
+    <flightClass class="com.airamerica.product.ticket.BusinessClass">
+      <type>BC</type>
+      <costPerMile>0.2</costPerMile>
+    </flightClass>
+    <aircraftType>Boeing757</aircraftType>
+  </ticket>
+</com.airamerica.product.service.Insurance>
+<com.airamerica.product.service.CheckedBaggage>
+  <code>90fc</code>
+  <type>SC</type>
+  <noOfBags>2</noOfBags>
+</com.airamerica.product.service.CheckedBaggage>
+<com.airamerica.product.service.SpecAssist>
+  <code>xer1</code>
+  <type>SS</type>
+  <typeOfService>PrioritySeating</typeOfService>
+  <person>
+    <code>55bb</code>
+    <firstName>Miles</firstName>
+    <lastName>O&apos;Brien</lastName>
     <address>
-      <street>2400 W Adams St</street>
-      <city>Lincoln</city>
-      <state>NE</state>
-      <zip>68524</zip>
+      <street>8753 West 3rd Ave.</street>
+      <city>Dallas</city>
+      <state>TX</state>
+      <zipcode>75001</zipcode>
       <country>USA</country>
     </address>
-    <latitude>40.833333333333336</latitude>
-    <longitude>96.66666666666667</longitude>
-    <passengerFacilityFee>0.0</passengerFacilityFee>
-  </departureCity>
-  <arrivalCity>
-    <airportCode>ATL</airportCode>
-    <airportName>Hartsfield Jackson Atlanta International Airport</airportName>
-    <address>
-      <street>6000 N Terminal Pkwy</street>
-      <city>Atlanta</city>
-      <state>GA</state>
-      <zip>30320</zip>
-      <country>USA</country>
-    </address>
-    <latitude>33.75</latitude>
-    <longitude>84.38333333333334</longitude>
-    <passengerFacilityFee>4.5</passengerFacilityFee>
-  </arrivalCity>
-  <departureDateTime>06:00</departureDateTime>
-  <arrivalDateTime>09:08</arrivalDateTime>
-  <flightNo>NA4889</flightNo>
-  <flightClass>EC</flightClass>
-  <aircraftType>CRJ900</aircraftType>
-  <costPerMile>0.15</costPerMile>
-</standard>
-<refreshment>
-  <productCode>31f4</productCode>
+    <phoneNumber>402-251-2114</phoneNumber>
+    <emailAddress>
+      <string>obrien@ds9.com</string>
+      <string>obrien@enterprise.gov</string>
+    </emailAddress>
+  </person>
+</com.airamerica.product.service.SpecAssist>
+<com.airamerica.product.service.Refreshment>
+  <code>31f4</code>
+  <type>SR</type>
   <name>Labbat-Beer-15oz</name>
   <cost>4.5</cost>
-</refreshment>
-<standard>
-  <productCode>1258</productCode>
-  <departureCity>
-    <airportCode>ATL</airportCode>
-    <airportName>Hartsfield Jackson Atlanta International Airport</airportName>
-    <address>
-      <street>6000 N Terminal Pkwy</street>
-      <city>Atlanta</city>
-      <state>GA</state>
-      <zip>30320</zip>
-      <country>USA</country>
-    </address>
-    <latitude>33.75</latitude>
-    <longitude>84.38333333333334</longitude>
-    <passengerFacilityFee>4.5</passengerFacilityFee>
-  </departureCity>
-  <arrivalCity>
-    <airportCode>LAX</airportCode>
-    <airportName>Los Angeles International Airport</airportName>
-    <address>
-      <street>1 World Way</street>
-      <city>Los Angeles</city>
-      <state>CA</state>
-      <zip>90045</zip>
-      <country>USA</country>
-    </address>
-    <latitude>34.05</latitude>
-    <longitude>118.25</longitude>
-    <passengerFacilityFee>4.5</passengerFacilityFee>
-  </arrivalCity>
-  <departureDateTime>10:50</departureDateTime>
-  <arrivalDateTime>12:50</arrivalDateTime>
-  <flightNo>NA1555</flightNo>
-  <flightClass>EC</flightClass>
-  <aircraftType>Boeing737-900ER</aircraftType>
-  <costPerMile>0.15</costPerMile>
-</standard>
-<refreshment>
-  <productCode>32f4</productCode>
-  <name>Italian Buffet</name>
-  <cost>18.0</cost>
-</refreshment>
-<standard>
-  <productCode>1255</productCode>
-  <departureCity>
-    <airportCode>LAX</airportCode>
-    <airportName>Los Angeles International Airport</airportName>
-    <address>
-      <street>1 World Way</street>
-      <city>Los Angeles</city>
-      <state>CA</state>
-      <zip>90045</zip>
-      <country>USA</country>
-    </address>
-    <latitude>34.05</latitude>
-    <longitude>118.25</longitude>
-    <passengerFacilityFee>4.5</passengerFacilityFee>
-  </departureCity>
-  <arrivalCity>
-    <airportCode>ATL</airportCode>
-    <airportName>Hartsfield Jackson Atlanta International Airport</airportName>
-    <address>
-      <street>6000 N Terminal Pkwy</street>
-      <city>Atlanta</city>
-      <state>GA</state>
-      <zip>30320</zip>
-      <country>USA</country>
-    </address>
-    <latitude>33.75</latitude>
-    <longitude>84.38333333333334</longitude>
-    <passengerFacilityFee>4.5</passengerFacilityFee>
-  </arrivalCity>
-  <departureDateTime>09:30</departureDateTime>
-  <arrivalDateTime>15:55</arrivalDateTime>
-  <flightNo>NA2222</flightNo>
-  <flightClass>BC</flightClass>
-  <aircraftType>Boeing757</aircraftType>
-  <costPerMile>0.5</costPerMile>
-</standard>
-<awards>
-  <productCode>1257</productCode>
-  <departureCity>
-    <airportCode>LAX</airportCode>
-    <airportName>Los Angeles International Airport</airportName>
-    <address>
-      <street>1 World Way</street>
-      <city>Los Angeles</city>
-      <state>CA</state>
-      <zip>90045</zip>
-      <country>USA</country>
-    </address>
-    <latitude>34.05</latitude>
-    <longitude>118.25</longitude>
-    <passengerFacilityFee>4.5</passengerFacilityFee>
-  </departureCity>
-  <arrivalCity>
-    <airportCode>ATL</airportCode>
-    <airportName>Hartsfield Jackson Atlanta International Airport</airportName>
-    <address>
-      <street>6000 N Terminal Pkwy</street>
-      <city>Atlanta</city>
-      <state>GA</state>
-      <zip>30320</zip>
-      <country>USA</country>
-    </address>
-    <latitude>33.75</latitude>
-    <longitude>84.38333333333334</longitude>
-    <passengerFacilityFee>4.5</passengerFacilityFee>
-  </arrivalCity>
-  <departureDateTime>10:15</departureDateTime>
-  <arrivalDateTime>18:13</arrivalDateTime>
-  <flightNo>NA101</flightNo>
-  <flightClass>EP</flightClass>
-  <aircraftType>Boeing737-900ER</aircraftType>
-  <costPerMile>0.2</costPerMile>
-  <redeemptionFee>30.0</redeemptionFee>
-  <pointsPerMile>90.0</pointsPerMile>
-</awards>
-<standard>
-  <productCode>1256</productCode>
-  <departureCity>
-    <airportCode>LAX</airportCode>
-    <airportName>Los Angeles International Airport</airportName>
-    <address>
-      <street>1 World Way</street>
-      <city>Los Angeles</city>
-      <state>CA</state>
-      <zip>90045</zip>
-      <country>USA</country>
-    </address>
-    <latitude>34.05</latitude>
-    <longitude>118.25</longitude>
-    <passengerFacilityFee>4.5</passengerFacilityFee>
-  </departureCity>
-  <arrivalCity>
-    <airportCode>ATL</airportCode>
-    <airportName>Hartsfield Jackson Atlanta International Airport</airportName>
-    <address>
-      <street>6000 N Terminal Pkwy</street>
-      <city>Atlanta</city>
-      <state>GA</state>
-      <zip>30320</zip>
-      <country>USA</country>
-    </address>
-    <latitude>33.75</latitude>
-    <longitude>84.38333333333334</longitude>
-    <passengerFacilityFee>4.5</passengerFacilityFee>
-  </arrivalCity>
-  <departureDateTime>09:30</departureDateTime>
-  <arrivalDateTime>15:55</arrivalDateTime>
-  <flightNo>NA2222</flightNo>
-  <flightClass>EP</flightClass>
-  <aircraftType>Boeing757</aircraftType>
-  <costPerMile>0.2</costPerMile>
-</standard>
+  <quantity>1</quantity>
+</com.airamerica.product.service.Refreshment>
 </products>
