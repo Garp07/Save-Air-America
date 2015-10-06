@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.airamerica.other.Address;
 
 public class Person {
-	private String personCode;
+	private String code;
 	private String firstName;
 	private String lastName;
 	private Address address;
@@ -13,8 +13,8 @@ public class Person {
 	private ArrayList<String> emailAddress;
 	
 	//Person constructor - no phone number
-	public Person(String personCode, String firstName, String lastName, Address address) {
-		this.personCode = personCode;
+	public Person(String code, String firstName, String lastName, Address address) {
+		this.code = code;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
@@ -22,8 +22,8 @@ public class Person {
 	}
 	
 	//Person constructor - w/ phone number
-	public Person(String personCode, String firstName, String lastName, Address address, String phoneNumber) {
-		this.personCode = personCode;
+	public Person(String code, String firstName, String lastName, Address address, String phoneNumber) {
+		this.code = code;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
@@ -43,12 +43,12 @@ public class Person {
 		this.emailAddress.add(email);
 	}
 
-	public String getPersonCode() {
-		return personCode;
+	public String getCode() {
+		return code;
 	}
 
-	public void setPersonCode(String personCode) {
-		this.personCode = personCode;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public String getFirstName() {

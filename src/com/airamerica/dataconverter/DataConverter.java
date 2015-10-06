@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.airamerica.airport.Airport;
 import com.airamerica.customer.Customer;
+import com.airamerica.invoice.Invoice;
 import com.airamerica.person.Person;
 import com.airamerica.product.Product;
 import com.airamerica.product.ticket.Ticket;
@@ -32,6 +33,10 @@ public class DataConverter {
 		//Create array list of customers
 		CustomerConverter customers = new CustomerConverter("data/Customers.dat", personsArray);				
 		ArrayList<Customer> customersArray = customers.parseCustomers();
+		
+		InvoiceConverter invoices = new InvoiceConverter("data/Invoices.dat", productsArray, 
+				customersArray, personsArray);
+		ArrayList<Invoice> invoicesArray = invoices.parseInvoices();
 		
 		//prints to XML
 		PrintToXML.PrintAirportsXML(airportsArray);
