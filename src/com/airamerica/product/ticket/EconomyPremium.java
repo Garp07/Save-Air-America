@@ -1,4 +1,4 @@
-package com.airamerica.product.ticket;
+package src.com.airamerica.product.ticket;
 
 public class EconomyPremium extends FlightClass {
 	//priority boarding, preferred seat selection, two free bags, free 12 floz drink

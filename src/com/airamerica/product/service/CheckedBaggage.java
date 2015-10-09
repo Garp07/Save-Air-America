@@ -1,6 +1,6 @@
-package com.airamerica.product.service;
+package src.com.airamerica.product.service;
 
-import com.airamerica.product.ticket.Ticket;
+import src.com.airamerica.product.ticket.Ticket;
 
 public class CheckedBaggage extends Service {
 	private Ticket ticketCode;	
@@ -28,4 +28,16 @@ public class CheckedBaggage extends Service {
 		this.ticketCode = ticketCode;
 		this.type = "SC";
 	}
+	
+	public double getServiceCost() {
+		double cost = 0;
+		if(this.noOfBags == 1) {
+			cost = 25;
+		} else {
+			cost = 25 + (double) this.noOfBags*35;
+		}
+		return cost;
+	}
+	
+	
 }

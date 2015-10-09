@@ -1,12 +1,12 @@
-package com.airamerica.dataconverter;
+package src.com.airamerica.dataconverter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.airamerica.other.Address;
-import com.airamerica.person.Person;
+import src.com.airamerica.other.Address;
+import src.com.airamerica.person.Person;
 
 public class PersonConverter extends DataReader {
 	

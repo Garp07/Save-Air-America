@@ -1,12 +1,12 @@
-package com.airamerica.dataconverter;
+package src.com.airamerica.dataconverter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.airamerica.airport.Airport;
-import com.airamerica.other.Address;
+import src.com.airamerica.airport.Airport;
+import src.com.airamerica.other.Address;
 
 public class AirportConverter extends DataReader {
 	

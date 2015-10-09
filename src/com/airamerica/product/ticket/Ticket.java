@@ -1,11 +1,11 @@
-package com.airamerica.product.ticket;
+package src.com.airamerica.product.ticket;
 
 import java.util.ArrayList;
 
 import org.joda.time.DateTime;
 
-import com.airamerica.airport.Airport;
-import com.airamerica.product.Product;
+import src.com.airamerica.airport.Airport;
+import src.com.airamerica.product.Product;
 
 abstract public class Ticket extends Product {
 	protected Airport depAirport;
@@ -56,4 +56,36 @@ abstract public class Ticket extends Product {
 		this.flightClass = flightClass;
 		this.aircraftType = aircraftType;
 	}
+	
+	public double getFlightDistance() {
+		double latDiff = Math.toRadians(arrAirport.getLatitude() - depAirport.getLatitude());
+		double longDiff = Math.toRadians(arrAirport.getLongitude() - depAirport.getLongitude());
+		double latDep = Math.toRadians(depAirport.getLatitude());
+		double latArr = Math.toRadians(arrAirport.getLatitude());
+		double radiusEarth = 3959.87;
+		
+		double a = Math.pow(Math.sin(latDiff/2), 2) + Math.cos(latDep)*Math.cos(latArr)*Math.pow(Math.sin(longDiff/2), 2);		//Haversine formula
+		double c = 2*Math.asin(Math.sqrt(a));
+		return c*radiusEarth;
+	}
+
+	public double getBasefare() {
+		double fareRate = this.flightClass.getCostPerMile();
+		double flightDistance = this.getFlightDistance();
+		double basefare = fareRate*flightDistance;
+		return basefare;
+	}
+
+	public double getTaxes() {
+		double federalExciseTax = this.getBasefare()*0.075;
+		double flightSegmentTax = (double)this.getSeats().size()*4;
+		double securityFee = (double)this.getSeats().size()*5.6;
+		double facilityCharge = this.depAirport.getPassengerFacilityFee()*(double)this.getSeats().size();
+		double taxes = federalExciseTax + flightSegmentTax + securityFee + facilityCharge;
+		return taxes;
+	}
+
+	abstract double getTotalFare();
+	
+	
 }

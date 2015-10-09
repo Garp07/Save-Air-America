@@ -1,4 +1,4 @@
-package com.airamerica.product.service;
+package src.com.airamerica.product.service;
 
 public class Refreshment extends Service {
 	private String name;
@@ -36,4 +36,10 @@ public class Refreshment extends Service {
 		this.cost = cost;
 		this.type = "SR";
 	}
+	
+	public double getServiceCost() {
+		double cost = (double) this.quantity*this.cost;
+		return cost;
+	}
+	
 }

@@ -1,4 +1,4 @@
-package com.airamerica.other;
+package src.com.airamerica.other;
 
 public class Address {
 	private String street;

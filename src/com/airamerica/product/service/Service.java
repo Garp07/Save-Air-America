@@ -1,6 +1,6 @@
-package com.airamerica.product.service;
+package src.com.airamerica.product.service;
 
-import com.airamerica.product.Product;
+import src.com.airamerica.product.Product;
 
 abstract public class Service extends Product {
 	
@@ -8,4 +8,6 @@ abstract public class Service extends Product {
 	public Service(String code) {
 		super(code);
 	}
+	
+	abstract double getServiceCost();
 }

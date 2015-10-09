@@ -1,13 +1,13 @@
-package com.airamerica.dataconverter;
+package src.com.airamerica.dataconverter;
 
 import java.util.ArrayList;
 
-import com.airamerica.airport.Airport;
-import com.airamerica.customer.Customer;
-import com.airamerica.invoice.Invoice;
-import com.airamerica.person.Person;
-import com.airamerica.product.Product;
-import com.airamerica.product.ticket.Ticket;
+import src.com.airamerica.airport.Airport;
+import src.com.airamerica.customer.Customer;
+import src.com.airamerica.invoice.Invoice;
+import src.com.airamerica.person.Person;
+import src.com.airamerica.product.Product;
+import src.com.airamerica.product.ticket.Ticket;
 
 public class DataConverter {
 

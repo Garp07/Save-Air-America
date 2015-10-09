@@ -1,4 +1,4 @@
-package com.airamerica.dataconverter;
+package src.com.airamerica.dataconverter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,20 +9,20 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import com.airamerica.airport.Airport;
-import com.airamerica.product.Product;
-import com.airamerica.product.service.CheckedBaggage;
-import com.airamerica.product.service.Insurance;
-import com.airamerica.product.service.Refreshment;
-import com.airamerica.product.service.SpecAssist;
-import com.airamerica.product.ticket.AwardTicket;
-import com.airamerica.product.ticket.BusinessClass;
-import com.airamerica.product.ticket.Economy;
-import com.airamerica.product.ticket.EconomyPremium;
-import com.airamerica.product.ticket.FlightClass;
-import com.airamerica.product.ticket.OffseasonTicket;
-import com.airamerica.product.ticket.StandardTicket;
-import com.airamerica.product.ticket.Ticket;
+import src.com.airamerica.airport.Airport;
+import src.com.airamerica.product.Product;
+import src.com.airamerica.product.service.CheckedBaggage;
+import src.com.airamerica.product.service.Insurance;
+import src.com.airamerica.product.service.Refreshment;
+import src.com.airamerica.product.service.SpecAssist;
+import src.com.airamerica.product.ticket.AwardTicket;
+import src.com.airamerica.product.ticket.BusinessClass;
+import src.com.airamerica.product.ticket.Economy;
+import src.com.airamerica.product.ticket.EconomyPremium;
+import src.com.airamerica.product.ticket.FlightClass;
+import src.com.airamerica.product.ticket.OffseasonTicket;
+import src.com.airamerica.product.ticket.StandardTicket;
+import src.com.airamerica.product.ticket.Ticket;
 
 public class ProductConverter extends DataReader {
 	private ArrayList<Airport> airports;

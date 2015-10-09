@@ -1,13 +1,13 @@
-package com.airamerica.dataconverter;
+package src.com.airamerica.dataconverter;
 
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import com.airamerica.airport.Airport;
-import com.airamerica.customer.Customer;
-import com.airamerica.person.Person;
-import com.airamerica.product.Product;
+import src.com.airamerica.airport.Airport;
+import src.com.airamerica.customer.Customer;
+import src.com.airamerica.person.Person;
+import src.com.airamerica.product.Product;
 import com.thoughtworks.xstream.XStream;
 
 public class PrintToXML {

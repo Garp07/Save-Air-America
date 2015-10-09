@@ -1,4 +1,4 @@
-package com.airamerica.product;
+package src.com.airamerica.product;
 
 abstract public class Product {
 	protected String code;

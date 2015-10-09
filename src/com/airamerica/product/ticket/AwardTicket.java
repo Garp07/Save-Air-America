@@ -1,8 +1,8 @@
-package com.airamerica.product.ticket;
+package src.com.airamerica.product.ticket;
 
 import org.joda.time.DateTime;
 
-import com.airamerica.airport.Airport;
+import src.com.airamerica.airport.Airport;
 
 public class AwardTicket extends Ticket { 
 	private double pointsPerMile;	
@@ -25,4 +25,16 @@ public class AwardTicket extends Ticket {
 		this.type = "TA";
 	}
 	
+	public double getAwardsPoints() {
+		double distance = this.getFlightDistance();
+		double awardsPoints = distance*this.pointsPerMile;
+		return awardsPoints;
+	}
+	
+	public double getTotalFare() {
+		double totalFare = this.getBasefare() + this.getTaxes();
+		return totalFare;
+	}
+	
+	/*Pay flat $30 redemption fee once per invoice regardless of number of tickets*/
 }
