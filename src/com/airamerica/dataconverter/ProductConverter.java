@@ -204,7 +204,7 @@ public class ProductConverter extends DataReader {
 	
 	private Airport findAirport(String airportCode) {
 		for(Airport a : airports) {
-			if(a.getAirportCode() == airportCode) {
+			if(a.getAirportCode().equals(airportCode)) {
 				return a;
 			}
 		}

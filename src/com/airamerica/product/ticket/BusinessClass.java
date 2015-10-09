@@ -5,7 +5,7 @@ public class BusinessClass extends FlightClass {
 	
 	public BusinessClass() {
 		super();
-		this.costPerMile = 0.2;
+		this.costPerMile = 0.5;
 		this.type = "BC";
 	}
 }

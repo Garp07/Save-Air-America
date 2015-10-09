@@ -50,7 +50,7 @@ public class OffseasonTicket extends Ticket {
 		if(this.travelDate.isAfter(this.seasonStartDate) && this.travelDate.isBefore(this.seasonEndDate)) {
 			discount = this.getBasefare()*this.rebate;
 		} 
-		double totalFare = (this.getBasefare() - discount) + this.getTaxes() + serviceFee;
+		double totalFare = (this.getBasefare()*(double)this.getSeats().size() - discount) + this.getTaxes() + serviceFee;
 		return totalFare;
 	}
 	

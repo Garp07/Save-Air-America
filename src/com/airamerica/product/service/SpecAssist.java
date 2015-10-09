@@ -26,6 +26,7 @@ public class SpecAssist extends Service {
 		super(code);
 		this.typeOfService = typeOfService;
 		this.type = "SS";
+		this.quantity = 1;
 	}
 	
 	public double getServiceCost() {

@@ -3,15 +3,6 @@ package src.com.airamerica.product.service;
 public class Refreshment extends Service {
 	private String name;
 	private double cost;
-	private int quantity;
-	
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
 
 	public String getName() {						
 		return name;

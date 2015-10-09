@@ -5,7 +5,7 @@ public class EconomyPremium extends FlightClass {
 	
 	public EconomyPremium() {
 		super();
-		this.costPerMile = 0.5;
+		this.costPerMile = 0.2;
 		this.type = "EP";
 	}
 }

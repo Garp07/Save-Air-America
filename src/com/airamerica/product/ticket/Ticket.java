@@ -20,6 +20,62 @@ abstract public class Ticket extends Product {
 	protected ArrayList<Seat> seats;
 	protected String ticketNote;
 	
+	public Airport getDepAirport() {
+		return depAirport;
+	}
+
+	public void setDepAirport(Airport depAirport) {
+		this.depAirport = depAirport;
+	}
+
+	public Airport getArrAirport() {
+		return arrAirport;
+	}
+
+	public void setArrAirport(Airport arrAirport) {
+		this.arrAirport = arrAirport;
+	}
+
+	public DateTime getDepTime() {
+		return depTime;
+	}
+
+	public void setDepTime(DateTime depTime) {
+		this.depTime = depTime;
+	}
+
+	public DateTime getArrTime() {
+		return arrTime;
+	}
+
+	public void setArrTime(DateTime arrTime) {
+		this.arrTime = arrTime;
+	}
+
+	public String getFlightNo() {
+		return flightNo;
+	}
+
+	public void setFlightNo(String flightNo) {
+		this.flightNo = flightNo;
+	}
+
+	public FlightClass getFlightClass() {
+		return flightClass;
+	}
+
+	public void setFlightClass(FlightClass flightClass) {
+		this.flightClass = flightClass;
+	}
+
+	public String getAircraftType() {
+		return aircraftType;
+	}
+
+	public void setAircraftType(String aircraftType) {
+		this.aircraftType = aircraftType;
+	}
+
 	public DateTime getTravelDate() {
 		return travelDate;
 	}
@@ -77,7 +133,7 @@ abstract public class Ticket extends Product {
 	}
 
 	public double getTaxes() {
-		double federalExciseTax = this.getBasefare()*0.075;
+		double federalExciseTax = this.getBasefare()*(double)this.getSeats().size()*0.075;
 		double flightSegmentTax = (double)this.getSeats().size()*4;
 		double securityFee = (double)this.getSeats().size()*5.6;
 		double facilityCharge = this.depAirport.getPassengerFacilityFee()*(double)this.getSeats().size();
@@ -85,7 +141,7 @@ abstract public class Ticket extends Product {
 		return taxes;
 	}
 
-	abstract double getTotalFare();
+	public abstract double getTotalFare();
 	
 	
 }

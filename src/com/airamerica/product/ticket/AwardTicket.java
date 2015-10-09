@@ -32,7 +32,7 @@ public class AwardTicket extends Ticket {
 	}
 	
 	public double getTotalFare() {
-		double totalFare = this.getBasefare() + this.getTaxes();
+		double totalFare = this.getBasefare()*(double)this.getSeats().size() + this.getTaxes();
 		return totalFare;
 	}
 	
