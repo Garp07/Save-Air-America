@@ -88,7 +88,7 @@ CREATE TABLE Airports
 
 --Populate Airport table
 INSERT INTO Airports(AirportCode, AirportName, AddressID, LatitudeDegrees, LatitudeMinutes, LongitudeDegrees, LongitudeMinutes, FacilityFee)
-VALUES ('JJR', 'Jakey Junior's Runways', (SELECT AddressID FROM Addresses WHERE Street = '123 Mulberry Lane'), 52, 25, 30, 45, 1.50), ('KPX', 'Kimborough Platform Airport', (SELECT AddressID FROM Addresses WHERE Street = '1 Pinewood Blvd'), 15, 50, 43, 22, 3.00), ('WDF', 'Wheatly Daniels Fields', (SELECT AddressID FROM Addresses WHERE Street = '11456 Hillsborough St'), 32, 11, 40, 54, 2.50), ('HOX', 'Harrington Offset Airport', (SELECT AddressID FROM Addresses WHERE Street = '42 Bryce Ave'), 45, 16, 48, 32, 4.50);
+VALUES ('JJR', 'Jakey Junior''s Runways', (SELECT AddressID FROM Addresses WHERE Street = '123 Mulberry Lane'), 52, 25, 30, 45, 1.50), ('KPX', 'Kimborough Platform Airport', (SELECT AddressID FROM Addresses WHERE Street = '1 Pinewood Blvd'), 15, 50, 43, 22, 3.00), ('WDF', 'Wheatly Daniels Fields', (SELECT AddressID FROM Addresses WHERE Street = '11456 Hillsborough St'), 32, 11, 40, 54, 2.50), ('HOX', 'Harrington Offset Airport', (SELECT AddressID FROM Addresses WHERE Street = '42 Bryce Ave'), 45, 16, 48, 32, 4.50);
 
 
 -- Invoice table
