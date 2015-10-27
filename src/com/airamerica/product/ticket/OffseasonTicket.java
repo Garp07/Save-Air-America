@@ -1,8 +1,8 @@
-package com.airamerica.product.ticket;
+package src.com.airamerica.product.ticket;
 
 import org.joda.time.DateTime;
 
-import com.airamerica.airport.Airport;
+import src.com.airamerica.airport.Airport;
 
 public class OffseasonTicket extends Ticket {
 	private DateTime seasonStartDate;
@@ -43,4 +43,16 @@ public class OffseasonTicket extends Ticket {
 		this.rebate = rebate;
 		this.type = "TO";
 	}
+	
+	public double getTotalFare() {
+		double discount = 0;
+		double serviceFee = 20;
+		if(this.travelDate.isAfter(this.seasonStartDate) && this.travelDate.isBefore(this.seasonEndDate)) {
+			discount = this.getBasefare()*this.rebate;
+		} 
+		double totalFare = (this.getBasefare()*(double)this.getSeats().size() - discount) + this.getTaxes() + serviceFee;
+		return totalFare;
+	}
+	
+	
 }

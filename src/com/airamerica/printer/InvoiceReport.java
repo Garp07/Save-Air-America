@@ -1,19 +1,22 @@
-package src.com.airamerica.dataconverter;
+package src.com.airamerica.printer;
 
 import java.util.ArrayList;
 
 import src.com.airamerica.airport.Airport;
 import src.com.airamerica.customer.Customer;
+import src.com.airamerica.dataconverter.AirportConverter;
+import src.com.airamerica.dataconverter.CustomerConverter;
+import src.com.airamerica.dataconverter.InvoiceConverter;
+import src.com.airamerica.dataconverter.PersonConverter;
+import src.com.airamerica.dataconverter.ProductConverter;
 import src.com.airamerica.invoice.Invoice;
 import src.com.airamerica.person.Person;
 import src.com.airamerica.product.Product;
 import src.com.airamerica.product.ticket.Ticket;
 
-public class DataConverter {
+public class InvoiceReport {
 
 	public static void main(String[] args) {
-			
-		//Create array list of airports
 		AirportConverter airports = new AirportConverter("data/Airports.dat");					
 		ArrayList<Airport> airportsArray = airports.parseAirports();
 		
@@ -38,12 +41,19 @@ public class DataConverter {
 				customersArray, personsArray);
 		ArrayList<Invoice> invoicesArray = invoices.parseInvoices();
 		
-		//prints to XML
-		PrintToXML.PrintAirportsXML(airportsArray);
-		PrintToXML.PrintPersonsXML(personsArray);
-		PrintToXML.PrintProductsXML(productsArray);
-		PrintToXML.PrintCustomersXML(customersArray);
+		SummaryPrinter summary = new SummaryPrinter();
+		InvoicePrinter singleInvoice = new InvoicePrinter();
+		
+		summary.print(invoicesArray);
+		System.out.printf("%n");
+		System.out.printf("%n");
+		for(Invoice i : invoicesArray) {
+			singleInvoice.print(i);
+			System.out.printf("%n");
+			System.out.printf("%n");
+		}
+		
+
 	}
-	
-	
+
 }

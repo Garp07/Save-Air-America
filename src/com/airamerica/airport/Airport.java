@@ -1,6 +1,6 @@
-package com.airamerica.airport;
+package src.com.airamerica.airport;
 
-import com.airamerica.other.Address;
+import src.com.airamerica.other.Address;
 
 public class Airport {
 	private String airportCode;

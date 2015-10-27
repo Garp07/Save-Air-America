@@ -1,6 +1,6 @@
-package com.airamerica.customer;
+package src.com.airamerica.customer;
 
-import com.airamerica.person.Person;
+import src.com.airamerica.person.Person;
 
 public class General extends Customer {
 	//pay full price for everything (including taxes)

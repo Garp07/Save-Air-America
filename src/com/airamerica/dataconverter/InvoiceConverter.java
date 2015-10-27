@@ -1,4 +1,4 @@
-package com.airamerica.dataconverter;
+package src.com.airamerica.dataconverter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,17 +9,18 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import com.airamerica.customer.Customer;
-import com.airamerica.invoice.Invoice;
-import com.airamerica.person.Person;
-import com.airamerica.product.Product;
-import com.airamerica.product.service.CheckedBaggage;
-import com.airamerica.product.service.Insurance;
-import com.airamerica.product.service.Refreshment;
-import com.airamerica.product.service.Service;
-import com.airamerica.product.service.SpecAssist;
-import com.airamerica.product.ticket.Seat;
-import com.airamerica.product.ticket.Ticket;
+import src.com.airamerica.customer.Customer;
+import src.com.airamerica.invoice.Invoice;
+import src.com.airamerica.other.Address;
+import src.com.airamerica.person.Person;
+import src.com.airamerica.product.Product;
+import src.com.airamerica.product.service.CheckedBaggage;
+import src.com.airamerica.product.service.Insurance;
+import src.com.airamerica.product.service.Refreshment;
+import src.com.airamerica.product.service.Service;
+import src.com.airamerica.product.service.SpecAssist;
+import src.com.airamerica.product.ticket.Seat;
+import src.com.airamerica.product.ticket.Ticket;
 
 public class InvoiceConverter extends DataReader {
 	private ArrayList<Product> products;
@@ -107,9 +108,11 @@ public class InvoiceConverter extends DataReader {
 		for(Person p : persons) {
 			if(p.getCode().equals(personCode)) {
 				return p;
-			}
+			} 
 		}
-		return null;
+		Address a = new Address("ONLINE", "ONLINE", "ONLINE", "ONLINE", "ONLINE");
+		Person online = new Person("ONLINE", "ONLINE", "ONLINE", a);
+		return online;
 	}
 	
 	private Product findProduct(String productCode) {
@@ -153,7 +156,7 @@ public class InvoiceConverter extends DataReader {
 					String baggageString[] = tokens[i].split(":");
 					CheckedBaggage checkedBaggage = (CheckedBaggage)product;
 					int noOfBags = Integer.parseInt(baggageString[1]);
-					checkedBaggage.setNoOfBags(noOfBags);
+					checkedBaggage.setQuantity(noOfBags);
 					services.add(checkedBaggage);
 					break;
 					
@@ -207,10 +210,10 @@ public class InvoiceConverter extends DataReader {
 		ArrayList<Ticket> tickets = new ArrayList<Ticket>();
 		String tokens[] = productString.split(",");
 		
-		for(int i=1; i<tokens.length; i++) {
+		for(int i=0; i<tokens.length; i++) {
 			Product product = this.findProduct(tokens[i].split(":")[0]);
 			switch(product.getType()) {
-				case "TI":
+				case "TO":
 				case "TS":		//all tickets
 				case "TA":
 					String ticketString[] = tokens[i].split(":");

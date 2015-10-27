@@ -1,6 +1,6 @@
-package com.airamerica.dataconverter;
+package src.com.airamerica.dataconverter;
 
-import com.airamerica.other.Address;
+import src.com.airamerica.other.Address;
 
 public class DataReader {
 	protected String inputFile;

@@ -1,6 +1,6 @@
-package com.airamerica.product.service;
+package src.com.airamerica.product.service;
 
-import com.airamerica.person.Person;
+import src.com.airamerica.person.Person;
 
 public class SpecAssist extends Service {
 	private String typeOfService;
@@ -26,5 +26,12 @@ public class SpecAssist extends Service {
 		super(code);
 		this.typeOfService = typeOfService;
 		this.type = "SS";
+		this.quantity = 1;
 	}
+	
+	public double getServiceCost() {
+		double cost = 0;
+		return cost;
+	}
+	
 }

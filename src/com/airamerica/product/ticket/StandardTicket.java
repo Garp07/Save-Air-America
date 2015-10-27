@@ -1,8 +1,8 @@
-package com.airamerica.product.ticket;
+package src.com.airamerica.product.ticket;
 
 import org.joda.time.DateTime;
 
-import com.airamerica.airport.Airport;
+import src.com.airamerica.airport.Airport;
 
 public class StandardTicket extends Ticket {
 	
@@ -12,4 +12,8 @@ public class StandardTicket extends Ticket {
 		this.type = "TS";
 	}
 	
+	public double getTotalFare() {
+		double totalFare = this.getBasefare()*(double)this.getSeats().size() + this.getTaxes();
+		return totalFare;
+	}
 }

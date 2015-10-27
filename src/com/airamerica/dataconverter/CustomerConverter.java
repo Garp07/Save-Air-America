@@ -1,15 +1,15 @@
-package com.airamerica.dataconverter;
+package src.com.airamerica.dataconverter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.airamerica.customer.Corporate;
-import com.airamerica.customer.Customer;
-import com.airamerica.customer.General;
-import com.airamerica.customer.Government;
-import com.airamerica.person.Person;
+import src.com.airamerica.customer.Corporate;
+import src.com.airamerica.customer.Customer;
+import src.com.airamerica.customer.General;
+import src.com.airamerica.customer.Government;
+import src.com.airamerica.person.Person;
 
 public class CustomerConverter extends DataReader {
 	private ArrayList<Person> persons;
@@ -84,7 +84,7 @@ public class CustomerConverter extends DataReader {
 		Person primaryContact = null;
 		
 		for(Person p : persons) {
-			if(p.getCode() == primaryContactCode) {
+			if(p.getCode().equals(primaryContactCode)) {
 				primaryContact = p;
 			}
 		}
