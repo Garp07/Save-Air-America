@@ -1,6 +1,6 @@
-package src.com.airamerica.product.service;
+package com.airamerica.product.service;
 
-import src.com.airamerica.product.ticket.Ticket;
+import com.airamerica.product.ticket.Ticket;
 
 public class CheckedBaggage extends Service {
 	private Ticket ticketCode;	

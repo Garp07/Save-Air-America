@@ -1,8 +1,8 @@
-package src.com.airamerica.product.ticket;
+package com.airamerica.product.ticket;
 
 import org.joda.time.DateTime;
 
-import src.com.airamerica.airport.Airport;
+import com.airamerica.airport.Airport;
 
 public class OffseasonTicket extends Ticket {
 	private DateTime seasonStartDate;

@@ -1,6 +1,6 @@
-package src.com.airamerica.customer;
+package com.airamerica.customer;
 
-import src.com.airamerica.person.Person;
+import com.airamerica.person.Person;
 
 public class Corporate extends Customer {
 	//get %12 discount on all products (not taxes), pay flat $40 per invoice

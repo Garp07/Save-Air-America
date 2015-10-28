@@ -1,6 +1,6 @@
-package src.com.airamerica.customer;
+package com.airamerica.customer;
 
-import src.com.airamerica.person.Person;
+import com.airamerica.person.Person;
 
 abstract public class Customer {
 	private String code;

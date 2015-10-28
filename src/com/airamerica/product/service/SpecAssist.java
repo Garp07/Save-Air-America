@@ -1,6 +1,6 @@
-package src.com.airamerica.product.service;
+package com.airamerica.product.service;
 
-import src.com.airamerica.person.Person;
+import com.airamerica.person.Person;
 
 public class SpecAssist extends Service {
 	private String typeOfService;

@@ -1,6 +1,6 @@
-package src.com.airamerica.printer;
+package com.airamerica.printer;
 
-import src.com.airamerica.invoice.Invoice;
+import com.airamerica.invoice.Invoice;
 
 public class InvoicePrinter {
 	

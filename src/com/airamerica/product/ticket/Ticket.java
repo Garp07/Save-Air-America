@@ -1,11 +1,11 @@
-package src.com.airamerica.product.ticket;
+package com.airamerica.product.ticket;
 
 import java.util.ArrayList;
 
 import org.joda.time.DateTime;
 
-import src.com.airamerica.airport.Airport;
-import src.com.airamerica.product.Product;
+import com.airamerica.airport.Airport;
+import com.airamerica.product.Product;
 
 abstract public class Ticket extends Product {
 	protected Airport depAirport;

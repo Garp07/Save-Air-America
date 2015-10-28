@@ -1,4 +1,4 @@
-package src.com.airamerica.product.service;
+package com.airamerica.product.service;
 
 public class Refreshment extends Service {
 	private String name;

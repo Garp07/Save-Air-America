@@ -1,7 +1,7 @@
-package src.com.airamerica.printer;
+package com.airamerica.printer;
 
-import src.com.airamerica.customer.Customer;
-import src.com.airamerica.person.Person;
+import com.airamerica.customer.Customer;
+import com.airamerica.person.Person;
 
 public class CustomerInfoPrinter {
 

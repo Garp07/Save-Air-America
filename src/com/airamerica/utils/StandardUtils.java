@@ -1,4 +1,4 @@
-package src.com.airamerica.utils;
+package com.airamerica.utils;
 
 public class StandardUtils {
 

@@ -1,8 +1,8 @@
-package src.com.airamerica.person;
+package com.airamerica.person;
 
 import java.util.ArrayList;
 
-import src.com.airamerica.other.Address;
+import com.airamerica.other.Address;
 
 public class Person {
 	private String code;

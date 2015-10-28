@@ -1,4 +1,4 @@
-package src.com.airamerica.product.ticket;
+package com.airamerica.product.ticket;
 
 abstract public class FlightClass {
 	protected String type;

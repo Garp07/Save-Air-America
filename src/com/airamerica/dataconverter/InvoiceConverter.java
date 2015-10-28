@@ -1,4 +1,4 @@
-package src.com.airamerica.dataconverter;
+package com.airamerica.dataconverter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,18 +9,18 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import src.com.airamerica.customer.Customer;
-import src.com.airamerica.invoice.Invoice;
-import src.com.airamerica.other.Address;
-import src.com.airamerica.person.Person;
-import src.com.airamerica.product.Product;
-import src.com.airamerica.product.service.CheckedBaggage;
-import src.com.airamerica.product.service.Insurance;
-import src.com.airamerica.product.service.Refreshment;
-import src.com.airamerica.product.service.Service;
-import src.com.airamerica.product.service.SpecAssist;
-import src.com.airamerica.product.ticket.Seat;
-import src.com.airamerica.product.ticket.Ticket;
+import com.airamerica.customer.Customer;
+import com.airamerica.invoice.Invoice;
+import com.airamerica.other.Address;
+import com.airamerica.person.Person;
+import com.airamerica.product.Product;
+import com.airamerica.product.service.CheckedBaggage;
+import com.airamerica.product.service.Insurance;
+import com.airamerica.product.service.Refreshment;
+import com.airamerica.product.service.Service;
+import com.airamerica.product.service.SpecAssist;
+import com.airamerica.product.ticket.Seat;
+import com.airamerica.product.ticket.Ticket;
 
 public class InvoiceConverter extends DataReader {
 	private ArrayList<Product> products;

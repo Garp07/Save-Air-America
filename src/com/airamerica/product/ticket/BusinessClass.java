@@ -1,4 +1,4 @@
-package src.com.airamerica.product.ticket;
+package com.airamerica.product.ticket;
 
 public class BusinessClass extends FlightClass {
 	//premium seats & service, 3 free bags, meals

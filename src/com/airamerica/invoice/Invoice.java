@@ -1,14 +1,14 @@
-package src.com.airamerica.invoice;
+package com.airamerica.invoice;
 
 import java.util.ArrayList;
 
 import org.joda.time.DateTime;
 
-import src.com.airamerica.customer.Customer;
-import src.com.airamerica.person.Person;
-import src.com.airamerica.product.service.Service;
-import src.com.airamerica.product.ticket.Ticket;
-import src.com.airamerica.utils.StandardUtils;
+import com.airamerica.customer.Customer;
+import com.airamerica.person.Person;
+import com.airamerica.product.service.Service;
+import com.airamerica.product.ticket.Ticket;
+import com.airamerica.utils.StandardUtils;
 
 public class Invoice {
 	protected String code;

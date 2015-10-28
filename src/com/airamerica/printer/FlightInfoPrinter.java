@@ -1,9 +1,9 @@
-package src.com.airamerica.printer;
+package com.airamerica.printer;
 
 import java.util.ArrayList;
 
-import src.com.airamerica.product.ticket.Seat;
-import src.com.airamerica.product.ticket.Ticket;
+import com.airamerica.product.ticket.Seat;
+import com.airamerica.product.ticket.Ticket;
 
 public class FlightInfoPrinter {
 	

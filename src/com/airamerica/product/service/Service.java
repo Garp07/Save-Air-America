@@ -1,6 +1,6 @@
-package src.com.airamerica.product.service;
+package com.airamerica.product.service;
 
-import src.com.airamerica.product.Product;
+import com.airamerica.product.Product;
 
 abstract public class Service extends Product {
 	protected int quantity;

@@ -1,10 +1,10 @@
-package src.com.airamerica.printer;
+package com.airamerica.printer;
 
 import java.util.ArrayList;
 
-import src.com.airamerica.invoice.Invoice;
-import src.com.airamerica.product.service.Service;
-import src.com.airamerica.product.ticket.Ticket;
+import com.airamerica.invoice.Invoice;
+import com.airamerica.product.service.Service;
+import com.airamerica.product.ticket.Ticket;
 
 public class SummaryPrinter {
 

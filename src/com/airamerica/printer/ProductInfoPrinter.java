@@ -1,13 +1,13 @@
-package src.com.airamerica.printer;
+package com.airamerica.printer;
 
 import java.util.ArrayList;
 
-import src.com.airamerica.customer.Customer;
-import src.com.airamerica.product.service.Insurance;
-import src.com.airamerica.product.service.Refreshment;
-import src.com.airamerica.product.service.Service;
-import src.com.airamerica.product.service.SpecAssist;
-import src.com.airamerica.product.ticket.Ticket;
+import com.airamerica.customer.Customer;
+import com.airamerica.product.service.Insurance;
+import com.airamerica.product.service.Refreshment;
+import com.airamerica.product.service.Service;
+import com.airamerica.product.service.SpecAssist;
+import com.airamerica.product.ticket.Ticket;
 
 public class ProductInfoPrinter {
 	

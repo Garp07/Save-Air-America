@@ -1,6 +1,6 @@
-package src.com.airamerica.product.ticket;
+package com.airamerica.product.ticket;
 
-import src.com.airamerica.person.Person;
+import com.airamerica.person.Person;
 
 public class Seat {
 	private String seatNumber;
