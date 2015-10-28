@@ -1,4 +1,4 @@
-use bpramber;
+
 -- Address table
 DROP TABLE IF EXISTS Addresses;
 CREATE TABLE Addresses 
@@ -346,6 +346,7 @@ VALUES
     (1,2,NULL,NULL,NULL,NULL),
     (1,3,NULL,NULL,NULL,NULL),
     (2,6,NULL,2,5,NULL),
+    (2,7,NULL,2,NULL,NULL),
     (2,8,NULL,3,NULL,NULL),
     (2,9,NULL,NULL,NULL,2);
     

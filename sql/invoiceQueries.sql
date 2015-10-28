@@ -24,44 +24,66 @@ DELETE f FROM Seats f
 		ON a.InvoiceProductsID = f.InvoiceProductsID
 	LEFT JOIN Products b
 		ON a.ProductID = b.ProductID
-	LEFT JOIN Tickets c 
-		ON b.TicketID = c.TicketID
-	LEFT JOIN Airports d 
-		ON c.DepAirportID = d.AirportID
-	LEFT JOIN Airports e 
-		ON c.ArrAirportID = e.AirportID
-	WHERE d.AirportID = 4 OR e.AirportID = 4;
+	WHERE b.TicketID = 
+		(SELECT t.TicketID FROM  Tickets t 
+			LEFT JOIN Airports d 
+				ON t.DepAirportID = d.AirportID
+			LEFT JOIN Airports e 
+				ON t.ArrAirportID = e.AirportID
+			WHERE d.AirportID = 4 OR e.AirportID = 4);
 
 DELETE a FROM InvoiceProducts a
 	LEFT JOIN Products b
 		ON a.ProductID = b.ProductID
-	LEFT JOIN Tickets c 
-		ON b.TicketID = c.TicketID
-	LEFT JOIN Airports d 
-		ON c.DepAirportID = d.AirportID
-	LEFT JOIN Airports e 
-		ON c.ArrAirportID = e.AirportID
-	WHERE d.AirportID = 4 OR e.AirportID = 4;
-
-DELETE s FROM Services s 
-	LEFT JOIN Products b 
-		ON s.TicketID = b.TicketID
-	LEFT JOIN Tickets c 
-		ON b.TicketID = c.TicketID
-	LEFT JOIN Airports d 
-		ON c.DepAirportID = d.AirportID
-	LEFT JOIN Airports e 
-		ON c.ArrAirportID = e.AirportID
-	WHERE d.AirportID = 4 OR e.AirportID = 4;
+	WHERE b.TicketID = 
+		(SELECT t.TicketID FROM  Tickets t 
+			LEFT JOIN Airports d 
+				ON t.DepAirportID = d.AirportID
+			LEFT JOIN Airports e 
+				ON t.ArrAirportID = e.AirportID
+			WHERE d.AirportID = 4 OR e.AirportID = 4);
+            
+DELETE a FROM InvoiceProducts a
+	LEFT JOIN Products b
+		ON a.ProductID = b.ProductID
+	LEFT JOIN Services s ON
+		s.ServiceID = b.ServiceID 
+	WHERE s.TicketID = 
+		(SELECT t.TicketID FROM  Tickets t 
+			LEFT JOIN Airports d 
+				ON t.DepAirportID = d.AirportID
+			LEFT JOIN Airports e 
+				ON t.ArrAirportID = e.AirportID
+			WHERE d.AirportID = 4 OR e.AirportID = 4);
 
 DELETE b FROM Products b
-	LEFT JOIN Tickets c 
-		ON b.TicketID = c.TicketID
-	LEFT JOIN Airports d 
-		ON c.DepAirportID = d.AirportID
-	LEFT JOIN Airports e 
-		ON c.ArrAirportID = e.AirportID
-	WHERE d.AirportID = 4 OR e.AirportID = 4;
+	WHERE b.TicketID = 
+		(SELECT t.TicketID FROM  Tickets t 
+			LEFT JOIN Airports d 
+				ON t.DepAirportID = d.AirportID
+			LEFT JOIN Airports e 
+				ON t.ArrAirportID = e.AirportID
+			WHERE d.AirportID = 4 OR e.AirportID = 4); 
+            
+DELETE b FROM Products b
+	LEFT JOIN Services s ON
+		s.ServiceID = b.ServiceID 
+	WHERE s.TicketID = 
+		(SELECT t.TicketID FROM  Tickets t 
+			LEFT JOIN Airports d 
+				ON t.DepAirportID = d.AirportID
+			LEFT JOIN Airports e 
+				ON t.ArrAirportID = e.AirportID
+			WHERE d.AirportID = 4 OR e.AirportID = 4); 
+
+DELETE s FROM Services s
+	WHERE s.TicketID = 
+		(SELECT t.TicketID FROM Tickets t
+			LEFT JOIN Airports d 
+				ON t.DepAirportID = d.AirportID
+			LEFT JOIN Airports e 
+				ON t.ArrAirportID = e.AirportID
+			WHERE d.AirportID = 4 OR e.AirportID = 4);
 
 DELETE a FROM Tickets a 
 	LEFT JOIN Airports b 
@@ -69,7 +91,7 @@ DELETE a FROM Tickets a
 	LEFT JOIN Airports c 
 		ON a.ArrAirportID = c.AirportID
 	WHERE b.AirportID = 4 OR c.AirportID = 4;
-    
+
 DELETE a FROM Airports a 
 	WHERE a.AirportID = 4;
     
@@ -108,6 +130,80 @@ SELECT i.InvoiceDate, COUNT(p.ProductID) AS TotalAwardTickets FROM Invoices i
 	WHERE p.ProductType = 'TA' AND i.InvoiceDate = '2015-04-12';
     
 -- 10
+SELECT s.TravelDate, p.FirstName, p.LastName, a.Street, a.City, a.State, a.Zipcode, a.Country, p.PhoneNumber, e.Email, s.Nationality, s.Age, s.IDNumber FROM Seats s
+	JOIN Persons p 
+		ON p.PersonID = s.PersonID
+	LEFT JOIN Addresses a
+		ON a.AddressID = p.AddressID
+	LEFT JOIN Emails e 
+		ON p.PersonID = e.PersonID
+	JOIN InvoiceProducts ip 
+		ON ip.InvoiceProductsID = s.InvoiceProductsID
+	JOIN Products pr 
+		ON pr.ProductID = ip.ProductID
+	JOIN Tickets t 
+		ON t.TicketID = pr.TicketID
+	WHERE t.FlightNumber = 'A4' 
+		AND t.DepAirportID = 
+			(SELECT t.DepAirportID FROM Tickets t 
+				JOIN Airports a 
+					ON a.AirportID = t.DepAirportID
+				JOIN Addresses ad 
+					ON ad.AddressID = a.AddressID
+				WHERE ad.City = 'Glendale Heights')
+		AND t.DepTime = '09:20';
+
+-- 11
+SELECT COUNT(DISTINCT ip.InvoiceID) AS TotalInvoices, SUM(a.FacilityFee) AS AirportRevenue FROM Seats s 
+	JOIN InvoiceProducts ip 
+		ON ip.InvoiceProductsID = s.InvoiceProductsID
+	JOIN Products pr 
+		ON pr.ProductID = ip.ProductID
+	JOIN Tickets t 
+		ON t.TicketID = pr.TicketID
+	JOIN Airports a 
+		ON a.AirportID = t.ArrAirportID
+	WHERE a.AirportID = 2;
+
+-- 12
+SELECT i.InvoiceDate, SUM(ip.Quantity * se.Cost) AS TotalDrinkRevenue From InvoiceProducts ip 
+	JOIN Products p
+		ON p.ProductID = ip.ProductID
+	JOIN Services se 
+		ON se.ServiceID = p.ServiceID
+	JOIN Invoices i 
+		ON i.InvoiceID = ip.InvoiceID
+	WHERE p.ProductType = 'SR' AND i.InvoiceDate = '2015-10-02';
+
+-- 13
+SELECT p.ProductType, COUNT(*) FROM Invoices i 
+	JOIN InvoiceProducts ip
+		ON ip.InvoiceID = i.InvoiceID
+	JOIN Products p
+		ON p.ProductID = ip.ProductID
+	JOIN Services s
+		ON s.ServiceID = p.ServiceID
+	GROUP BY p.ProductType;
+
+-- 14
+SELECT i.InvoiceCode FROM InvoiceProducts ip
+	JOIN Products p 
+		ON p.ProductID = ip.ProductID
+	JOIN Invoices i 
+		ON i.InvoiceID = ip.InvoiceID
+	WHERE p.TicketID IS NOT NULL
+	GROUP BY i.InvoiceID
+		HAVING COUNT(*) > 1;
+        
+-- 15
+SELECT i.InvoiceCode FROM Invoices i 
+	JOIN Customers c 
+		ON c.PrimaryContactID = i.SalespersonID;
+
+
+
+
+
 
 
 
