@@ -11,7 +11,7 @@ public class CustomerInfoPrinter {
 				String name = c.getName();
 				String code = c.getCode();
 				String type = c.getType();
-				if(type.equals("G")) {
+				if(type.equals("G")) {			
 					type = "[General]";
 				}else if(type.equals("V")) {
 					type = "[Government]";

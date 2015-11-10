@@ -7,6 +7,7 @@ public class Insurance extends Service {
 	private String ageClass;
 	private double costPerMile;
 	private Ticket ticket;
+	
 	public Ticket getTicket() {
 		return ticket;
 	}

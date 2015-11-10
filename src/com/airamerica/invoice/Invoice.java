@@ -11,6 +11,7 @@ import com.airamerica.product.ticket.Ticket;
 import com.airamerica.utils.StandardUtils;
 
 public class Invoice {
+	
 	protected String code;
 	protected Customer customer;
 	protected Person person;
