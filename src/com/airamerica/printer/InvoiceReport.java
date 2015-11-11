@@ -52,8 +52,54 @@ public class InvoiceReport {
 			System.out.printf("%n");
 			System.out.printf("%n");
 		}
+	}
 		
+	private String generateSummaryReport() {
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("Executive Summary Report\n");
+		sb.append("=========================\n");
+		
+		//TODO: Add code for generating summary of all Invoices
+		
+		return sb.toString();
+	}
+	
 
+	private String getTravelSummary() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("FLIGHT INFORMATION");
+		sb.append("==================================================\n");
+
+		//TODO: Add code for generating Travel Information of an Invoice
+		
+		return sb.toString();
+		
+	}
+	
+	private String getCostSummary() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("FARES AND SERVICES");
+		sb.append("==================================================\n");
+
+		//TODO: Add code for generating Cost Summary of all 
+		//products and services in an Invoice
+		
+		return sb.toString();
+		
+	}
+
+	public String generateDetailReport() {
+	StringBuilder sb = new StringBuilder();		
+	sb.append("Individual Invoice Detail Reports\n");
+	sb.append("==================================================\n");
+	
+	/* TODO: Loop through all invoices and call the getTravelSummary() and 
+	getCostSummary() for each invoice*/
+	
+	
+	
+	return sb.toString();
 	}
 
 }

@@ -2,7 +2,7 @@ package com.airamerica.person;
 
 import java.util.ArrayList;
 
-import com.airamerica.other.Address;
+import com.airamerica.address.Address;
 
 public class Person {
 	private String code;

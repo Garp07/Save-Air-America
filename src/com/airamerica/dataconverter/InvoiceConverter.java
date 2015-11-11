@@ -9,9 +9,9 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import com.airamerica.address.Address;
 import com.airamerica.customer.Customer;
 import com.airamerica.invoice.Invoice;
-import com.airamerica.other.Address;
 import com.airamerica.person.Person;
 import com.airamerica.product.Product;
 import com.airamerica.product.service.CheckedBaggage;

@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.airamerica.other.Address;
+import com.airamerica.address.Address;
 import com.airamerica.person.Person;
 
 public class PersonConverter extends DataReader {
