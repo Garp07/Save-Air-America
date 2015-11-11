@@ -49,18 +49,17 @@ public class InvoiceData {
 			//re-enable foreign key checks
 			stmt.executeUpdate(enableFK);
 			
-			//close things
-			if(stmt != null) 
-				stmt.close();
-			if(ps != null)
-				ps.close();
-			if(conn != null)
-				conn.close();
-			
 		} catch (SQLException e) {
 			System.out.println("SQLException: ");
 			e.printStackTrace();
 			throw new RuntimeException(e);
+		} finally {
+			if(stmt != null)
+				try { stmt.close(); } catch(SQLException ignored) {}
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
 		}
 		
 	}
@@ -89,16 +88,15 @@ public class InvoiceData {
 			ps.setInt(4, addressID);
 			ps.setString(5, phoneNo);
 			ps.executeUpdate();
-			
-			if(ps != null)
-				ps.close();
-			if(conn != null)
-				conn.close();
-			
 		} catch(SQLException e) {
 			System.out.println("SQLException: ");
 			e.printStackTrace();
 			throw new RuntimeException(e);
+		} finally {
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
 		}
 	}
 	
@@ -113,7 +111,7 @@ public class InvoiceData {
 		String selectPerson = "SELECT PersonID FROM Persons WHERE"
 				+ "PersonCode = ?;";
 		
-		int id = 0;
+		int id = -1;
 		
 		try {
 			ps = conn.prepareStatement(selectPerson);
@@ -121,21 +119,21 @@ public class InvoiceData {
 			
 			rs = ps.executeQuery();
 			
-			while(rs.next()) {
+			if(rs.next()) {
 				id = rs.getInt("PersonID");
 			}
-			
-			if(rs != null)
-				rs.close();
-			if(ps != null)
-				ps.close();
-			if(conn != null)
-				conn.close();
 			
 		} catch (SQLException e) {
 			System.out.println("SQLException: ");
 			e.printStackTrace();
 			throw new RuntimeException(e);
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch(SQLException ignored) {}
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
 		}
 		
 		return id;
@@ -156,7 +154,7 @@ public class InvoiceData {
 				+ "Zipcode = ? AND"
 				+ "Country = ?;";
 		
-		int id = 0;
+		int id = -1;
 		
 		try {
 			ps = conn.prepareStatement(selectAddress);
@@ -168,21 +166,21 @@ public class InvoiceData {
 			
 			rs = ps.executeQuery();
 			
-			while(rs.next()) {
+			if(rs.next()) {
 				id = rs.getInt("AddressID");
 			}
-			
-			if(rs != null)
-				rs.close();
-			if(ps != null)
-				ps.close();
-			if(conn != null)
-				conn.close();
 			
 		} catch (SQLException e) {
 			System.out.println("SQLException: ");
 			e.printStackTrace();
 			throw new RuntimeException(e);
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch(SQLException ignored) {}
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
 		}
 		
 		return id;
@@ -209,15 +207,15 @@ public class InvoiceData {
 			
 			ps.executeUpdate();
 			
-			if(ps != null)
-				ps.close();
-			if(conn != null)
-				conn.close();
-			
 		} catch (SQLException e) {
 			System.out.println("SQLException: ");
 			e.printStackTrace();
 			throw new RuntimeException(e);
+		} finally {
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
 		}
 	}
 	
@@ -245,18 +243,17 @@ public class InvoiceData {
 			//re-enable foreign key checks
 			stmt.executeUpdate(enableFK);
 			
-			//close things
-			if(stmt != null) 
-				stmt.close();
-			if(ps != null)
-				ps.close();
-			if(conn != null)
-				conn.close();
-			
 		} catch (SQLException e) {
 			System.out.println("SQLException: ");
 			e.printStackTrace();
 			throw new RuntimeException(e);
+		} finally {
+			if(stmt != null)
+				try { stmt.close(); } catch(SQLException ignored) {}
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
 		}
 		
 	}
@@ -292,15 +289,15 @@ public class InvoiceData {
 			
 			ps.executeUpdate();
 			
-			if(ps != null)
-				ps.close();
-			if(conn != null)
-				conn.close();
-			
 		} catch (SQLException e) {
 			System.out.println("SQLException: ");
 			e.printStackTrace();
 			throw new RuntimeException(e);
+		} finally {
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
 		}
 		
 	}
@@ -326,15 +323,15 @@ public class InvoiceData {
 			
 			ps.executeUpdate();
 			
-			if(ps != null)
-				ps.close();
-			if(conn != null)
-				conn.close();
-			
 		} catch (SQLException e) {
 			System.out.println("SQLException: ");
 			e.printStackTrace();
 			throw new RuntimeException(e);
+		} finally {
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
 		}
 	}
 	
@@ -363,18 +360,17 @@ public class InvoiceData {
 			//re-enable foreign key checks
 			stmt.executeUpdate(enableFK);
 			
-			//close things
-			if(stmt != null) 
-				stmt.close();
-			if(ps != null)
-				ps.close();
-			if(conn != null)
-				conn.close();
-			
 		} catch (SQLException e) {
 			System.out.println("SQLException: ");
 			e.printStackTrace();
 			throw new RuntimeException(e);
+		} finally {
+			if(stmt != null)
+				try { stmt.close(); } catch(SQLException ignored) {}
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
 		}
 	}
 
@@ -403,15 +399,15 @@ public class InvoiceData {
 			
 			ps.executeUpdate();
 			
-			if(ps != null)
-				ps.close();
-			if(conn != null)
-				conn.close();
-			
 		} catch (SQLException e) {
 			System.out.println("SQLException: ");
 			e.printStackTrace();
 			throw new RuntimeException(e);
+		} finally {
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
 		}
 	}
 
@@ -440,18 +436,17 @@ public class InvoiceData {
 			//re-enable foreign key checks
 			stmt.executeUpdate(enableFK);
 			
-			//close things
-			if(stmt != null) 
-				stmt.close();
-			if(ps != null)
-				ps.close();
-			if(conn != null)
-				conn.close();
-			
 		} catch (SQLException e) {
 			System.out.println("SQLException: ");
 			e.printStackTrace();
 			throw new RuntimeException(e);
+		} finally {
+			if(stmt != null)
+				try { stmt.close(); } catch(SQLException ignored) {}
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
 		}
 	}
 
@@ -479,16 +474,17 @@ public class InvoiceData {
 				airportID = rs.getInt("AirportID");
 			}
 			
-			if(rs != null) 
-				rs.close();
-			if(ps != null)
-				ps.close();
-			if(conn != null)
-				conn.close();
 		} catch (SQLException e) {
 			System.out.println("SQLException: ");
 			e.printStackTrace();
 			throw new RuntimeException(e);
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch(SQLException ignored) {}
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
 		}
 		
 		return airportID;
@@ -504,16 +500,18 @@ public class InvoiceData {
 		
 		Connection conn = DatabaseInfo.getConnection();
 		PreparedStatement ps = null;
+		ResultSet rs = null;
 		
 		int depAirportID = getAirportID(depAirportCode);
 		int arrAirportID = getAirportID(arrAirportCode);
+		int ticketID = -1;
 		
 		//add to Tickets
 		String insertTicket = "INSERT INTO Tickets(DepAirportID, ArrAirportID, DepTime, ArrTime, FlightNumber, FlightClass, AircraftType)"
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?);";
 		
 		try {
-			ps = conn.prepareStatement(insertTicket);
+			ps = conn.prepareStatement(insertTicket, Statement.RETURN_GENERATED_KEYS);
 			ps.setInt(1, depAirportID);
 			ps.setInt(2, arrAirportID);
 			ps.setString(3, depTime);
@@ -522,23 +520,64 @@ public class InvoiceData {
 			ps.setString(6, flightClass);
 			ps.setString(7, aircraftType);
 			
+			if(depAirportID < 0 || arrAirportID < 0) {
+				throw new SQLException("No Airport Found in Database");
+			}
+			
 			ps.executeUpdate();
 			
-			//close things
-			if(ps != null)
-				ps.close();
-			if(conn != null)
-				conn.close();
+			rs = ps.getGeneratedKeys();
+			if(rs.next()) {
+				ticketID = rs.getInt(1);
+			}
+			
+			addTicketToProducts(productCode, "TS", ticketID);
 			
 		} catch (SQLException e) {
 			System.out.println("SQLException: ");
 			e.printStackTrace();
 			throw new RuntimeException(e);
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch(SQLException ignored) {}
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
 		}
 		
+	}
+	
+	/**
+	 * Method to add a ticket into the products table
+	 */
+	private static void addTicketToProducts(String productCode, String productType, int ticketID) {
 		
+		Connection conn = DatabaseInfo.getConnection();
+		PreparedStatement ps = null;
 		
-		//add to Products
+		//add to Tickets
+		String insertTicket = "INSERT INTO Products(ProductCode, ProductType, TicketID)"
+				+ "VALUES (?, ?, ?);";
+		
+		try {
+			ps = conn.prepareStatement(insertTicket);
+			ps.setString(1, productCode);
+			ps.setString(2, productType);
+			ps.setInt(3, ticketID);
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
+		}
 	}
 	
 	 /** 
@@ -548,7 +587,60 @@ public class InvoiceData {
 	public static void addOffSeasonTicket(String productCode, String seasonStartDate, 
 			String seasonEndDate, String depAirportCode, String arrAirportCode, 
 			String depTime, String arrTime,	String flightNo, String flightClass, 
-			String aircraftType, double rebate) { }
+			String aircraftType, double rebate) { 
+		
+		Connection conn = DatabaseInfo.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		int depAirportID = getAirportID(depAirportCode);
+		int arrAirportID = getAirportID(arrAirportCode);
+		int ticketID = -1;
+		
+		//add to Tickets
+		String insertTicket = "INSERT INTO Tickets(DepAirportID, ArrAirportID, DepTime, ArrTime, FlightNumber, FlightClass, AircraftType,"
+				+ "SeasonStartDate, SeasonEndDate, Rebate)"
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+		
+		try {
+			ps = conn.prepareStatement(insertTicket, Statement.RETURN_GENERATED_KEYS);
+			ps.setInt(1, depAirportID);
+			ps.setInt(2, arrAirportID);
+			ps.setString(3, depTime);
+			ps.setString(4, arrTime);
+			ps.setString(5, flightNo);
+			ps.setString(6, flightClass);
+			ps.setString(7, aircraftType);
+			ps.setString(8, seasonStartDate);
+			ps.setString(9, seasonEndDate);
+			ps.setDouble(10, rebate);
+			
+			if(depAirportID < 0 || arrAirportID < 0) {
+				throw new SQLException("No Airport Found in Database");
+			}
+			
+			ps.executeUpdate();
+			
+			rs = ps.getGeneratedKeys();
+			if(rs.next()) {
+				ticketID = rs.getInt(1);
+			}
+			
+			addTicketToProducts(productCode, "TO", ticketID);
+			
+		} catch (SQLException e) {
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch(SQLException ignored) {}
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
+		}
+	}
 	 
 	 /** Adds an awardsTicket record to the database with the
 	 * provided data.  
