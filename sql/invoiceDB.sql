@@ -158,6 +158,7 @@ DROP TABLE IF EXISTS Customers;
 CREATE TABLE Customers 
 (
 	CustomerID INT(11) NOT NULL AUTO_INCREMENT,
+    CustomerCode VARCHAR(11) NOT NULL UNIQUE,
 	CustomerType VARCHAR(1) NOT NULL,
 	PrimaryContactID INT(11) NOT NULL,
 	CustomerName VARCHAR(50) NOT NULL,
@@ -167,12 +168,12 @@ CREATE TABLE Customers
 );
 
 -- Populate Customer table
-INSERT INTO Customers(CustomerType, PrimaryContactID, CustomerName, AirlineMiles)
+INSERT INTO Customers(CustomerCode, CustomerType, PrimaryContactID, CustomerName, AirlineMiles)
 VALUES 
-	('C', 8, 'Black Studios', 4.23),
-    ('G', 12, 'Friday Night Inc.', 4221.02), 
-    ('V', 15, 'House of Stark Industries', 0.00),
-    ('G', 22, 'Hogwarts School of Witch Craft and Wizardry', 777.33);
+	('aeg8', 'C', 8, 'Black Studios', 4.23),
+    ('eoij', 'G', 12, 'Friday Night Inc.', 4221.02), 
+    ('qfe6', 'V', 15, 'House of Stark Industries', 0.00),
+    ('qef8', 'G', 22, 'Hogwarts School of Witch Craft and Wizardry', 777.33);
 
 -- Airport table
 DROP TABLE IF EXISTS Airports;
