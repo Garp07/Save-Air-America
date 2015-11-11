@@ -268,28 +268,26 @@ VALUES
 DROP TABLE IF EXISTS Services;
 CREATE TABLE Services
 (
-	ServiceID INT(11) NOT NULL AUTO_INCREMENT,
-	TicketID INT(11), -- for checkedbaggage
+	ServiceID INT(11) NOT NULL AUTO_INCREMENT, -- CheckedBaggage items will have null for all fields, but are still listed here because they are tied in with the Products table
 	InsuranceName VARCHAR(30),
 	AgeClass VARCHAR(30), -- for insurance
 	CostPerMile FLOAT(10), -- for insurance
     TypeOfService VARCHAR(255), -- for special assistance
 	RefreshmentName VARCHAR(30), 
 	Cost FLOAT(10), -- for drinks
-	CONSTRAINT Services_PK PRIMARY KEY (ServiceID),
-	FOREIGN KEY (TicketID) REFERENCES Tickets(TicketID)
+	CONSTRAINT Services_PK PRIMARY KEY (ServiceID)
 );
 
 -- Populate Service table
-INSERT INTO Services(TicketID, InsuranceName, AgeClass, CostPerMile, TypeOfService, RefreshmentName, Cost)
+INSERT INTO Services(InsuranceName, AgeClass, CostPerMile, TypeOfService, RefreshmentName, Cost)
 VALUES
-	(NULL, 'Sleep Easy Insurance', '0-30', 3.25, NULL, NULL, NULL),
-	(2, NULL, NULL, NULL, NULL, NULL, NULL), 
-	(NULL, NULL, NULL, NULL, NULL, 'Basketball Drink', 1.50), 
-    (NULL, NULL, NULL, NULL, 'Back Massage', NULL, NULL), 
-    (NULL, 'Insurance Company', '25-60', 12, NULL, NULL, NULL),
-    (NULL, 'Healthy Company', '25-48', .2, NULL, NULL, NULL),
-    (NULL, 'Please Stay Alive', '36-38', 1, NULL, NULL, NULL);
+	('Sleep Easy Insurance', '0-30', 3.25, NULL, NULL, NULL),
+	(NULL, NULL, NULL, NULL, NULL, NULL), 
+	(NULL, NULL, NULL, NULL, 'Basketball Drink', 1.50), 
+    (NULL, NULL, NULL, 'Back Massage', NULL, NULL), 
+    ('Insurance Company', '25-60', 12, NULL, NULL, NULL),
+    ('Healthy Company', '25-48', .2, NULL, NULL, NULL),
+    ('Please Stay Alive', '36-38', 1, NULL, NULL, NULL);
 
 -- Create Products Table
 DROP TABLE IF EXISTS Products;
@@ -316,12 +314,15 @@ VALUES
 INSERT INTO Products(ProductCode, ProductType, ServiceID)
 VALUES
 	('ff25', 'SI', 1),
-	('90fb', 'SC', 2),
 	('32f4', 'SR', 3),
 	('xer4', 'SS', 4),
 	('ff24', 'SI', 5),
 	('fg23', 'SI', 6),
 	('fh23', 'SI', 7);
+    
+INSERT INTO Products(ProductCode, ProductType, ServiceID, TicketID)
+VALUES
+	('90fb', 'SC', 2, 2);
 
 -- InvoiceProducts Table
 DROP TABLE IF EXISTS InvoiceProducts;
