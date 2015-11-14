@@ -163,7 +163,7 @@ public class InvoiceData {
 				throw new SQLException("No Ticket and/or Service Found in Database");
 			}
 			
-			addBaggageToProducts(productCode, "TA", serviceID, ticketID);
+			addBaggageToProducts(productCode, "SC", serviceID, ticketID);
 			
 		} catch (SQLException e) {
 			System.out.println("SQLException: ");
@@ -179,14 +179,124 @@ public class InvoiceData {
 		}
 	}
 	
-	//TODO
+	/**
+	 * Method to return the productID from a given productCode
+	 */
+	private static int getProductID(String productCode) {
+		
+		Connection conn = DatabaseInfo.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		int productID = -1;
+		
+		String selectProduct = "SELECT ProductID FROM Products WHERE "
+				+ "ProductCode = ?;";
+		
+		try {
+			ps = conn.prepareStatement(selectProduct);
+			ps.setString(1, productCode);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				productID = rs.getInt("ProductID");
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
+		}
+		
+		return productID;
+	}
+	
+	/**
+	 * Method to return the invoiceID from a given invoiceCode
+	 */
+	private static int getInvoiceID(String invoiceCode) {
+		
+		Connection conn = DatabaseInfo.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		int invoiceID = -1;
+		
+		String selectInvoice = "SELECT InvoiceID FROM Invoices WHERE "
+				+ "InvoiceCode = ?;";
+		
+		try {
+			ps = conn.prepareStatement(selectInvoice);
+			ps.setString(1, invoiceCode);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				invoiceID = rs.getInt("InvoiceID");
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
+		}
+		
+		return invoiceID;
+	}
+	
 	/**
 	 * Adds a CheckedBaggage Service (corresponding to <code>productCode</code>) to an 
 	 * invoice corresponding to the provided <code>invoiceCode</code> with the given
 	 * number of quantity.
 	 */
 	public static void addCheckedBaggageToInvoice(String invoiceCode, String productCode, 
-			int quantity) { }	
+			int quantity) {
+		
+		Connection conn = DatabaseInfo.getConnection();
+		PreparedStatement ps = null;
+		
+		int invoiceID = getInvoiceID(invoiceCode);
+		int productID = getProductID(productCode);
+		
+		String insertInvoiceProduct = "INSERT INTO InvoiceProducts(InvoiceID, ProductID, Quantity) "
+				+ "VALUES (?, ?, ?);";
+		
+		try {
+			
+			ps = conn.prepareStatement(insertInvoiceProduct);
+			ps.setInt(1, invoiceID);
+			ps.setInt(2, productID);
+			ps.setInt(3, quantity);
+			
+			if(invoiceID < 0 || productID < 0) {
+				throw new SQLException("No invoice or product found in database");
+			}
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
+		}
+		
+	}	
 	
 	/**
 	 * Method to add a customer record to the database with the provided data. 
@@ -258,13 +368,52 @@ public class InvoiceData {
 		}
 	}
 	
-	//TODO
+	
 	/**
 	 * Adds a Insurance record to the database with the
 	 * provided data.  
 	 */
 	public static void addInsurance(String productCode, String productName, 
-			String ageClass, double costPerMile) {	}
+			String ageClass, double costPerMile) {
+		
+		Connection conn = DatabaseInfo.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		int serviceID = -1;
+		
+		String insertInsurance = "INSERT INTO Services(InsuranceName, AgeClass, CostPerMile) "
+				+ "VALUES (?, ?, ?);";
+		
+		try {
+			ps = conn.prepareStatement(insertInsurance, Statement.RETURN_GENERATED_KEYS);
+			ps.setString(1, productName);
+			ps.setString(2, ageClass);
+			ps.setDouble(3, costPerMile);
+			
+			ps.executeUpdate();
+			
+			rs = ps.getGeneratedKeys();
+			
+			if(rs.next()) {
+				serviceID = rs.getInt(1);
+			}
+			
+			addServiceToProducts(productCode, "SI", serviceID);
+			
+		} catch (SQLException e) {
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch(SQLException ignored) {}
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
+		}
+	}
 	
 	//TODO
 	/**
@@ -765,7 +914,7 @@ public class InvoiceData {
 		PreparedStatement ps = null;
 		
 		String insertBaggage = "INSERT INTO Products(ProductCode, ProductType, ServiceID, TicketID) "
-				+ "VALUES (?, ?, ?. ?);";
+				+ "VALUES (?, ?, ?, ?);";
 		
 		try {
 			ps = conn.prepareStatement(insertBaggage);
@@ -917,8 +1066,8 @@ public class InvoiceData {
 		
 		int ticketID = -1;
 		
-		String selectTicket = "SELECT TicketID FROM Tickets WHERE "
-				+ "TicketCode = ?;";
+		String selectTicket = "SELECT TicketID FROM Products WHERE "
+				+ "ProductCode = ?;";
 		
 		try {
 			ps = conn.prepareStatement(selectTicket);
@@ -944,5 +1093,37 @@ public class InvoiceData {
 		}
 		
 		return ticketID;
+	}
+	
+	/**
+	 * Method to add a service into the products table
+	 */
+	private static void addServiceToProducts(String productCode, String productType, int serviceID) {
+		
+		Connection conn = DatabaseInfo.getConnection();
+		PreparedStatement ps = null;
+		
+		//add to Tickets
+		String insertService = "INSERT INTO Products(ProductCode, ProductType, ServiceID) "
+				+ "VALUES (?, ?, ?);";
+		
+		try {
+			ps = conn.prepareStatement(insertService);
+			ps.setString(1, productCode);
+			ps.setString(2, productType);
+			ps.setInt(3, serviceID);
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
+		}
 	}
 }
