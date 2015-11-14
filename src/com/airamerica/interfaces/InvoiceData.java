@@ -368,7 +368,6 @@ public class InvoiceData {
 		}
 	}
 	
-	
 	/**
 	 * Adds a Insurance record to the database with the
 	 * provided data.  
@@ -429,7 +428,44 @@ public class InvoiceData {
 	 * Adds an invoice record to the database with the given data.  
 	 */
 	public static void addInvoice(String invoiceCode, String customerCode, 
-			String salesPersonCode, String invoiceDate) { }
+			String salesPersonCode, String invoiceDate) {
+		
+		Connection conn = DatabaseInfo.getConnection();
+		PreparedStatement ps = null;
+		
+		int customerID = -1;
+		int salesPersonID = -1;
+		
+		String insertInvoice = "INSERT INTO Invoices(InvoiceCode, CustomerID, SalespersonID, InvoiceDate) "
+				+ "VALUES (?, ?, ?, ?);";
+		
+		try {
+			customerID = getCustomerID(customerCode);
+			salesPersonID = getPersonID(salesPersonCode);
+			
+			ps = conn.prepareStatement(insertInvoice, Statement.RETURN_GENERATED_KEYS);
+			ps.setString(1, invoiceCode);
+			ps.setInt(2, customerID);
+			ps.setInt(3, salesPersonID);
+			ps.setString(4, invoiceDate);
+			
+			if(customerID < 0 || salesPersonID < 0) {
+				throw new SQLException("Customer or salesPerson not found in database");
+			}
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
+		}
+	}
 
 	/** 
 	 * Adds an offSeasonTicket record to the database with the
@@ -538,12 +574,49 @@ public class InvoiceData {
 		}
 	}
 	
-	//TODO
 	/**
 	 * Adds a refreshment record to the database with the
 	 * provided data.  
 	 */
-	public static void addRefreshment(String productCode, String name, double cost) { }
+	public static void addRefreshment(String productCode, String name, double cost) {
+		
+		Connection conn = DatabaseInfo.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		int serviceID = -1;
+		
+		String insertRefreshment = "INSERT INTO Services(RefreshmentName, Cost) "
+				+ "VALUES (?, ?);";
+		
+		try {
+			ps = conn.prepareStatement(insertRefreshment, Statement.RETURN_GENERATED_KEYS);
+			ps.setString(1, name);
+			ps.setDouble(2, cost);
+			
+			ps.executeUpdate();
+			
+			rs = ps.getGeneratedKeys();
+			
+			if(rs.next()) {
+				serviceID = rs.getInt(1);
+			}
+			
+			addServiceToProducts(productCode, "SR", serviceID);
+			
+		} catch (SQLException e) {
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch(SQLException ignored) {}
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
+		}
+	}
 	
 	//TODO
 	/**
@@ -554,12 +627,48 @@ public class InvoiceData {
 	public static void addRefreshmentToInvoice(String invoiceCode, 
 			String productCode, int quantity) { }
 	
-	//TODO
 	 /**
 	 * Adds a SpecialAssistance record to the database with the
 	 * provided data.  
 	 */
-	public static void addSpecialAssistance(String productCode, String assistanceType) { }
+	public static void addSpecialAssistance(String productCode, String assistanceType) { 
+		
+		Connection conn = DatabaseInfo.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		int serviceID = -1;
+		
+		String insertSpecialAssistance = "INSERT INTO Services(TypeOfService) "
+				+ "VALUES (?);";
+		
+		try {
+			ps = conn.prepareStatement(insertSpecialAssistance, Statement.RETURN_GENERATED_KEYS);
+			ps.setString(1, assistanceType);
+			
+			ps.executeUpdate();
+			
+			rs = ps.getGeneratedKeys();
+			
+			if(rs.next()) {
+				serviceID = rs.getInt(1);
+			}
+			
+			addServiceToProducts(productCode, "SS", serviceID);
+			
+		} catch (SQLException e) {
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch(SQLException ignored) {}
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
+		}
+	}
 	 
 	//TODO
 	 /**
@@ -998,6 +1107,45 @@ public class InvoiceData {
 			
 			if(rs.next()) {
 				id = rs.getInt("AddressID");
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			if(rs != null)
+				try { rs.close(); } catch(SQLException ignored) {}
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
+		}
+		
+		return id;
+	}
+	
+	/**
+	 * Method to return a customerID given the provided data
+	 */
+	private static int getCustomerID(String customerCode) {
+		Connection conn = DatabaseInfo.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String selectCustomer = "SELECT CustomerID FROM Customers WHERE "
+				+ "CustomerCode = ?;";
+		
+		int id = -1;
+		
+		try {
+			ps = conn.prepareStatement(selectCustomer);
+			ps.setString(1, customerCode);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				id = rs.getInt("PersonID");
 			}
 			
 		} catch (SQLException e) {
