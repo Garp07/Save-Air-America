@@ -23,15 +23,13 @@ public class AirportJDBC {
 		int latDegs, latMins, lonDegs, lonMins;
 		double passengerFacilityFee;
 		
-		//address
-		String street, city, state, zipcode, country;
+		int addressID;
+		Address address = null;
+	
 		
-		String selectAirport = "SELECT a.AirportCode, a.AirportName, a.LatitudeDegrees, a.LatitudeMinutes, "
-				+ "a.LongitudeDegrees, a.LongitudeMinutes, a.FacilityFee, "
-				+ "b.Street, b.City, b.State, b.Zipcode, b.Country "
-				+ "FROM Airports a "
-				+ "LEFT JOIN Addresses b "
-				+ "ON a.AddressID = b.AddressID;";
+		String selectAirport = "SELECT AddressID, AirportCode, AirportName, LatitudeDegrees, LatitudeMinutes, "
+				+ "LongitudeDegrees, LongitudeMinutes, FacilityFee, "
+				+ "FROM Airports;";
 		
 		try {
 			ps = conn.prepareStatement(selectAirport);
@@ -47,13 +45,11 @@ public class AirportJDBC {
 				lonMins = rs.getInt("LongitudeMinutes");
 				passengerFacilityFee = rs.getDouble("FacilityFee");
 				
-				street = rs.getString("Street");
-				city = rs.getString("City");
-				state = rs.getString("State");
-				zipcode = rs.getString("Zipcode");
-				country = rs.getString("Country");
+				addressID = rs.getInt("AddressID");
 				
-				airports.add(new Airport(airportCode, name, new Address(street, city, state, zipcode, country), latDegs, latMins, lonDegs, lonMins, passengerFacilityFee));
+				address = AddressJDBC.getAddress(addressID);
+				
+				airports.add(new Airport(airportCode, name, address, latDegs, latMins, lonDegs, lonMins, passengerFacilityFee));
 				
 			}
 			
