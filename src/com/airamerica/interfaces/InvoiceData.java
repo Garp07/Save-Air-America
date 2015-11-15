@@ -1,7 +1,13 @@
 package com.airamerica.interfaces;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Types;
+
 import com.airamerica.jdbc.DatabaseInfo;
-import java.sql.*;
 
 /* Assignment 5 - (Phase IV) */
 /* NOTE: Do not change the package name or any of the method signatures.
@@ -414,16 +420,51 @@ public class InvoiceData {
 		}
 	}
 	
-	//TODO
 	/**
 	 * Adds an Insurance Service (corresponding to <code>productCode</code>) to an 
 	 * invoice corresponding to the provided <code>invoiceCode</code> with the given
 	 * number of quantity and associated ticket information
 	 */
 	public static void addInsuranceToInvoice(String invoiceCode, String productCode, 
-			int quantity, String ticketCode) { }
+			int quantity, String ticketCode) {
+		
+		Connection conn = DatabaseInfo.getConnection();
+		PreparedStatement ps = null;
+		
+		String insertInvoiceProduct = "INSERT INTO InvoiceProducts(InvoiceID, ProductID, Quantity, InsuranceTicketID) "
+				+ "VALUES (?, ?, ?, ?);";
+		
+		try {
+			
+			int invoiceID = getInvoiceID(invoiceCode);
+			int productID = getProductID(productCode);
+			int ticketID = getTicketID(ticketCode);
+			
+			ps = conn.prepareStatement(insertInvoiceProduct);
+			ps.setInt(1, invoiceID);
+			ps.setInt(2, productID);
+			ps.setInt(3, quantity);
+			ps.setInt(4, ticketID);
+			
+			if(invoiceID < 0 || productID < 0 || ticketID < 0) {
+				throw new SQLException("No invoice and/or product and/or ticket found in database");
+			}
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
+		}
+		
+	}
 	
-	//TODO
 	/**
 	 * Adds an invoice record to the database with the given data.  
 	 */
@@ -433,24 +474,22 @@ public class InvoiceData {
 		Connection conn = DatabaseInfo.getConnection();
 		PreparedStatement ps = null;
 		
-		int customerID = -1;
-		int salesPersonID = -1;
-		
 		String insertInvoice = "INSERT INTO Invoices(InvoiceCode, CustomerID, SalespersonID, InvoiceDate) "
 				+ "VALUES (?, ?, ?, ?);";
 		
 		try {
-			customerID = getCustomerID(customerCode);
-			salesPersonID = getPersonID(salesPersonCode);
 			
-			ps = conn.prepareStatement(insertInvoice, Statement.RETURN_GENERATED_KEYS);
+			int customerID = getCustomerID(customerCode);
+			int salesPersonID = getPersonID(salesPersonCode);
+			
+			ps = conn.prepareStatement(insertInvoice);
 			ps.setString(1, invoiceCode);
 			ps.setInt(2, customerID);
 			ps.setInt(3, salesPersonID);
 			ps.setString(4, invoiceDate);
 			
 			if(customerID < 0 || salesPersonID < 0) {
-				throw new SQLException("Customer or salesPerson not found in database");
+				throw new SQLException("Customer and/or salesperson not found in database");
 			}
 			
 			ps.executeUpdate();
@@ -529,14 +568,71 @@ public class InvoiceData {
 		}
 	}
 
-	//TODO
 	/**
 	 * Adds a Passenger information to an 
 	 * invoice corresponding to the provided <code>invoiceCode</code> 
 	 */
-	public static void addPassengerInformation(String invoiceCode, String productCode, 
-			String personCode, 
-			String identity, int age, String nationality, String seat){ }
+	public static void addPassengerInformation(String invoiceCode, String productCode, String personCode, 
+			String identity, int age, String nationality, String seat) {
+		
+		Connection conn = DatabaseInfo.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String insertInvoiceProduct = "INSERT INTO Seats(InvoiceProductsID, PersonID, IDNumber, Age, Nationality, SeatNumber) "
+				+ "VALUES (?, ?, ?, ?, ?, ?);";
+		
+		String selectInvoiceProduct = "SELECT InvoiceProductsID FROM InvoiceProducts WHERE "
+				+ "InvoiceID = ? AND ProductID = ?;";
+		
+		try {
+			
+			int invoiceID = getInvoiceID(invoiceCode);
+			int productID = getProductID(productCode);
+			
+			int invoiceProductID = -1;
+			
+			int personID = getPersonID(personCode);
+			
+			ps = conn.prepareStatement(selectInvoiceProduct);
+			
+			ps.setInt(1, invoiceID);
+			ps.setInt(2, productID);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				invoiceProductID = rs.getInt("InvoiceProductsID");
+			}
+			
+			if(invoiceProductID < 0 || personID < 0) {
+				throw new SQLException("No invoice and/or person found in database");
+			}
+			
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			
+			ps = conn.prepareStatement(insertInvoiceProduct);
+			ps.setInt(1, invoiceProductID);
+			ps.setInt(2, personID);
+			ps.setString(3, identity);
+			ps.setInt(4, age);
+			ps.setString(5, nationality);
+			ps.setString(6, seat);
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
+		}
+	}
 
 	/**
 	 * Method to add a person record to the database with the provided data. 
@@ -618,14 +714,47 @@ public class InvoiceData {
 		}
 	}
 	
-	//TODO
 	/**
 	 * Adds a refreshment service (corresponding to <code>productCode</code>) to an 
 	 * invoice corresponding to the provided <code>invoiceCode</code> with the given
 	 * number of quantity.
 	 */
 	public static void addRefreshmentToInvoice(String invoiceCode, 
-			String productCode, int quantity) { }
+			String productCode, int quantity) { 
+		
+		Connection conn = DatabaseInfo.getConnection();
+		PreparedStatement ps = null;
+		
+		String insertInvoiceProduct = "INSERT INTO InvoiceProducts(InvoiceID, ProductID, Quantity) "
+				+ "VALUES (?, ?, ?);";
+		
+		try {
+			
+			int invoiceID = getInvoiceID(invoiceCode);
+			int productID = getProductID(productCode);
+			
+			ps = conn.prepareStatement(insertInvoiceProduct);
+			ps.setInt(1, invoiceID);
+			ps.setInt(2, productID);
+			ps.setInt(3, quantity);
+			
+			if(invoiceID < 0 || productID < 0) {
+				throw new SQLException("No invoice and/or product and/or ticket found in database");
+			}
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
+		}
+	}
 	
 	 /**
 	 * Adds a SpecialAssistance record to the database with the
