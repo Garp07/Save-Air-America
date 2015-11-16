@@ -799,14 +799,48 @@ public class InvoiceData {
 		}
 	}
 	 
-	//TODO
 	 /**
 	 * Adds a SpecialAssistance Service (corresponding to <code>productCode</code>) to an 
 	 * invoice corresponding to the provided <code>invoiceCode</code> with the given
 	 * number of quantity.
 	 */
 	public static void addSpecialAssistanceToInvoice(String invoiceCode, String productCode, 
-			String personCode) { } 
+			String personCode) {
+		
+		Connection conn = DatabaseInfo.getConnection();
+		PreparedStatement ps = null;
+		
+		String insertInvoiceProduct = "INSERT INTO InvoiceProducts(InvoiceID, ProductID, SpecialAssistancePersonID) "
+				+ "VALUES (?, ?, ?);";
+		
+		try {
+			
+			int invoiceID = getInvoiceID(invoiceCode);
+			int productID = getProductID(productCode);
+			int personID = getPersonID(personCode);
+			
+			ps = conn.prepareStatement(insertInvoiceProduct);
+			ps.setInt(1, invoiceID);
+			ps.setInt(2, productID);
+			ps.setInt(3, personID);
+			
+			if(invoiceID < 0 || productID < 0 || personID < 0) {
+				throw new SQLException("No invoice and/or product and/or ticket found in database");
+			}
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
+		}
+	} 
 	
 	/**
 	 * Adds an standardTicket record to the database with the
