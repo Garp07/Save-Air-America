@@ -335,6 +335,7 @@ CREATE TABLE InvoiceProducts
     Quantity INT(11), -- checked baggage, insurance, or refreshments
     InsuranceTicketID INT(11),
     SpecialAssistancePersonID INT(11),
+    TravelDate VARCHAR(12),
     CONSTRAINT InvoiceProducts_PK PRIMARY KEY (InvoiceProductsID),
     FOREIGN KEY (InvoiceID) REFERENCES Invoices(InvoiceID),
     FOREIGN KEY (ProductID) REFERENCES Products(ProductID),
@@ -344,9 +345,9 @@ CREATE TABLE InvoiceProducts
 
 INSERT INTO InvoiceProducts(InvoiceID, ProductID, TicketNote, Quantity, InsuranceTicketID, SpecialAssistancePersonID)
 VALUES
-	(1,1,NULL,NULL,NULL,NULL),
-    (1,2,NULL,NULL,NULL,NULL),
-    (1,3,NULL,NULL,NULL,NULL),
+	(1,1,NULL,NULL,NULL,NULL,'2015-05-06'),
+    (1,2,NULL,NULL,NULL,NULL,'2014-04-29'),
+    (1,3,NULL,NULL,NULL,NULL,'2015-12-15'),
     (2,6,NULL,2,5,NULL),
     (2,7,NULL,2,NULL,NULL),
     (2,8,NULL,3,NULL,NULL),
@@ -357,7 +358,6 @@ DROP TABLE IF EXISTS Seats;
 CREATE TABLE Seats
 (
 	SeatID INT(11) NOT NULL AUTO_INCREMENT,
-    TravelDate VARCHAR(12) NOT NULL,
 	SeatNumber VARCHAR(3) NOT NULL,
 	PersonID INT(11) NOT NULL,
 	IDNumber VARCHAR(30) NOT NULL,
@@ -370,11 +370,11 @@ CREATE TABLE Seats
 );
 
 -- Populate Seat table
-INSERT INTO Seats(TravelDate, SeatNumber, PersonID, IDNumber, Age, Nationality, InvoiceProductsID)
+INSERT INTO Seats(SeatNumber, PersonID, IDNumber, Age, Nationality, InvoiceProductsID)
 VALUES 
-	('2015-05-06', 'B22', 5, '554g643', 25, 'American', 1), 
-    ('2015-08-24', 'E19', 8, '99889', 23, 'American', 1),
-    ('2015-04-21', 'C02', 9, 'sj223j1', 30, 'British', 1), 
-    ('2015-05-15', 'D12', 12, '66h7y', 20, 'Canadian', 2), 
-    ('2015-08-14', 'H07', 2, '878h', 18, 'American', 2),
-    ('2015-09-08', 'J10', 15, 'nno998', 54, 'Jamaican', 3);
+	('B22', 5, '554g643', 25, 'American', 1), 
+    ('E19', 8, '99889', 23, 'American', 1),
+    ('C02', 9, 'sj223j1', 30, 'British', 1), 
+    ('D12', 12, '66h7y', 20, 'Canadian', 2), 
+    ('H07', 2, '878h', 18, 'American', 2),
+    ('J10', 15, 'nno998', 54, 'Jamaican', 3);
