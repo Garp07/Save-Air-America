@@ -43,7 +43,7 @@ public class PersonJDBC {
 				
 				emails = EmailJDBC.getEmail(personID);
 				
-				if (phoneNumber.isEmpty()) {
+				if (phoneNumber == null) {
 					Person p = new Person(code, firstName, lastName, address);
 					p.setEmails(emails);
 					persons.add(p);

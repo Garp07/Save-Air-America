@@ -41,6 +41,15 @@ public class Insurance extends Service {
 	}
 	
 	//Insurance Constructor
+	public Insurance(String code, String name, String ageClass, double costPerMile, Ticket ticket) {
+		super(code);
+		this.name = name;
+		this.ageClass = ageClass;
+		this.costPerMile = costPerMile;
+		this.type = "SI";
+		this.ticket = ticket;
+	}
+	
 	public Insurance(String code, String name, String ageClass, double costPerMile) {
 		super(code);
 		this.name = name;
