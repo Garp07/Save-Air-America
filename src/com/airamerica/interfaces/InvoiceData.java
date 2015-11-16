@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.sql.Types;
 
 import com.airamerica.jdbc.DatabaseInfo;
+import com.airamerica.utils.StandardUtils;
 
 /* Assignment 5 - (Phase IV) */
 /* NOTE: Do not change the package name or any of the method signatures.
@@ -403,8 +404,8 @@ public class InvoiceData {
 		Connection conn = DatabaseInfo.getConnection();
 		PreparedStatement ps = null;
 		
-		String insertInvoice = "INSERT INTO Invoices(InvoiceCode, CustomerID, SalespersonID, InvoiceDate) "
-				+ "VALUES (?, ?, ?, ?);";
+		String insertInvoice = "INSERT INTO Invoices(InvoiceCode, CustomerID, SalespersonID, InvoiceDate, PNR) "
+				+ "VALUES (?, ?, ?, ?, ?);";
 		
 		try {
 			
@@ -416,6 +417,7 @@ public class InvoiceData {
 			ps.setInt(2, customerID);
 			ps.setInt(3, salesPersonID);
 			ps.setString(4, invoiceDate);
+			ps.setString(5, StandardUtils.generatePNR());
 			
 			if(customerID < 0 || salesPersonID < 0) {
 				throw new SQLException("Customer and/or salesperson not found in database");
@@ -1309,7 +1311,7 @@ public class InvoiceData {
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {
-				id = rs.getInt("PersonID");
+				id = rs.getInt("CustomerID");
 			}
 			
 		} catch (SQLException e) {

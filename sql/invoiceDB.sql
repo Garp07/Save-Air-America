@@ -343,15 +343,15 @@ CREATE TABLE InvoiceProducts
     FOREIGN KEY (SpecialAssistancePersonID) REFERENCES Persons(PersonID)
 );
 
-INSERT INTO InvoiceProducts(InvoiceID, ProductID, TicketNote, Quantity, InsuranceTicketID, SpecialAssistancePersonID)
+INSERT INTO InvoiceProducts(InvoiceID, ProductID, TicketNote, Quantity, InsuranceTicketID, SpecialAssistancePersonID, TravelDate)
 VALUES
 	(1,1,NULL,NULL,NULL,NULL,'2015-05-06'),
     (1,2,NULL,NULL,NULL,NULL,'2014-04-29'),
     (1,3,NULL,NULL,NULL,NULL,'2015-12-15'),
-    (2,6,NULL,2,5,NULL),
-    (2,7,NULL,2,NULL,NULL),
-    (2,8,NULL,3,NULL,NULL),
-    (2,9,NULL,NULL,NULL,2);
+    (2,6,NULL,2,5,NULL,NULL),
+    (2,7,NULL,2,NULL,NULL,NULL),
+    (2,8,NULL,3,NULL,NULL,NULL),
+    (2,9,NULL,NULL,NULL,2,NULL);
     
     -- Seat table
 DROP TABLE IF EXISTS Seats;
