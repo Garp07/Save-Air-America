@@ -42,14 +42,14 @@ public class InvoiceData {
 		Connection conn = DatabaseInfo.getConnection();
 		PreparedStatement ps = null;
 		
-		addAddress(street, city, state, zip, country);
-		int addressID = getAddressID(street, city, state, zip, country);
-		
 		String insertAirport = "INSERT INTO Airports(AirportCode, AirportName, AddressID, LatitudeDegrees, "
 				+ "LatitudeMinutes, LongitudeDegrees, LongitudeMinutes, FacilityFee) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 		
 		try {
+			addAddress(street, city, state, zip, country);
+			int addressID = getAddressID(street, city, state, zip, country);
+			
 			ps = conn.prepareStatement(insertAirport);
 			ps.setString(1, airportCode);
 			ps.setString(2, name);
@@ -88,9 +88,7 @@ public class InvoiceData {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		int depAirportID = getAirportID(depAirportCode);
-		int arrAirportID = getAirportID(arrAirportCode);
-		int ticketID = -1;
+		
 		
 		//add to Tickets
 		String insertTicket = "INSERT INTO Tickets(DepAirportID, ArrAirportID, DepTime, ArrTime, FlightNumber, FlightClass, AircraftType, "
@@ -98,6 +96,10 @@ public class InvoiceData {
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 		
 		try {
+			int depAirportID = getAirportID(depAirportCode);
+			int arrAirportID = getAirportID(arrAirportCode);
+			int ticketID = -1;
+			
 			ps = conn.prepareStatement(insertTicket, Statement.RETURN_GENERATED_KEYS);
 			ps.setInt(1, depAirportID);
 			ps.setInt(2, arrAirportID);
@@ -186,82 +188,6 @@ public class InvoiceData {
 	}
 	
 	/**
-	 * Method to return the productID from a given productCode
-	 */
-	private static int getProductID(String productCode) {
-		
-		Connection conn = DatabaseInfo.getConnection();
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		
-		int productID = -1;
-		
-		String selectProduct = "SELECT ProductID FROM Products WHERE "
-				+ "ProductCode = ?;";
-		
-		try {
-			ps = conn.prepareStatement(selectProduct);
-			ps.setString(1, productCode);
-			
-			rs = ps.executeQuery();
-			
-			if(rs.next()) {
-				productID = rs.getInt("ProductID");
-			}
-			
-		} catch (SQLException e) {
-			System.out.println("SQLException: ");
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		} finally {
-			if(ps != null)
-				try { ps.close(); } catch(SQLException ignored) {}
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) {}
-		}
-		
-		return productID;
-	}
-	
-	/**
-	 * Method to return the invoiceID from a given invoiceCode
-	 */
-	private static int getInvoiceID(String invoiceCode) {
-		
-		Connection conn = DatabaseInfo.getConnection();
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		
-		int invoiceID = -1;
-		
-		String selectInvoice = "SELECT InvoiceID FROM Invoices WHERE "
-				+ "InvoiceCode = ?;";
-		
-		try {
-			ps = conn.prepareStatement(selectInvoice);
-			ps.setString(1, invoiceCode);
-			
-			rs = ps.executeQuery();
-			
-			if(rs.next()) {
-				invoiceID = rs.getInt("InvoiceID");
-			}
-			
-		} catch (SQLException e) {
-			System.out.println("SQLException: ");
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		} finally {
-			if(ps != null)
-				try { ps.close(); } catch(SQLException ignored) {}
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) {}
-		}
-		
-		return invoiceID;
-	}
-	
-	/**
 	 * Adds a CheckedBaggage Service (corresponding to <code>productCode</code>) to an 
 	 * invoice corresponding to the provided <code>invoiceCode</code> with the given
 	 * number of quantity.
@@ -272,13 +198,12 @@ public class InvoiceData {
 		Connection conn = DatabaseInfo.getConnection();
 		PreparedStatement ps = null;
 		
-		int invoiceID = getInvoiceID(invoiceCode);
-		int productID = getProductID(productCode);
-		
 		String insertInvoiceProduct = "INSERT INTO InvoiceProducts(InvoiceID, ProductID, Quantity) "
 				+ "VALUES (?, ?, ?);";
 		
 		try {
+			int invoiceID = getInvoiceID(invoiceCode);
+			int productID = getProductID(productCode);
 			
 			ps = conn.prepareStatement(insertInvoiceProduct);
 			ps.setInt(1, invoiceID);
@@ -302,7 +227,7 @@ public class InvoiceData {
 				try { conn.close(); } catch(SQLException ignored) {}
 		}
 		
-	}	
+	}
 	
 	/**
 	 * Method to add a customer record to the database with the provided data. 
@@ -314,12 +239,14 @@ public class InvoiceData {
 		Connection conn = DatabaseInfo.getConnection();
 		PreparedStatement ps = null;
 		
-		int personID = getPersonID(primaryContactPersonCode);
+		
 		
 		String insertCustomer = "INSERT INTO Customers(CustomerCode, CustomerType, PrimaryContactID, CustomerName, AirlineMiles) "
 				+ "VALUES (?, ?, ?, ?, ?);";
 		
 		try {
+			int personID = getPersonID(primaryContactPersonCode);
+			
 			ps = conn.prepareStatement(insertCustomer);
 			ps.setString(1, customerCode);
 			ps.setString(2, customerType);
@@ -350,12 +277,14 @@ public class InvoiceData {
 		Connection conn = DatabaseInfo.getConnection();
 		PreparedStatement ps = null;
 		
-		int personID = getPersonID(personCode);
+		
 		
 		String insertEmail = "INSERT INTO Emails(Email, PersonID) "
 				+ "VALUES (?, ?);";
 		
 		try {
+			int personID = getPersonID(personCode);
+			
 			ps = conn.prepareStatement(insertEmail);
 			ps.setString(1, email);
 			ps.setInt(2, personID);
@@ -372,7 +301,7 @@ public class InvoiceData {
 			if(conn != null)
 				try { conn.close(); } catch(SQLException ignored) {}
 		}
-	}
+	}	
 	
 	/**
 	 * Adds a Insurance record to the database with the
@@ -505,7 +434,7 @@ public class InvoiceData {
 				try { conn.close(); } catch(SQLException ignored) {}
 		}
 	}
-
+	
 	/** 
 	 * Adds an offSeasonTicket record to the database with the
 	 * provided data.  
@@ -519,9 +448,7 @@ public class InvoiceData {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		int depAirportID = getAirportID(depAirportCode);
-		int arrAirportID = getAirportID(arrAirportCode);
-		int ticketID = -1;
+		
 		
 		//add to Tickets
 		String insertTicket = "INSERT INTO Tickets(DepAirportID, ArrAirportID, DepTime, ArrTime, FlightNumber, FlightClass, AircraftType, "
@@ -529,6 +456,10 @@ public class InvoiceData {
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		
 		try {
+			int depAirportID = getAirportID(depAirportCode);
+			int arrAirportID = getAirportID(arrAirportCode);
+			int ticketID = -1;
+			
 			ps = conn.prepareStatement(insertTicket, Statement.RETURN_GENERATED_KEYS);
 			ps.setInt(1, depAirportID);
 			ps.setInt(2, arrAirportID);
@@ -567,7 +498,7 @@ public class InvoiceData {
 				try { conn.close(); } catch(SQLException ignored) {}
 		}
 	}
-
+	
 	/**
 	 * Adds a Passenger information to an 
 	 * invoice corresponding to the provided <code>invoiceCode</code> 
@@ -644,13 +575,15 @@ public class InvoiceData {
 		Connection conn = DatabaseInfo.getConnection();
 		PreparedStatement ps = null;
 		
-		addAddress(street, city, state, zip, country);
-		int addressID = getAddressID(street, city, state, zip, country);
+		
 		
 		String insertPerson = "INSERT INTO Persons(PersonCode, FirstName, LastName, AddressID, PhoneNumber) "
 				+ "VALUES (?, ?, ?, ?, ?);";
 		
 		try {
+			addAddress(street, city, state, zip, country);
+			int addressID = getAddressID(street, city, state, zip, country);
+			
 			ps = conn.prepareStatement(insertPerson);
 			ps.setString(1, personCode);
 			ps.setString(2, firstName);
@@ -669,7 +602,7 @@ public class InvoiceData {
 				try { conn.close(); } catch(SQLException ignored) {}
 		}
 	}
-	
+
 	/**
 	 * Adds a refreshment record to the database with the
 	 * provided data.  
@@ -713,7 +646,7 @@ public class InvoiceData {
 				try { conn.close(); } catch(SQLException ignored) {}
 		}
 	}
-	
+
 	/**
 	 * Adds a refreshment service (corresponding to <code>productCode</code>) to an 
 	 * invoice corresponding to the provided <code>invoiceCode</code> with the given
@@ -756,7 +689,7 @@ public class InvoiceData {
 		}
 	}
 	
-	 /**
+	/**
 	 * Adds a SpecialAssistance record to the database with the
 	 * provided data.  
 	 */
@@ -798,8 +731,8 @@ public class InvoiceData {
 				try { conn.close(); } catch(SQLException ignored) {}
 		}
 	}
-	 
-	 /**
+	
+	/**
 	 * Adds a SpecialAssistance Service (corresponding to <code>productCode</code>) to an 
 	 * invoice corresponding to the provided <code>invoiceCode</code> with the given
 	 * number of quantity.
@@ -840,9 +773,9 @@ public class InvoiceData {
 			if(conn != null)
 				try { conn.close(); } catch(SQLException ignored) {}
 		}
-	} 
+	}
 	
-	/**
+	 /**
 	 * Adds an standardTicket record to the database with the
 	 * provided data.  
 	 */
@@ -854,15 +787,17 @@ public class InvoiceData {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		int depAirportID = getAirportID(depAirportCode);
-		int arrAirportID = getAirportID(arrAirportCode);
-		int ticketID = -1;
+		
 		
 		//add to Tickets
 		String insertTicket = "INSERT INTO Tickets(DepAirportID, ArrAirportID, DepTime, ArrTime, FlightNumber, FlightClass, AircraftType) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?);";
 		
 		try {
+			int depAirportID = getAirportID(depAirportCode);
+			int arrAirportID = getAirportID(arrAirportCode);
+			int ticketID = -1;
+			
 			ps = conn.prepareStatement(insertTicket, Statement.RETURN_GENERATED_KEYS);
 			ps.setInt(1, depAirportID);
 			ps.setInt(2, arrAirportID);
@@ -899,15 +834,49 @@ public class InvoiceData {
 		}
 		
 	}
-	
-	//TODO
-	/**
+	 
+	 /**
 	 * Adds a particular Ticket (corresponding to <code>productCode</code>) to an 
 	 * invoice corresponding to the provided <code>invoiceCode</code> with the given
 	 * additional details
 	 */
 	public static void addTicketToInvoice(String invoiceCode, String productCode, 
-			String travelDate, String ticketNote) { }
+			String travelDate, String ticketNote) { 
+		
+		Connection conn = DatabaseInfo.getConnection();
+		PreparedStatement ps = null;
+		
+		String insertInvoiceProduct = "INSERT INTO InvoiceProducts(InvoiceID, ProductID, TravelDate, TicketNote) "
+				+ "VALUES (?, ?, ?, ?);";
+		
+		try {
+			
+			int invoiceID = getInvoiceID(invoiceCode);
+			int productID = getProductID(productCode);
+			
+			ps = conn.prepareStatement(insertInvoiceProduct);
+			ps.setInt(1, invoiceID);
+			ps.setInt(2, productID);
+			ps.setString(3, travelDate);
+			ps.setString(4, ticketNote);
+			
+			if(invoiceID < 0 || productID < 0) {
+				throw new SQLException("No invoice and/or product and/or ticket found in database");
+			}
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
+		}
+	} 
 	
 	/**
 	 * Method to return an airportID given the airportCode
@@ -948,7 +917,7 @@ public class InvoiceData {
 		
 		return airportID;
 	}
-
+	
 	/**
 	 * Method that removes every airport record from the database
 	 */
@@ -1104,7 +1073,7 @@ public class InvoiceData {
 		}
 		
 	}
-	
+
 	/**
 	 * Removes all product records from the database
 	 */
@@ -1194,6 +1163,38 @@ public class InvoiceData {
 			ps.setString(2, productType);
 			ps.setInt(3, serviceID);
 			ps.setInt(4, ticketID);
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
+		}
+	}
+	
+	/**
+	 * Method to add a service into the products table
+	 */
+	private static void addServiceToProducts(String productCode, String productType, int serviceID) {
+		
+		Connection conn = DatabaseInfo.getConnection();
+		PreparedStatement ps = null;
+		
+		//add to Tickets
+		String insertService = "INSERT INTO Products(ProductCode, ProductType, ServiceID) "
+				+ "VALUES (?, ?, ?);";
+		
+		try {
+			ps = conn.prepareStatement(insertService);
+			ps.setString(1, productCode);
+			ps.setString(2, productType);
+			ps.setInt(3, serviceID);
 			
 			ps.executeUpdate();
 			
@@ -1328,6 +1329,44 @@ public class InvoiceData {
 	}
 	
 	/**
+	 * Method to return the invoiceID from a given invoiceCode
+	 */
+	private static int getInvoiceID(String invoiceCode) {
+		
+		Connection conn = DatabaseInfo.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		int invoiceID = -1;
+		
+		String selectInvoice = "SELECT InvoiceID FROM Invoices WHERE "
+				+ "InvoiceCode = ?;";
+		
+		try {
+			ps = conn.prepareStatement(selectInvoice);
+			ps.setString(1, invoiceCode);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				invoiceID = rs.getInt("InvoiceID");
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
+		}
+		
+		return invoiceID;
+	}
+	
+	/**
 	 * Method to return a personID given a provided personCode
 	 */
 	private static int getPersonID(String personCode) {
@@ -1367,6 +1406,44 @@ public class InvoiceData {
 	}
 	
 	/**
+	 * Method to return the productID from a given productCode
+	 */
+	private static int getProductID(String productCode) {
+		
+		Connection conn = DatabaseInfo.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		int productID = -1;
+		
+		String selectProduct = "SELECT ProductID FROM Products WHERE "
+				+ "ProductCode = ?;";
+		
+		try {
+			ps = conn.prepareStatement(selectProduct);
+			ps.setString(1, productCode);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				productID = rs.getInt("ProductID");
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			if(ps != null)
+				try { ps.close(); } catch(SQLException ignored) {}
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) {}
+		}
+		
+		return productID;
+	}
+	
+	/**
 	 * Method to return a ticketID given the ticketCode
 	 */
 	private static int getTicketID(String ticketCode) {
@@ -1386,7 +1463,7 @@ public class InvoiceData {
 			
 			rs = ps.executeQuery();
 			
-			while(rs.next()) {
+			if(rs.next()) {
 				ticketID = rs.getInt("TicketID");
 			}
 			
@@ -1404,37 +1481,5 @@ public class InvoiceData {
 		}
 		
 		return ticketID;
-	}
-	
-	/**
-	 * Method to add a service into the products table
-	 */
-	private static void addServiceToProducts(String productCode, String productType, int serviceID) {
-		
-		Connection conn = DatabaseInfo.getConnection();
-		PreparedStatement ps = null;
-		
-		//add to Tickets
-		String insertService = "INSERT INTO Products(ProductCode, ProductType, ServiceID) "
-				+ "VALUES (?, ?, ?);";
-		
-		try {
-			ps = conn.prepareStatement(insertService);
-			ps.setString(1, productCode);
-			ps.setString(2, productType);
-			ps.setInt(3, serviceID);
-			
-			ps.executeUpdate();
-			
-		} catch (SQLException e) {
-			System.out.println("SQLException: ");
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		} finally {
-			if(ps != null)
-				try { ps.close(); } catch(SQLException ignored) {}
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) {}
-		}
 	}
 }
