@@ -11,7 +11,7 @@ import com.airamerica.product.ticket.Seat;
 
 public class SeatJDBC {
 	
-	public static ArrayList<Seat> getSeats(int invoiceID) {
+	public static ArrayList<Seat> getSeats(int productID) {
 		ArrayList<Seat> seats = new ArrayList<Seat>();
 		
 		Connection conn = DatabaseInfo.getConnection();
@@ -23,13 +23,21 @@ public class SeatJDBC {
 		int age, personID;
 		Person person = null;
 
+<<<<<<< HEAD
 		String selectAirport = "SELECT SeatNumber, PersonID, IDNumber, Age, Nationality "
 				+ "FROM Seats a JOIN InvoiceProducts b ON a.InvoiceProductsID = b.InvoiceProductsID "
 				+ "WHERE b.InvoiceID = ?;";
+=======
+	
+		
+		String selectAirport = "SELECT SeatNumber, PersonID, IDNumber, Age, Nationality, "
+				+ "FROM Seats a RIGHT JOIN InvoiceProducts b ON a.InvoiceProductsID = b.InvoiceProductsID "
+				+ "WHERE b.ProductID = ?;";
+>>>>>>> 39172a24aea8dc9fa329bc06c7faadf00c2da46f
 		
 		try {
 			ps = conn.prepareStatement(selectAirport);
-			ps.setInt(1, invoiceID);
+			ps.setInt(1, productID);
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {

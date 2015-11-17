@@ -32,7 +32,7 @@ public class TicketJDBC {
 		
 		//ticket
 		String depTime, arrTime, flightNo, flightClass, aircraftType, seasonStart, seasonEnd, travelDate, ticketNote, type, code;
-		int depAirportID, arrAirportID;
+		int depAirportID, arrAirportID, productID;
 		double rebate, pointsPerMile;
 		
 		Airport arrAirport = null;
@@ -42,9 +42,15 @@ public class TicketJDBC {
 		Ticket ticket = null;
 		
 		String selectTicket = "SELECT DepAirportID, ArrAirportID, DepTime, ArrTime, FlightNumber, "
+<<<<<<< HEAD
 				+ "FlightClass, AircraftType, SeasonStartDate, SeasonEndDate, Rebate, PointsPerMile, "
 				+ "TravelDate, TicketNote, ProductType, ProductCode "
 				+ "FROM InvoiceProducts a LEFT JOIN Products b ON a.ProductID = b.ProductID JOIN Tickets c ON b.TicketID = c.TicketID "
+=======
+				+ "FlightClass, AircraftType, SeasonStartDate, SeasonEndDate, Rebate, PointsPerMile "
+				+ "TravelDate, TicketNote, ProductType, ProductCode, ProductID "
+				+ "FROM InvoiceProducts a LEFT JOIN Products b ON a.ProductID = b.ProductID LEFT JOIN Tickets c ON b.TicketID = c.TicketID "
+>>>>>>> 39172a24aea8dc9fa329bc06c7faadf00c2da46f
 				+ "WHERE a.InvoiceID = ?;";
 		
 		try {
@@ -69,6 +75,7 @@ public class TicketJDBC {
 				pointsPerMile = rs.getDouble("PointsPerMile");
 				type = rs.getString("ProductType");
 				code = rs.getString("ProductCode");
+				productID = rs.getInt("ProductID");
 				
 				arrAirport = AirportJDBC.getAirport(arrAirportID);
 				depAirport = AirportJDBC.getAirport(depAirportID);
@@ -89,7 +96,7 @@ public class TicketJDBC {
 					fc = new EconomyPremium();
 				}
 				
-				seats = SeatJDBC.getSeats(invoiceID);
+				seats = SeatJDBC.getSeats(productID);
 			
 				if (type.equals("TS")) {
 					ticket = new StandardTicket(code, depAirport, arrAirport, depTimeFormat, arrTimeFormat, flightNo, fc, aircraftType);
@@ -137,7 +144,7 @@ public class TicketJDBC {
 		
 		//ticket
 		String depTime, arrTime, flightNo, flightClass, aircraftType, seasonStart, seasonEnd, travelDate, ticketNote, type, code;
-		int depAirportID, arrAirportID, invoiceID;
+		int depAirportID, arrAirportID, productID;
 		double rebate, pointsPerMile;
 		
 		Airport arrAirport = null;
@@ -146,9 +153,15 @@ public class TicketJDBC {
 		ArrayList<Seat> seats = new ArrayList<Seat>();
 		
 		String selectTicket = "SELECT DepAirportID, ArrAirportID, DepTime, ArrTime, FlightNumber, "
+<<<<<<< HEAD
 				+ "FlightClass, AircraftType, SeasonStartDate, SeasonEndDate, Rebate, PointsPerMile, "
 				+ "TravelDate, TicketNote, ProductType, ProductCode, InvoiceID "
 				+ "FROM InvoiceProducts a JOIN Products b ON a.ProductID = b.ProductID JOIN Tickets c ON b.TicketID = c.TicketID "
+=======
+				+ "FlightClass, AircraftType, SeasonStartDate, SeasonEndDate, Rebate, PointsPerMile "
+				+ "TravelDate, TicketNote, ProductType, ProductCode, ProductID "
+				+ "FROM InvoiceProducts a LEFT JOIN Products b ON a.ProductID = b.ProductID LEFT JOIN Tickets c ON b.TicketID = c.TicketID "
+>>>>>>> 39172a24aea8dc9fa329bc06c7faadf00c2da46f
 				+ "WHERE a.InsuranceTicketID = ?;";
 		
 		try {
@@ -172,7 +185,7 @@ public class TicketJDBC {
 				pointsPerMile = rs.getDouble("PointsPerMile");
 				type = rs.getString("ProductType");
 				code = rs.getString("ProductCode");
-				invoiceID = rs.getInt("InvoiceID");
+				productID = rs.getInt("ProductID");
 				
 				arrAirport = AirportJDBC.getAirport(arrAirportID);
 				depAirport = AirportJDBC.getAirport(depAirportID);
@@ -194,7 +207,7 @@ public class TicketJDBC {
 					fc = new EconomyPremium();
 				}
 				
-				seats = SeatJDBC.getSeats(invoiceID);
+				seats = SeatJDBC.getSeats(productID);
 			
 				if (type.equals("TS")) {
 					ticket = new StandardTicket(code, depAirport, arrAirport, depTimeFormat, arrTimeFormat, flightNo, fc, aircraftType);
