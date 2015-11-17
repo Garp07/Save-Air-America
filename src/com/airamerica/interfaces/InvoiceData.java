@@ -414,11 +414,10 @@ public class InvoiceData {
 			ps.setString(1, invoiceCode);
 			ps.setInt(2, customerID);
 			
-			int salesPersonID;
-			if(salesPersonCode.equalsIgnoreCase("online")) {
+			int salesPersonID = getPersonID(salesPersonCode);
+			if(salesPersonID == -1) {
 				ps.setNull(3, Types.INTEGER);
 			} else {
-				salesPersonID = getPersonID(salesPersonCode);
 				ps.setInt(3, salesPersonID);
 			}
 			ps.setString(4, invoiceDate);
@@ -820,7 +819,7 @@ public class InvoiceData {
 			
 			rs = ps.getGeneratedKeys();
 			if(rs.next()) {
-				ticketID = rs.getInt(1);
+				ticketID = rs.getInt(1); 
 			}
 			
 			addTicketToProducts(productCode, "TS", ticketID);

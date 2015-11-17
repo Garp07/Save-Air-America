@@ -24,16 +24,16 @@ public class SeatJDBC {
 		int age, personID;
 		Person person = null;
 
-		String selectAirport = "SELECT SeatNumber, PersonID, IDNumber, Age, Nationality "
+		String selectSeats = "SELECT SeatNumber, PersonID, IDNumber, Age, Nationality "
 				+ "FROM Seats a JOIN InvoiceProducts b ON a.InvoiceProductsID = b.InvoiceProductsID "
-				+ "WHERE b.InvoiceID = ?;";
+				+ "WHERE ProductID = ?;";
 
-//		String selectAirport = "SELECT SeatNumber, PersonID, IDNumber, Age, Nationality, "
-//				+ "FROM Seats a RIGHT JOIN InvoiceProducts b ON a.InvoiceProductsID = b.InvoiceProductsID "
+//		String selectSeats = "SELECT SeatNumber, PersonID, IDNumber, Age, Nationality, "
+//				+ "FROM Seats a JOIN InvoiceProducts b ON a.InvoiceProductsID = b.InvoiceProductsID "
 //				+ "WHERE b.ProductID = ?;";
 		
 		try {
-			ps = conn.prepareStatement(selectAirport);
+			ps = conn.prepareStatement(selectSeats);
 			ps.setInt(1, productID);
 			rs = ps.executeQuery();
 			
