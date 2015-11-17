@@ -34,7 +34,7 @@ public class SeatJDBC {
 		
 		try {
 			ps = conn.prepareStatement(selectSeats);
-			ps.setInt(1, productID);
+			ps.setInt(1, invoiceID);
 			ps.setInt(2, productID);
 			rs = ps.executeQuery();
 			
