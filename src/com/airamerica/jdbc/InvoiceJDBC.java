@@ -15,6 +15,7 @@ import com.airamerica.invoice.Invoice;
 import com.airamerica.person.Person;
 import com.airamerica.product.service.Service;
 import com.airamerica.product.ticket.Ticket;
+import com.airamerica.utils.NullString;
 
 public class InvoiceJDBC {
 	
@@ -43,8 +44,8 @@ public class InvoiceJDBC {
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				code = rs.getString("InvoiceCode");
-				date = rs.getString("InvoiceDate");
+				code = NullString.CheckNullString(rs.getString("InvoiceCode"));
+				date = NullString.CheckNullString(rs.getString("InvoiceDate"));
 				//PNR = rs.getString("PNR");
 				customerID = rs.getInt("CustomerID");
 				personID = rs.getInt("SalespersonID");

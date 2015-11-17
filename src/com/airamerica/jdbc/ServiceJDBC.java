@@ -13,6 +13,7 @@ import com.airamerica.product.service.Refreshment;
 import com.airamerica.product.service.Service;
 import com.airamerica.product.service.SpecAssist;
 import com.airamerica.product.ticket.Ticket;
+import com.airamerica.utils.NullString;
 
 public class ServiceJDBC {
 	
@@ -43,17 +44,27 @@ public class ServiceJDBC {
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				code = rs.getString("ProductCode");
-				insuranceName = rs.getString("InsuranceName");
-				ageClass = rs.getString("AgeClass");
-				refreshmentName = rs.getString("RefreshmentName");
-				typeOfService = rs.getString("TypeOfService");
+				code = NullString.CheckNullString(rs.getString("ProductCode"));
+				
+				insuranceName = NullString.CheckNullString(rs.getString("InsuranceName"));
+				
+				ageClass = NullString.CheckNullString(rs.getString("AgeClass"));
+				
+				refreshmentName = NullString.CheckNullString(rs.getString("RefreshmentName"));
+				
+				typeOfService = NullString.CheckNullString(rs.getString("TypeOfService"));
+				
 				quantity = rs.getInt("Quantity");
+				
 				ticketID = rs.getInt("InsuranceTicketID");
+				
 				personID = rs.getInt("SpecialAssistancePersonID");
+				
 				costPerMile = rs.getDouble("CostPerMile");
+				
 				cost = rs.getDouble("Cost");
-				type = rs.getString("ProductType");
+				
+				type = NullString.CheckNullString(rs.getString("ProductType"));
 				
 				
 				
@@ -61,21 +72,23 @@ public class ServiceJDBC {
 				if (type.equals("SC")) {
 					service = new CheckedBaggage(code, ticket); //Need to go back and add ticket attribute to CB class as well as a column in the DB
 					service.setQuantity(quantity);
-					services.add(service);
+		
 				} else if (type.equals("SI")) {
 					ticket = TicketJDBC.getInsuranceTicket(ticketID);
 					service = new Insurance(code, insuranceName, ageClass, costPerMile, ticket);
 					service.setQuantity(quantity);
-					services.add(service);
+				
 				} else if (type.equals("SS")) {
 					person = PersonJDBC.getPerson(personID);
 					service = new SpecAssist(code, typeOfService, person);
-					services.add(service);
+				
 				} else {
 					service = new Refreshment(code, refreshmentName, cost);
 					service.setQuantity(quantity);
-					services.add(service);
+					
 				}
+				
+				services.add(service);
 				
 			}
 			

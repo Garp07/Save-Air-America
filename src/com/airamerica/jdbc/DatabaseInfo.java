@@ -10,9 +10,9 @@ public class DatabaseInfo {
 	 * I'll be removing this file from updating with future commits. 
 	 * Adjust to your login for testing.
 	 */
-	public static final String url = "jdbc:mysql://cse.unl.edu/LOGIN";
-	public static final String username = "";
-	public static final String password = "";
+	public static final String url = "jdbc:mysql://cse.unl.edu:3306/gtliu";
+	public static final String username = "gtliu";
+	public static final String password = "8vqbDP";
 	
 	static public Connection getConnection()
 	{

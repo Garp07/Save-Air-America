@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.airamerica.address.Address;
+import com.airamerica.utils.NullString;
 
 public class AddressJDBC {
 	
@@ -31,16 +32,21 @@ public class AddressJDBC {
 			
 			if(rs.next()) {
 				
-				street = rs.getString("Street");
-				city = rs.getString("City");
-				state = rs.getString("State");
-				zipcode = rs.getString("Zipcode");
-				country = rs.getString("Country");
+				street = NullString.CheckNullString(rs.getString("Street"));
 				
+				city = NullString.CheckNullString(rs.getString("City"));
+				
+				state = NullString.CheckNullString(rs.getString("State"));
+				
+				zipcode = NullString.CheckNullString(rs.getString("Zipcode"));
+				
+				country = NullString.CheckNullString(rs.getString("Country"));
+					
 				address = new Address(street, city, state, zipcode, country);
 				
 			} else {
-				throw new SQLException("No Address");
+				address = new Address("---", "---", "---", "---", "---");
+//				throw new SQLException("No Address");
 			}
 			
 		} catch (SQLException e) {
@@ -54,7 +60,7 @@ public class AddressJDBC {
 				try { ps.close(); } catch(SQLException ignored) {}
 			if(conn != null)
 				try { conn.close(); } catch(SQLException ignored) {}
-		}		
+		}
 		return address;
 	}
 	

@@ -11,6 +11,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import com.airamerica.airport.Airport;
+import com.airamerica.person.Person;
 import com.airamerica.product.ticket.AwardTicket;
 import com.airamerica.product.ticket.BusinessClass;
 import com.airamerica.product.ticket.Economy;
@@ -20,6 +21,7 @@ import com.airamerica.product.ticket.OffseasonTicket;
 import com.airamerica.product.ticket.Seat;
 import com.airamerica.product.ticket.StandardTicket;
 import com.airamerica.product.ticket.Ticket;
+import com.airamerica.utils.NullString;
 
 public class TicketJDBC {
 	
@@ -31,7 +33,8 @@ public class TicketJDBC {
 		ResultSet rs = null;
 		
 		//ticket
-		String depTime, arrTime, flightNo, flightClass, aircraftType, seasonStart, seasonEnd, travelDate, ticketNote, type, code;
+		String flightNo, flightClass, aircraftType, ticketNote, type, code;
+		DateTime depTime, arrTime, seasonStart, seasonEnd, travelDate;
 		int depAirportID, arrAirportID, productID;
 		double rebate, pointsPerMile;
 		
@@ -43,7 +46,7 @@ public class TicketJDBC {
 		
 		String selectTicket = "SELECT DepAirportID, ArrAirportID, DepTime, ArrTime, FlightNumber, "
 				+ "FlightClass, AircraftType, SeasonStartDate, SeasonEndDate, Rebate, PointsPerMile, "
-				+ "TravelDate, TicketNote, ProductType, ProductCode "
+				+ "TicketNote, ProductType, ProductCode, TravelDate, b.ProductID "
 				+ "FROM InvoiceProducts a LEFT JOIN Products b ON a.ProductID = b.ProductID JOIN Tickets c ON b.TicketID = c.TicketID "
 				+ "WHERE a.InvoiceID = ?;";
 
@@ -59,64 +62,81 @@ public class TicketJDBC {
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				depTime = rs.getString("DepTime");
-				arrTime = rs.getString("ArrTime");
-				flightNo = rs.getString("FlightNumber");
-				flightClass = rs.getString("FlightClass");
-				aircraftType = rs.getString("AircraftType");
-				seasonStart = rs.getString("SeasonStartDate");
-				seasonEnd = rs.getString("SeasonEndDate");
-				travelDate = rs.getString("TravelDate");
-				ticketNote = rs.getString("TicketNote");
+				depTime = NullString.CheckNullTime(rs.getString("DepTime"));
+				
+				arrTime = NullString.CheckNullTime(rs.getString("ArrTime"));
+				
+				flightNo = NullString.CheckNullString(rs.getString("FlightNumber"));
+				
+				flightClass = NullString.CheckNullString(rs.getString("FlightClass"));
+				
+				aircraftType = NullString.CheckNullString(rs.getString("AircraftType"));
+				
+				seasonStart = NullString.CheckNullDate(rs.getString("SeasonStartDate"));
+				
+				seasonEnd = NullString.CheckNullDate(rs.getString("SeasonEndDate"));
+				
+				travelDate = NullString.CheckNullDate(rs.getString("TravelDate"));
+				
+				ticketNote = NullString.CheckNullString(rs.getString("TicketNote"));
+				
 				depAirportID = rs.getInt("DepAirportID");
+				
 				arrAirportID = rs.getInt("ArrAirportID");
+				
 				rebate = rs.getDouble("Rebate");
+				
 				pointsPerMile = rs.getDouble("PointsPerMile");
-				type = rs.getString("ProductType");
-				code = rs.getString("ProductCode");
+				
+				type = NullString.CheckNullString(rs.getString("ProductType"));
+				
+				code = NullString.CheckNullString(rs.getString("ProductCode"));
+				
 				productID = rs.getInt("ProductID");
 				
 				arrAirport = AirportJDBC.getAirport(arrAirportID);
 				depAirport = AirportJDBC.getAirport(depAirportID);
 				
-				DateTimeFormatter formatTime = DateTimeFormat.forPattern("HH:mm");
-				DateTimeFormatter formatDate = DateTimeFormat.forPattern("yyyy-MM-dd");
-				DateTime seasonStartFormat, seasonEndFormat, travelDateFormat;
-				
-				
-				DateTime depTimeFormat = formatTime.parseDateTime(depTime);
-				DateTime arrTimeFormat = formatTime.parseDateTime(arrTime);
+//				DateTimeFormatter formatTime = DateTimeFormat.forPattern("HH:mm");
+//				DateTimeFormatter formatDate = DateTimeFormat.forPattern("yyyy-MM-dd");
+//				DateTime seasonStartFormat, seasonEndFormat, travelDateFormat;
+//				
+//				
+//				DateTime depTimeFormat = formatTime.parseDateTime(depTime);
+//				DateTime arrTimeFormat = formatTime.parseDateTime(arrTime);
 				
 				if (flightClass.equals("BC")) {
 					fc = new BusinessClass();
-				} else if (flightClass.equals("EC")) {
-					fc = new Economy();
+					
 				} else if (flightClass.equals("EP")) {
 					fc = new EconomyPremium();
+					
+				} else {
+					fc = new Economy();
+					
 				}
 				
 				seats = SeatJDBC.getSeats(productID);
 			
-				if (type.equals("TS")) {
-					ticket = new StandardTicket(code, depAirport, arrAirport, depTimeFormat, arrTimeFormat, flightNo, fc, aircraftType);
-				} else if (type.equals("TO")) {
-					seasonStartFormat = formatDate.parseDateTime(seasonStart);
-					seasonEndFormat = formatDate.parseDateTime(seasonEnd);
-					ticket = new OffseasonTicket(code, seasonStartFormat, seasonEndFormat, depAirport, arrAirport, depTimeFormat, arrTimeFormat, flightNo, fc, aircraftType, rebate);
+				if (type.equals("TO")) {
+//					seasonStartFormat = formatDate.parseDateTime(seasonStart);
+//					seasonEndFormat = formatDate.parseDateTime(seasonEnd);
+					ticket = new OffseasonTicket(code, seasonStart, seasonEnd, depAirport, arrAirport, depTime, arrTime, flightNo, fc, aircraftType, rebate);
+					
 				} else if (type.equals("TA")) {
-					ticket = new AwardTicket(code, depAirport, arrAirport, depTimeFormat, arrTimeFormat, flightNo, fc, aircraftType, pointsPerMile);
-				}	
-				
-				if(travelDate != null) {
-					travelDateFormat = formatDate.parseDateTime(travelDate);
-					ticket.setTravelDate(travelDateFormat);
+					ticket = new AwardTicket(code, depAirport, arrAirport, depTime, arrTime, flightNo, fc, aircraftType, pointsPerMile);
+					
+				} else {
+					ticket = new StandardTicket(code, depAirport, arrAirport, depTime, arrTime, flightNo, fc, aircraftType);
+					
 				}
-				
-				
+	
+				ticket.setTravelDate(travelDate);
 				ticket.setSeats(seats);
 				ticket.setTicketNote(ticketNote);
 				
 				tickets.add(ticket);
+				
 			}
 			
 		} catch (SQLException e) {
@@ -142,7 +162,8 @@ public class TicketJDBC {
 		ResultSet rs = null;
 		
 		//ticket
-		String depTime, arrTime, flightNo, flightClass, aircraftType, seasonStart, seasonEnd, travelDate, ticketNote, type, code;
+		String flightNo, flightClass, aircraftType, ticketNote, type, code;
+		DateTime depTime, arrTime, seasonStart, seasonEnd, travelDate;
 		int depAirportID, arrAirportID, productID;
 		double rebate, pointsPerMile;
 		
@@ -150,6 +171,9 @@ public class TicketJDBC {
 		Airport depAirport = null;
 		FlightClass fc = null;
 		ArrayList<Seat> seats = new ArrayList<Seat>();
+		
+//		DateTimeFormatter formatTime = DateTimeFormat.forPattern("HH:mm");
+//		DateTimeFormatter formatDate = DateTimeFormat.forPattern("yyyy-MM-dd");
 		
 		String selectTicket = "SELECT DepAirportID, ArrAirportID, DepTime, ArrTime, FlightNumber, "
 
@@ -167,62 +191,77 @@ public class TicketJDBC {
 			rs = ps.executeQuery();
 			
 			if (rs.next()) {
-				depTime = rs.getString("DepTime");
-				arrTime = rs.getString("ArrTime");
-				flightNo = rs.getString("FlightNumber");
-				flightClass = rs.getString("FlightClass");
-				aircraftType = rs.getString("AircraftType");
-				seasonStart = rs.getString("SeasonStartDate");
-				seasonEnd = rs.getString("SeasonEndDate");
-				travelDate = rs.getString("TravelDate");
-				ticketNote = rs.getString("TicketNote");
+				depTime = NullString.CheckNullTime(rs.getString("DepTime"));
+				
+				arrTime = NullString.CheckNullTime(rs.getString("ArrTime"));
+				
+				flightNo = NullString.CheckNullString(rs.getString("FlightNumber"));
+				
+				flightClass = NullString.CheckNullString(rs.getString("FlightClass"));
+				
+				aircraftType = NullString.CheckNullString(rs.getString("AircraftType"));
+				
+				seasonStart = NullString.CheckNullDate(rs.getString("SeasonStartDate"));
+				
+				seasonEnd = NullString.CheckNullDate(rs.getString("SeasonEndDate"));
+				
+				travelDate = NullString.CheckNullDate(rs.getString("TravelDate"));
+				
+				ticketNote = NullString.CheckNullString(rs.getString("TicketNote"));
+				
 				depAirportID = rs.getInt("DepAirportID");
+				
 				arrAirportID = rs.getInt("ArrAirportID");
+				
 				rebate = rs.getDouble("Rebate");
+				
 				pointsPerMile = rs.getDouble("PointsPerMile");
-				type = rs.getString("ProductType");
-				code = rs.getString("ProductCode");
+				
+				type = NullString.CheckNullString(rs.getString("ProductType"));
+				
+				code = NullString.CheckNullString(rs.getString("ProductCode"));
+				
 				productID = rs.getInt("ProductID");
 				
 				arrAirport = AirportJDBC.getAirport(arrAirportID);
 				depAirport = AirportJDBC.getAirport(depAirportID);
 				
-				DateTimeFormatter formatTime = DateTimeFormat.forPattern("HH:mm");
-				DateTimeFormatter formatDate = DateTimeFormat.forPattern("yyyy-MM-dd");
-				
-				DateTime seasonStartFormat = formatDate.parseDateTime(seasonStart);
-				DateTime seasonEndFormat = formatDate.parseDateTime(seasonEnd);
-				DateTime travelDateFormat = formatDate.parseDateTime(travelDate);
-				DateTime depTimeFormat = formatTime.parseDateTime(depTime);
-				DateTime arrTimeFormat = formatTime.parseDateTime(arrTime);
+//				DateTime seasonStartFormat = formatDate.parseDateTime(seasonStart);
+//				DateTime seasonEndFormat = formatDate.parseDateTime(seasonEnd);
+//				DateTime travelDateFormat = formatDate.parseDateTime(travelDate);
+//				DateTime depTimeFormat = formatTime.parseDateTime(depTime);
+//				DateTime arrTimeFormat = formatTime.parseDateTime(arrTime);
 				
 				if (flightClass.equals("BC")) {
 					fc = new BusinessClass();
-				} else if (flightClass.equals("EC")) {
-					fc = new Economy();
-				} else {
+				} else if (flightClass.equals("EP")) {
 					fc = new EconomyPremium();
+				} else {
+					fc = new Economy();
 				}
 				
 				seats = SeatJDBC.getSeats(productID);
 			
 				if (type.equals("TS")) {
-					ticket = new StandardTicket(code, depAirport, arrAirport, depTimeFormat, arrTimeFormat, flightNo, fc, aircraftType);
-					ticket.setTravelDate(travelDateFormat);
-					ticket.setSeats(seats);
-					ticket.setTicketNote(ticketNote);
+					ticket = new StandardTicket(code, depAirport, arrAirport, depTime, arrTime, flightNo, fc, aircraftType);
+					
 				} else if (type.equals("TO")) {
-					ticket = new OffseasonTicket(code, seasonStartFormat, seasonEndFormat, depAirport, arrAirport, depTimeFormat, arrTimeFormat, flightNo, fc, aircraftType, rebate);
-					ticket.setTravelDate(travelDateFormat);
-					ticket.setSeats(seats);
-					ticket.setTicketNote(ticketNote);
+					ticket = new OffseasonTicket(code, seasonStart, seasonEnd, depAirport, arrAirport, depTime, arrTime, flightNo, fc, aircraftType, rebate);
+					
 				} else {
-					ticket = new AwardTicket(code, depAirport, arrAirport, depTimeFormat, arrTimeFormat, flightNo, fc, aircraftType, pointsPerMile);
-					ticket.setTravelDate(travelDateFormat);
-					ticket.setSeats(seats);
-					ticket.setTicketNote(ticketNote);
+					ticket = new AwardTicket(code, depAirport, arrAirport, depTime, arrTime, flightNo, fc, aircraftType, pointsPerMile);
+
 				}	
+				
+				ticket.setTravelDate(travelDate);
+				ticket.setSeats(seats);
+				ticket.setTicketNote(ticketNote);
+				
+			} else {
+				ticket = new StandardTicket("---", AirportJDBC.getAirport(0), AirportJDBC.getAirport(0), NullString.CheckNullTime(null), NullString.CheckNullTime(null), "---", new Economy(), "---");
+//				throw new SQLException("No associated ticket.");
 			}
+			
 			
 		} catch (SQLException e) {
 			System.out.println("SQLException: ");

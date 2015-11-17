@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.airamerica.person.Person;
 import com.airamerica.product.ticket.Seat;
+import com.airamerica.utils.NullString;
 
 public class SeatJDBC {
 	
@@ -37,10 +38,14 @@ public class SeatJDBC {
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				seatNumber = rs.getString("SeatNumber");
-				idNumber = rs.getString("IDNumber");
-				nationality = rs.getString("Nationality");
+				seatNumber = NullString.CheckNullString(rs.getString("SeatNumber"));
+				
+				idNumber = NullString.CheckNullString(rs.getString("IDNumber"));
+				
+				nationality = NullString.CheckNullString(rs.getString("Nationality"));
+				
 				age = rs.getInt("Age");
+				
 				personID = rs.getInt("PersonID");
 			
 				person = PersonJDBC.getPerson(personID);
