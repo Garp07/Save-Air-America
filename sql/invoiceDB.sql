@@ -159,7 +159,7 @@ DROP TABLE IF EXISTS Customers;
 CREATE TABLE Customers 
 (
 	CustomerID INT(11) NOT NULL AUTO_INCREMENT,
-    CustomerCode VARCHAR(11) NOT NULL UNIQUE,
+    CustomerCode VARCHAR(30) NOT NULL UNIQUE,
 	CustomerType VARCHAR(1) NOT NULL,
 	PrimaryContactID INT(11) NOT NULL,
 	CustomerName VARCHAR(50) NOT NULL,
@@ -216,7 +216,7 @@ DROP TABLE IF EXISTS Invoices;
 CREATE TABLE Invoices 
 (
 	InvoiceID INT(11) NOT NULL AUTO_INCREMENT,
-	InvoiceCode VARCHAR(10) NOT NULL,
+	InvoiceCode VARCHAR(30) NOT NULL,
 	CustomerID INT(11) NOT NULL,
 	SalespersonID INT(11), -- '000' is the person code if online
 	InvoiceDate VARCHAR(12) NOT NULL,

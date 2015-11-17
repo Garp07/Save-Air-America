@@ -12,7 +12,7 @@ import com.airamerica.utils.NullString;
 
 public class SeatJDBC {
 	
-	public static ArrayList<Seat> getSeats(int productID) {
+	public static ArrayList<Seat> getSeats(int invoiceID, int productID) {
 		ArrayList<Seat> seats = new ArrayList<Seat>();
 		
 		Connection conn = DatabaseInfo.getConnection();
@@ -26,7 +26,7 @@ public class SeatJDBC {
 
 		String selectSeats = "SELECT SeatNumber, PersonID, IDNumber, Age, Nationality "
 				+ "FROM Seats a JOIN InvoiceProducts b ON a.InvoiceProductsID = b.InvoiceProductsID "
-				+ "WHERE ProductID = ?;";
+				+ "WHERE b.InvoiceID = ? AND b.ProductID = ?;";
 
 //		String selectSeats = "SELECT SeatNumber, PersonID, IDNumber, Age, Nationality, "
 //				+ "FROM Seats a JOIN InvoiceProducts b ON a.InvoiceProductsID = b.InvoiceProductsID "
@@ -35,6 +35,7 @@ public class SeatJDBC {
 		try {
 			ps = conn.prepareStatement(selectSeats);
 			ps.setInt(1, productID);
+			ps.setInt(2, productID);
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {

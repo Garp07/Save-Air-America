@@ -7,11 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 import com.airamerica.airport.Airport;
-import com.airamerica.person.Person;
 import com.airamerica.product.ticket.AwardTicket;
 import com.airamerica.product.ticket.BusinessClass;
 import com.airamerica.product.ticket.Economy;
@@ -117,7 +114,7 @@ public class TicketJDBC {
 					
 				}
 				
-				seats = SeatJDBC.getSeats(productID);
+				seats = SeatJDBC.getSeats(invoiceID, productID);
 			
 				if (type.equals("TO")) {
 //					seasonStartFormat = formatDate.parseDateTime(seasonStart);
@@ -155,7 +152,7 @@ public class TicketJDBC {
 		
 	}
 	
-	public static Ticket getInsuranceTicket(int ticketID) {
+	public static Ticket getInsuranceTicket(int invoiceID, int ticketID) {
 		Ticket ticket = null;
 		
 		Connection conn = DatabaseInfo.getConnection();
@@ -241,7 +238,7 @@ public class TicketJDBC {
 					fc = new Economy();
 				}
 				
-				seats = SeatJDBC.getSeats(productID);
+				seats = SeatJDBC.getSeats(invoiceID, productID);
 			
 				if (type.equals("TS")) {
 					ticket = new StandardTicket(code, depAirport, arrAirport, depTime, arrTime, flightNo, fc, aircraftType);

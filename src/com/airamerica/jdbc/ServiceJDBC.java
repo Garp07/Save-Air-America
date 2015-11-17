@@ -74,7 +74,7 @@ public class ServiceJDBC {
 					service.setQuantity(quantity);
 		
 				} else if (type.equals("SI")) {
-					ticket = TicketJDBC.getInsuranceTicket(ticketID);
+					ticket = TicketJDBC.getInsuranceTicket(invoiceID, ticketID);
 					service = new Insurance(code, insuranceName, ageClass, costPerMile, ticket);
 					service.setQuantity(quantity);
 				
