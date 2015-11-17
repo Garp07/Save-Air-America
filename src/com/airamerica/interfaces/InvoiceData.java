@@ -407,8 +407,6 @@ public class InvoiceData {
 		String insertInvoice = "INSERT INTO Invoices(InvoiceCode, CustomerID, SalespersonID, InvoiceDate, PNR) "
 				+ "VALUES (?, ?, ?, ?, ?);";
 		
-		System.out.println("salesPersonCode: " + salesPersonCode);
-		
 		try {
 			int customerID = getCustomerID(customerCode);
 			
@@ -583,8 +581,6 @@ public class InvoiceData {
 		
 		Connection conn = DatabaseInfo.getConnection();
 		PreparedStatement ps = null;
-		
-		System.out.println("personCode: " + personCode);
 		
 		String insertPerson = "INSERT INTO Persons(PersonCode, FirstName, LastName, AddressID, PhoneNumber) "
 				+ "VALUES (?, ?, ?, ?, ?);";
