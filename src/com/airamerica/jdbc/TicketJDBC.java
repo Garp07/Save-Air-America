@@ -42,16 +42,15 @@ public class TicketJDBC {
 		Ticket ticket = null;
 		
 		String selectTicket = "SELECT DepAirportID, ArrAirportID, DepTime, ArrTime, FlightNumber, "
-<<<<<<< HEAD
 				+ "FlightClass, AircraftType, SeasonStartDate, SeasonEndDate, Rebate, PointsPerMile, "
 				+ "TravelDate, TicketNote, ProductType, ProductCode "
 				+ "FROM InvoiceProducts a LEFT JOIN Products b ON a.ProductID = b.ProductID JOIN Tickets c ON b.TicketID = c.TicketID "
-=======
-				+ "FlightClass, AircraftType, SeasonStartDate, SeasonEndDate, Rebate, PointsPerMile "
-				+ "TravelDate, TicketNote, ProductType, ProductCode, ProductID "
-				+ "FROM InvoiceProducts a LEFT JOIN Products b ON a.ProductID = b.ProductID LEFT JOIN Tickets c ON b.TicketID = c.TicketID "
->>>>>>> 39172a24aea8dc9fa329bc06c7faadf00c2da46f
 				+ "WHERE a.InvoiceID = ?;";
+
+//				+ "FlightClass, AircraftType, SeasonStartDate, SeasonEndDate, Rebate, PointsPerMile "
+//				+ "TravelDate, TicketNote, ProductType, ProductCode, ProductID "
+//				+ "FROM InvoiceProducts a LEFT JOIN Products b ON a.ProductID = b.ProductID LEFT JOIN Tickets c ON b.TicketID = c.TicketID "
+//				+ "WHERE a.InvoiceID = ?;";
 		
 		try {
 			ps = conn.prepareStatement(selectTicket);
@@ -153,17 +152,15 @@ public class TicketJDBC {
 		ArrayList<Seat> seats = new ArrayList<Seat>();
 		
 		String selectTicket = "SELECT DepAirportID, ArrAirportID, DepTime, ArrTime, FlightNumber, "
-<<<<<<< HEAD
+
 				+ "FlightClass, AircraftType, SeasonStartDate, SeasonEndDate, Rebate, PointsPerMile, "
 				+ "TravelDate, TicketNote, ProductType, ProductCode, InvoiceID "
 				+ "FROM InvoiceProducts a JOIN Products b ON a.ProductID = b.ProductID JOIN Tickets c ON b.TicketID = c.TicketID "
-=======
-				+ "FlightClass, AircraftType, SeasonStartDate, SeasonEndDate, Rebate, PointsPerMile "
-				+ "TravelDate, TicketNote, ProductType, ProductCode, ProductID "
-				+ "FROM InvoiceProducts a LEFT JOIN Products b ON a.ProductID = b.ProductID LEFT JOIN Tickets c ON b.TicketID = c.TicketID "
->>>>>>> 39172a24aea8dc9fa329bc06c7faadf00c2da46f
 				+ "WHERE a.InsuranceTicketID = ?;";
 		
+//				+ "FlightClass, AircraftType, SeasonStartDate, SeasonEndDate, Rebate, PointsPerMile "
+//				+ "TravelDate, TicketNote, ProductType, ProductCode, ProductID "
+//				+ "FROM InvoiceProducts a LEFT JOIN Products b ON a.ProductID = b.ProductID LEFT JOIN Tickets c ON b.TicketID = c.TicketID "
 		try {
 			ps = conn.prepareStatement(selectTicket);
 			ps.setInt(1, ticketID);

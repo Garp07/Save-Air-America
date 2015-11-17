@@ -23,17 +23,13 @@ public class SeatJDBC {
 		int age, personID;
 		Person person = null;
 
-<<<<<<< HEAD
 		String selectAirport = "SELECT SeatNumber, PersonID, IDNumber, Age, Nationality "
 				+ "FROM Seats a JOIN InvoiceProducts b ON a.InvoiceProductsID = b.InvoiceProductsID "
 				+ "WHERE b.InvoiceID = ?;";
-=======
-	
-		
-		String selectAirport = "SELECT SeatNumber, PersonID, IDNumber, Age, Nationality, "
-				+ "FROM Seats a RIGHT JOIN InvoiceProducts b ON a.InvoiceProductsID = b.InvoiceProductsID "
-				+ "WHERE b.ProductID = ?;";
->>>>>>> 39172a24aea8dc9fa329bc06c7faadf00c2da46f
+
+//		String selectAirport = "SELECT SeatNumber, PersonID, IDNumber, Age, Nationality, "
+//				+ "FROM Seats a RIGHT JOIN InvoiceProducts b ON a.InvoiceProductsID = b.InvoiceProductsID "
+//				+ "WHERE b.ProductID = ?;";
 		
 		try {
 			ps = conn.prepareStatement(selectAirport);
