@@ -85,6 +85,10 @@ public class PersonJDBC {
 		String selectPerson = "SELECT PersonID, PersonCode, FirstName, LastName, AddressID, PhoneNumber "
 				+ "FROM Persons WHERE PersonID = ?;";
 		
+		if(ID == 0) {
+			return new Person("ONLINE", "", "", new Address("", "", "", "", ""));
+		}
+		
 		try {
 			ps = conn.prepareStatement(selectPerson);
 			ps.setInt(1, ID);

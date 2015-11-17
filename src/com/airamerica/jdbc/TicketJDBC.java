@@ -77,7 +77,7 @@ public class TicketJDBC {
 				DateTimeFormatter formatDate = DateTimeFormat.forPattern("yyyy-MM-dd");
 				DateTime seasonStartFormat, seasonEndFormat, travelDateFormat;
 				
-				travelDateFormat = formatDate.parseDateTime(travelDate);
+				
 				DateTime depTimeFormat = formatTime.parseDateTime(depTime);
 				DateTime arrTimeFormat = formatTime.parseDateTime(arrTime);
 				
@@ -93,25 +93,24 @@ public class TicketJDBC {
 			
 				if (type.equals("TS")) {
 					ticket = new StandardTicket(code, depAirport, arrAirport, depTimeFormat, arrTimeFormat, flightNo, fc, aircraftType);
-					ticket.setTravelDate(travelDateFormat);
-					ticket.setSeats(seats);
-					ticket.setTicketNote(ticketNote);
-					tickets.add(ticket);
 				} else if (type.equals("TO")) {
 					seasonStartFormat = formatDate.parseDateTime(seasonStart);
 					seasonEndFormat = formatDate.parseDateTime(seasonEnd);
 					ticket = new OffseasonTicket(code, seasonStartFormat, seasonEndFormat, depAirport, arrAirport, depTimeFormat, arrTimeFormat, flightNo, fc, aircraftType, rebate);
-					ticket.setTravelDate(travelDateFormat);
-					ticket.setSeats(seats);
-					ticket.setTicketNote(ticketNote);
-					tickets.add(ticket);
 				} else if (type.equals("TA")) {
 					ticket = new AwardTicket(code, depAirport, arrAirport, depTimeFormat, arrTimeFormat, flightNo, fc, aircraftType, pointsPerMile);
-					ticket.setTravelDate(travelDateFormat);
-					ticket.setSeats(seats);
-					ticket.setTicketNote(ticketNote);
-					tickets.add(ticket);
 				}	
+				
+				if(travelDate != null) {
+					travelDateFormat = formatDate.parseDateTime(travelDate);
+					ticket.setTravelDate(travelDateFormat);
+				}
+				
+				
+				ticket.setSeats(seats);
+				ticket.setTicketNote(ticketNote);
+				
+				tickets.add(ticket);
 			}
 			
 		} catch (SQLException e) {
@@ -149,7 +148,7 @@ public class TicketJDBC {
 		String selectTicket = "SELECT DepAirportID, ArrAirportID, DepTime, ArrTime, FlightNumber, "
 				+ "FlightClass, AircraftType, SeasonStartDate, SeasonEndDate, Rebate, PointsPerMile, "
 				+ "TravelDate, TicketNote, ProductType, ProductCode, InvoiceID "
-				+ "FROM InvoiceProducts a LEFT JOIN Products b ON a.ProductID = b.ProductID JOIN Tickets c ON b.TicketID = c.TicketID "
+				+ "FROM InvoiceProducts a JOIN Products b ON a.ProductID = b.ProductID JOIN Tickets c ON b.TicketID = c.TicketID "
 				+ "WHERE a.InsuranceTicketID = ?;";
 		
 		try {
@@ -229,4 +228,5 @@ public class TicketJDBC {
 		return ticket;
 		
 	}
+	
 }
