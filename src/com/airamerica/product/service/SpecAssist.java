@@ -22,6 +22,14 @@ public class SpecAssist extends Service {
 		this.typeOfService = typeOfService;
 	}
 	
+	public SpecAssist(String code, String typeOfService, Person person) {
+		super(code);
+		this.typeOfService = typeOfService;
+		this.type = "SS";
+		this.quantity = 1;
+		this.person = person;
+	}
+	
 	public SpecAssist(String code, String typeOfService) {
 		super(code);
 		this.typeOfService = typeOfService;
