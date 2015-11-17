@@ -139,7 +139,7 @@ DROP TABLE IF EXISTS Emails;
 CREATE TABLE Emails 
 (
 	EmailID INT(11) NOT NULL AUTO_INCREMENT,
-	Email VARCHAR(30) NOT NULL,
+	Email VARCHAR(50) NOT NULL,
 	PersonID INT(11) NOT NULL,
 	CONSTRAINT Emails_PK PRIMARY KEY (EmailID),
 	FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)
@@ -336,7 +336,7 @@ CREATE TABLE InvoiceProducts
     Quantity INT(11), -- checked baggage, insurance, or refreshments
     InsuranceTicketID INT(11),
     SpecialAssistancePersonID INT(11),
-    TravelDate VARCHAR(12),
+    TravelDate VARCHAR(12) NOT NULL DEFAULT '0000-01-01',
     CONSTRAINT InvoiceProducts_PK PRIMARY KEY (InvoiceProductsID),
     FOREIGN KEY (InvoiceID) REFERENCES Invoices(InvoiceID),
     FOREIGN KEY (ProductID) REFERENCES Products(ProductID),
