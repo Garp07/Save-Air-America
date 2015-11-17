@@ -72,8 +72,8 @@ public class Invoice {
 		return PNR;
 	}
 
-	public void setPNR(String pNR) {
-		PNR = pNR;
+	public void setPNR(String PNR) {
+		this.PNR = PNR;
 	}
 
 	public Invoice(String code, Customer customer, Person person, DateTime invoiceDate,
