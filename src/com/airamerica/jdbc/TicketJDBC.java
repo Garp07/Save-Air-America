@@ -47,7 +47,8 @@ public class TicketJDBC {
 		String selectTicket = "SELECT DepAirportID, ArrAirportID, DepTime, ArrTime, FlightNumber, "
 				+ "FlightClass, AircraftType, SeasonStartDate, SeasonEndDate, Rebate, PointsPerMile, "
 				+ "TicketNote, ProductType, ProductCode, TravelDate, b.ProductID "
-				+ "FROM InvoiceProducts a LEFT JOIN Products b ON a.ProductID = b.ProductID JOIN Tickets c ON b.TicketID = c.TicketID "
+//				+ "FROM InvoiceProducts a LEFT JOIN Products b ON a.ProductID = b.ProductID RIGHT JOIN Tickets c ON b.TicketID = c.TicketID "
+				+ "FROM Tickets c LEFT JOIN Products b ON c.TicketID = b.TicketID LEFT JOIN InvoiceProducts a ON b.ProductID = a.ProductID "
 				+ "WHERE a.InvoiceID = ?;";
 
 //				+ "FlightClass, AircraftType, SeasonStartDate, SeasonEndDate, Rebate, PointsPerMile "

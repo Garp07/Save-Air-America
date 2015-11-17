@@ -87,7 +87,7 @@ public class PersonJDBC {
 				+ "FROM Persons WHERE PersonID = ?;";
 		
 		if(ID == 0) {
-			return new Person("ONLINE", "", "", new Address("", "", "", "", ""));
+			return new Person("ONLINE", "ONLINE", "ONLINE", new Address("", "", "", "", ""));
 		}
 		
 		try {
