@@ -42,13 +42,14 @@ public class TicketJDBC {
 		Ticket ticket = null;
 		
 		String selectTicket = "SELECT DepAirportID, ArrAirportID, DepTime, ArrTime, FlightNumber, "
-				+ "FlightClass, AircraftType, SeasonStartDate, SeasonEndDate, Rebate, PointsPerMile "
+				+ "FlightClass, AircraftType, SeasonStartDate, SeasonEndDate, Rebate, PointsPerMile, "
 				+ "TravelDate, TicketNote, ProductType, ProductCode "
-				+ "FROM InvoiceProducts a LEFT JOIN Products b ON a.ProductID = b.ProductID LEFT JOIN Tickets c ON b.TicketID = c.TicketID "
+				+ "FROM InvoiceProducts a LEFT JOIN Products b ON a.ProductID = b.ProductID JOIN Tickets c ON b.TicketID = c.TicketID "
 				+ "WHERE a.InvoiceID = ?;";
 		
 		try {
 			ps = conn.prepareStatement(selectTicket);
+			
 			ps.setInt(1, invoiceID);
 			rs = ps.executeQuery();
 			
@@ -74,10 +75,9 @@ public class TicketJDBC {
 				
 				DateTimeFormatter formatTime = DateTimeFormat.forPattern("HH:mm");
 				DateTimeFormatter formatDate = DateTimeFormat.forPattern("yyyy-MM-dd");
+				DateTime seasonStartFormat, seasonEndFormat, travelDateFormat;
 				
-				DateTime seasonStartFormat = formatDate.parseDateTime(seasonStart);
-				DateTime seasonEndFormat = formatDate.parseDateTime(seasonEnd);
-				DateTime travelDateFormat = formatDate.parseDateTime(travelDate);
+				travelDateFormat = formatDate.parseDateTime(travelDate);
 				DateTime depTimeFormat = formatTime.parseDateTime(depTime);
 				DateTime arrTimeFormat = formatTime.parseDateTime(arrTime);
 				
@@ -85,7 +85,7 @@ public class TicketJDBC {
 					fc = new BusinessClass();
 				} else if (flightClass.equals("EC")) {
 					fc = new Economy();
-				} else {
+				} else if (flightClass.equals("EP")) {
 					fc = new EconomyPremium();
 				}
 				
@@ -98,12 +98,14 @@ public class TicketJDBC {
 					ticket.setTicketNote(ticketNote);
 					tickets.add(ticket);
 				} else if (type.equals("TO")) {
+					seasonStartFormat = formatDate.parseDateTime(seasonStart);
+					seasonEndFormat = formatDate.parseDateTime(seasonEnd);
 					ticket = new OffseasonTicket(code, seasonStartFormat, seasonEndFormat, depAirport, arrAirport, depTimeFormat, arrTimeFormat, flightNo, fc, aircraftType, rebate);
 					ticket.setTravelDate(travelDateFormat);
 					ticket.setSeats(seats);
 					ticket.setTicketNote(ticketNote);
 					tickets.add(ticket);
-				} else {
+				} else if (type.equals("TA")) {
 					ticket = new AwardTicket(code, depAirport, arrAirport, depTimeFormat, arrTimeFormat, flightNo, fc, aircraftType, pointsPerMile);
 					ticket.setTravelDate(travelDateFormat);
 					ticket.setSeats(seats);
@@ -145,9 +147,9 @@ public class TicketJDBC {
 		ArrayList<Seat> seats = new ArrayList<Seat>();
 		
 		String selectTicket = "SELECT DepAirportID, ArrAirportID, DepTime, ArrTime, FlightNumber, "
-				+ "FlightClass, AircraftType, SeasonStartDate, SeasonEndDate, Rebate, PointsPerMile "
+				+ "FlightClass, AircraftType, SeasonStartDate, SeasonEndDate, Rebate, PointsPerMile, "
 				+ "TravelDate, TicketNote, ProductType, ProductCode, InvoiceID "
-				+ "FROM InvoiceProducts a LEFT JOIN Products b ON a.ProductID = b.ProductID LEFT JOIN Tickets c ON b.TicketID = c.TicketID "
+				+ "FROM InvoiceProducts a LEFT JOIN Products b ON a.ProductID = b.ProductID JOIN Tickets c ON b.TicketID = c.TicketID "
 				+ "WHERE a.InsuranceTicketID = ?;";
 		
 		try {

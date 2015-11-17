@@ -23,10 +23,8 @@ public class SeatJDBC {
 		int age, personID;
 		Person person = null;
 
-	
-		
-		String selectAirport = "SELECT SeatNumber, PersonID, IDNumber, Age, Nationality, "
-				+ "FROM Seats a RIGHT JOIN InvoiceProducts b ON a.InvoiceProductsID = b.InvoiceProductsID "
+		String selectAirport = "SELECT SeatNumber, PersonID, IDNumber, Age, Nationality "
+				+ "FROM Seats a JOIN InvoiceProducts b ON a.InvoiceProductsID = b.InvoiceProductsID "
 				+ "WHERE b.InvoiceID = ?;";
 		
 		try {

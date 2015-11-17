@@ -85,7 +85,7 @@ public class AirportJDBC {
 	
 		
 		String selectAirport = "SELECT AddressID, AirportCode, AirportName, LatitudeDegrees, LatitudeMinutes, "
-				+ "LongitudeDegrees, LongitudeMinutes, FacilityFee, "
+				+ "LongitudeDegrees, LongitudeMinutes, FacilityFee "
 				+ "FROM Airports WHERE AirportID = ?;";
 		
 		try {

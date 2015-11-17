@@ -70,7 +70,8 @@ VALUES
     ('644 Woodland Drive', 'Cookeville', 'TN', '38501', 'USA'),
     ('3 Clay Street', 'Fairport', 'NY', '14450', 'USA'), 
     ('275 Briarwood Court', 'Neptune', 'NJ', '07753', 'USA'),
-    ('311 3rd Avenue', 'Anchorage', 'AK', '99504', 'USA');
+    ('311 3rd Avenue', 'Anchorage', 'AK', '99504', 'USA'),
+    ('ONLINE','ONLINE','ON','ON','ON');
 
 -- Person table
 DROP TABLE IF EXISTS Persons;
@@ -217,7 +218,7 @@ CREATE TABLE Invoices
 	InvoiceID INT(11) NOT NULL AUTO_INCREMENT,
 	InvoiceCode VARCHAR(10) NOT NULL,
 	CustomerID INT(11) NOT NULL,
-	SalespersonID INT(11) NOT NULL, -- '000' is the person code if online
+	SalespersonID INT(11), -- '000' is the person code if online
 	InvoiceDate VARCHAR(12) NOT NULL,
 	PNR VARCHAR(10) NOT NULL,
 	CONSTRAINT Invoices_PK PRIMARY KEY (InvoiceID),
@@ -348,10 +349,11 @@ VALUES
 	(1,1,NULL,NULL,NULL,NULL,'2015-05-06'),
     (1,2,NULL,NULL,NULL,NULL,'2014-04-29'),
     (1,3,NULL,NULL,NULL,NULL,'2015-12-15'),
+    (3,1,NULL,NULL,NULL,NULL,'2013-12-13'),
     (2,6,NULL,2,5,NULL,NULL),
     (2,7,NULL,2,NULL,NULL,NULL),
-    (2,8,NULL,3,NULL,NULL,NULL),
-    (2,9,NULL,NULL,NULL,2,NULL);
+    (2,8,NULL,1,NULL,2,NULL),
+    (2,9,NULL,1,3,NULL,NULL);
     
     -- Seat table
 DROP TABLE IF EXISTS Seats;
@@ -377,4 +379,4 @@ VALUES
     ('C02', 9, 'sj223j1', 30, 'British', 1), 
     ('D12', 12, '66h7y', 20, 'Canadian', 2), 
     ('H07', 2, '878h', 18, 'American', 2),
-    ('J10', 15, 'nno998', 54, 'Jamaican', 3);
+    ('J10', 15, 'nno998', 54, 'Jamaican', 4);

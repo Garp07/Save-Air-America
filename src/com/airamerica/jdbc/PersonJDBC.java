@@ -98,11 +98,14 @@ public class PersonJDBC {
 				personID = rs.getInt("PersonID");
 				addressID = rs.getInt("AddressID");
 				
-				address = AddressJDBC.getAddress(addressID);
-				
+				if (addressID != 0) {
+					address = AddressJDBC.getAddress(addressID);
+				} else {
+					address = new Address("ONLINE", "ONLINE", "ONLINE", "ONLINE", "ONLINE");
+				}
 				emails = EmailJDBC.getEmail(personID);
 				
-				if (phoneNumber.isEmpty()) {
+				if (phoneNumber != null) {
 					person = new Person(code, firstName, lastName, address);
 					person.setEmails(emails);
 				} else {

@@ -34,7 +34,7 @@ public class ServiceJDBC {
 		String selectService = "SELECT InsuranceName, AgeClass, CostPerMile, TypeOfService, RefreshmentName, "
 				+ "Cost, ProductCode, Quantity, InsuranceTicketID, SpecialAssistancePersonID, ProductType "
 				+ "FROM InvoiceProducts a LEFT JOIN Products b ON a.ProductID = b.ProductID "
-				+ "LEFT JOIN Services c ON b.ServiceID = c.ServiceID "
+				+ "JOIN Services c ON b.ServiceID = c.ServiceID "
 				+ "WHERE a.InvoiceID = ?;";
 		
 		try {
@@ -55,18 +55,20 @@ public class ServiceJDBC {
 				cost = rs.getDouble("Cost");
 				type = rs.getString("ProductType");
 				
-				ticket = TicketJDBC.getInsuranceTicket(ticketID);
-				person = PersonJDBC.getPerson(personID);
+				
+				
 				
 				if (type.equals("SC")) {
 					service = new CheckedBaggage(code, ticket); //Need to go back and add ticket attribute to CB class as well as a column in the DB
 					service.setQuantity(quantity);
 					services.add(service);
 				} else if (type.equals("SI")) {
+					ticket = TicketJDBC.getInsuranceTicket(ticketID);
 					service = new Insurance(code, insuranceName, ageClass, costPerMile, ticket);
 					service.setQuantity(quantity);
 					services.add(service);
 				} else if (type.equals("SS")) {
+					person = PersonJDBC.getPerson(personID);
 					service = new SpecAssist(code, typeOfService, person);
 					services.add(service);
 				} else {

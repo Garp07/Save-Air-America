@@ -2,18 +2,8 @@ package com.airamerica.printer;
 
 import java.util.ArrayList;
 
-import com.airamerica.airport.Airport;
-import com.airamerica.customer.Customer;
-import com.airamerica.dataconverter.AirportConverter;
-import com.airamerica.dataconverter.CustomerConverter;
-import com.airamerica.dataconverter.InvoiceConverter;
-import com.airamerica.dataconverter.PersonConverter;
-import com.airamerica.dataconverter.ProductConverter;
 import com.airamerica.invoice.Invoice;
 import com.airamerica.jdbc.InvoiceJDBC;
-import com.airamerica.person.Person;
-import com.airamerica.product.Product;
-import com.airamerica.product.ticket.Ticket;
 
 public class InvoiceReport {
 

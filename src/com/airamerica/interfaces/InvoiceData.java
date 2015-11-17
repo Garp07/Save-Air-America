@@ -408,18 +408,23 @@ public class InvoiceData {
 				+ "VALUES (?, ?, ?, ?, ?);";
 		
 		try {
-			
 			int customerID = getCustomerID(customerCode);
-			int salesPersonID = getPersonID(salesPersonCode);
 			
 			ps = conn.prepareStatement(insertInvoice);
 			ps.setString(1, invoiceCode);
 			ps.setInt(2, customerID);
-			ps.setInt(3, salesPersonID);
+			
+			int salesPersonID;
+			if(salesPersonCode.equalsIgnoreCase("online")) {
+				ps.setNull(3, Types.INTEGER);
+			} else {
+				salesPersonID = getPersonID(salesPersonCode);
+				ps.setInt(3, salesPersonID);
+			}
 			ps.setString(4, invoiceDate);
 			ps.setString(5, StandardUtils.generatePNR());
 			
-			if(customerID < 0 || salesPersonID < 0) {
+			if(customerID < 0) {
 				throw new SQLException("Customer and/or salesperson not found in database");
 			}
 			
@@ -576,8 +581,6 @@ public class InvoiceData {
 		
 		Connection conn = DatabaseInfo.getConnection();
 		PreparedStatement ps = null;
-		
-		
 		
 		String insertPerson = "INSERT INTO Persons(PersonCode, FirstName, LastName, AddressID, PhoneNumber) "
 				+ "VALUES (?, ?, ?, ?, ?);";
