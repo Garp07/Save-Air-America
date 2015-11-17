@@ -5,5 +5,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Referenced Libraries"/>
 	<classpathentry kind="lib" path="libs/joda-time-2.8.2.jar"/>
 	<classpathentry kind="lib" path="libs/xstream-1.4.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Gary/Downloads/mysql-connector-java-5.0.8-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
