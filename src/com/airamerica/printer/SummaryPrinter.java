@@ -3,8 +3,15 @@ package com.airamerica.printer;
 import java.util.ArrayList;
 
 import com.airamerica.invoice.Invoice;
+import com.airamerica.product.service.CheckedBaggage;
+import com.airamerica.product.service.Insurance;
+import com.airamerica.product.service.Refreshment;
 import com.airamerica.product.service.Service;
+import com.airamerica.product.service.SpecAssist;
+import com.airamerica.product.ticket.AwardTicket;
+import com.airamerica.product.ticket.OffseasonTicket;
 import com.airamerica.product.ticket.Ticket;
+import com.airamerica.utils.Calculator;
 
 public class SummaryPrinter {
 
@@ -21,60 +28,110 @@ public class SummaryPrinter {
 			double superTotal = 0;
 			
 			for(Invoice i : invoices) {
-				String code = i.getCode();
-				String client = i.getCustomer().getName();
-				String type = i.getCustomer().getType();
-					if(type.equals("G")) {
-						type = "General";
-					}else if(type.equals("V")) {
-						type = "Government";
-					}else {
-						type = "Corporate";
-					}
-				String salesperson = i.getPerson().getLastName() + ", " + i.getPerson().getFirstName();
 				double grandSubtotal = 0;
 				double grandTaxes = 0;
-				double redemptionFee = 0;
+				double runningTotal = 0;
 				
 				for(Ticket t : i.getTickets()) {
-					double subtotal = t.getBasefare()*(double)t.getSeats().size();
-					double taxesFees = t.getTaxes();
-						if(t.getCode().equals("TA")) {
-							redemptionFee = 40;
-							subtotal = 0;
-						}
+					String ticketType = t.getType();
+					double subtotal = 0, taxes = 0, fees = 0, taxesFees = 0, total = 0;
+					
+					switch(ticketType) {
+					case "TS":
+						subtotal = Calculator.standardTicketCost(t);
+						break;
+					case "TO":
+						subtotal = Calculator.offseasonTicketCost((OffseasonTicket)t);
+						break;
+					case "TA":
+						subtotal = Calculator.awardTicketCost((AwardTicket)t);
+						break;
+					default:
+						break;
+					}
+					
+					taxes = Calculator.ticketTaxes(subtotal, t);
+					fees = Calculator.fees(t);
+					taxesFees = taxes + fees;
+					total = subtotal + taxesFees;
+					
 					grandSubtotal = grandSubtotal + subtotal;
 					grandTaxes = grandTaxes + taxesFees;
+					runningTotal = runningTotal + total;
+					
 				}
 				
 				for(Service s : i.getServices()) {
-					double subtotal = s.getServiceCost()*(double)s.getQuantity();
-					double taxesFees = s.getServiceTax()*(double)s.getQuantity();
-					if(s.getType().equals("SC")) {
-						subtotal = s.getServiceCost();
-						taxesFees = s.getServiceTax();
+					String serviceType = s.getType();
+					double subtotal = 0, taxes = 0, total = 0;
+					
+					switch(serviceType) {
+					case "SC":
+						subtotal = Calculator.baggageCost((CheckedBaggage)s);
+						break;
+					case "SI":
+						subtotal = Calculator.insuranceCost((Insurance)s);
+						break;
+					case "SR":
+						subtotal = Calculator.refreshmentCost((Refreshment)s);
+						if(i.getTickets().size() != 0) {
+							subtotal = subtotal - subtotal*0.05;
+						}
+						break;
+					case "SS":
+						subtotal = Calculator.specialAssistanceCost((SpecAssist)s);
+						break;
+					default:
+						break;
 					}
+					
+					taxes = Calculator.serviceTaxes(subtotal);
+					total = subtotal + taxes;
+					
 					grandSubtotal = grandSubtotal + subtotal;
-					grandTaxes = grandTaxes + taxesFees;
+					grandTaxes = grandTaxes + taxes;
+					runningTotal = runningTotal + total;
+
 				}
 				
-				double discounts = 0;
+				String code = i.getCode();
+				String client = i.getCustomer().getName();
+				String salesperson = i.getPerson().getLastName() + ", " + i.getPerson().getFirstName();
 				String customerType = i.getCustomer().getType();
+				String type;
+
+					if(customerType.equals("C")) {
+						type = "Corporate";
+						
+					} else if(customerType.equals("V")) {
+						type = "Government";
+						
+					} else {
+						type = "General";
+					}
+					
+				double discount = 0, redemptionFee = 0;
 				
-				if(customerType.equals("C")) {
-					discounts = grandSubtotal*0.12;
-					redemptionFee= redemptionFee + 40;
-				} else if(customerType.equals("V")) {
-					discounts = grandTaxes;
-				} 
+					if(customerType.equals("C")) {
+						discount = Calculator.corporateDiscount(grandSubtotal);
+						redemptionFee = 40;
+					
+					} else if(customerType.equals("V")) {
+						discount = grandTaxes;
+						redemptionFee = 0;
+						
+					} else {
+						discount = 0;
+						redemptionFee = 0;
+					}
 				
-				double grandTotal = grandSubtotal - discounts + grandTaxes + redemptionFee;
+				double grandTotal = runningTotal - discount + redemptionFee;
 				
 				System.out.printf("%-10s %-50s %-30s $%10.2f -$%10.2f $%10.2f $%10.2f $%10.2f %n", code, client + " [" + type + "]", salesperson, 
-						grandSubtotal, discounts, grandTaxes, redemptionFee, grandTotal);
+						grandSubtotal, discount, grandTaxes, redemptionFee, grandTotal);
 				
 				superSubtotal = superSubtotal + grandSubtotal;
-				superDiscounts = superDiscounts + discounts;
+				superDiscounts = superDiscounts + discount;
 				superTaxes = superTaxes + grandTaxes;
 				superFees = superFees + redemptionFee;
 				superTotal = superTotal + grandTotal;

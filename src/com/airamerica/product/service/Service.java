@@ -18,16 +18,16 @@ abstract public class Service extends Product {
 		super(code);
 	}
 	
-	public abstract double getServiceCost();
+//	public abstract double getServiceCost();
 	
-	public double getServiceTax() {
-		double tax = this.getServiceCost()*0.04;
-		return tax;
-	}
-	
-	public double getServiceTotal() {
-		double total = this.getServiceCost() + this.getServiceTax();
-		return total;
-	}
-	
+//	public double getServiceTax() {
+//		double tax = this.getServiceCost()*0.04;
+//		return tax;
+//	}
+//	
+//	public double getServiceTotal() {
+//		double total = this.getServiceCost() + this.getServiceTax();
+//		return total;
+//	}
+//	
 }

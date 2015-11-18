@@ -20,15 +20,15 @@ public class CheckedBaggage extends Service {
 		this.type = "SC";
 	}
 	
-	public double getServiceCost() {
-		double cost = 0;
-		if(this.quantity == 1) {
-			cost = 25;
-		} else {
-			cost = 25 + ((double) (this.quantity-1)*35);
-		}
-		return cost;
-	}
+//	public double getServiceCost() {
+//		double cost = 0;
+//		if(this.quantity == 1) {
+//			cost = 25;
+//		} else {
+//			cost = 25 + ((double) (this.quantity-1)*35);
+//		}
+//		return cost;
+//	}
 	
 	
 }

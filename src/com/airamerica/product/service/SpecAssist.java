@@ -37,9 +37,9 @@ public class SpecAssist extends Service {
 		this.quantity = 1;
 	}
 	
-	public double getServiceCost() {
-		double cost = 0;
-		return cost;
-	}
+//	public double getServiceCost() {
+//		double cost = 0;
+//		return cost;
+//	}
 	
 }

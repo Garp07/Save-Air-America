@@ -31,10 +31,10 @@ public class AwardTicket extends Ticket {
 		return awardsPoints;
 	}
 	
-	public double getTotalFare() {
-		double totalFare = this.getBasefare()*(double)this.getSeats().size() + this.getTaxes();
-		return totalFare;
-	}
+//	public double getTotalFare() {
+//		double totalFare = this.getBasefare()*(double)this.getSeats().size() + this.getTaxes();
+//		return totalFare;
+//	}
 	
 	/*Pay flat $30 redemption fee once per invoice regardless of number of tickets*/
 }

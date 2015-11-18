@@ -44,15 +44,15 @@ public class OffseasonTicket extends Ticket {
 		this.type = "TO";
 	}
 	
-	public double getTotalFare() {
-		double discount = 0;
-		double serviceFee = 20;
-		if(this.travelDate.isAfter(this.seasonStartDate) && this.travelDate.isBefore(this.seasonEndDate)) {
-			discount = this.getBasefare()*this.rebate;
-		} 
-		double totalFare = (this.getBasefare()*(double)this.getSeats().size() - discount) + this.getTaxes() + serviceFee;
-		return totalFare;
-	}
-	
+//	public double getTotalFare() {
+//		double discount = 0;
+//		double serviceFee = 20;
+//		if(this.travelDate.isAfter(this.seasonStartDate) && this.travelDate.isBefore(this.seasonEndDate)) {
+//			discount = this.getBasefare()*this.rebate;
+//		} 
+//		double totalFare = (this.getBasefare()*(double)this.getSeats().size() - discount) + this.getTaxes() + serviceFee;
+//		return totalFare;
+//	}
+//	
 	
 }

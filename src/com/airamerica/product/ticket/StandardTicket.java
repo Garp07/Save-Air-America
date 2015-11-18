@@ -12,8 +12,8 @@ public class StandardTicket extends Ticket {
 		this.type = "TS";
 	}
 	
-	public double getTotalFare() {
-		double totalFare = this.getBasefare()*(double)this.getSeats().size() + this.getTaxes();
-		return totalFare;
-	}
+//	public double getTotalFare() {
+//		double totalFare = this.getBasefare()*(double)this.getSeats().size() + this.getTaxes();
+//		return totalFare;
+//	}
 }

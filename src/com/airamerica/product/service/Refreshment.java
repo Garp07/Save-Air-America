@@ -28,9 +28,9 @@ public class Refreshment extends Service {
 		this.type = "SR";
 	}
 	
-	public double getServiceCost() {
-		double cost = (double) this.quantity*this.cost;
-		return cost;
-	}
+//	public double getServiceCost() {
+//		double cost = (double) this.quantity*this.cost;
+//		return cost;
+//	}
 	
 }

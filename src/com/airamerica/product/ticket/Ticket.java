@@ -125,23 +125,23 @@ abstract public class Ticket extends Product {
 		return c*radiusEarth;
 	}
 
-	public double getBasefare() {
-		double fareRate = this.flightClass.getCostPerMile();
-		double flightDistance = this.getFlightDistance();
-		double basefare = fareRate*flightDistance;
-		return basefare;
-	}
+//	public double getBasefare() {
+//		double fareRate = this.flightClass.getCostPerMile();
+//		double flightDistance = this.getFlightDistance();
+//		double basefare = fareRate*flightDistance;
+//		return basefare;
+//	}
 
-	public double getTaxes() {
-		double federalExciseTax = this.getBasefare()*(double)this.getSeats().size()*0.075;
-		double flightSegmentTax = (double)this.getSeats().size()*4;
-		double securityFee = (double)this.getSeats().size()*5.6;
-		double facilityCharge = this.depAirport.getPassengerFacilityFee()*(double)this.getSeats().size();
-		double taxes = federalExciseTax + flightSegmentTax + securityFee + facilityCharge;
-		return taxes;
-	}
+//	public double getTaxes() {
+//		double federalExciseTax = this.getBasefare()*(double)this.getSeats().size()*0.075;
+//		double flightSegmentTax = (double)this.getSeats().size()*4;
+//		double securityFee = (double)this.getSeats().size()*5.6;
+//		double facilityCharge = this.depAirport.getPassengerFacilityFee()*(double)this.getSeats().size();
+//		double taxes = federalExciseTax + flightSegmentTax + securityFee + facilityCharge;
+//		return taxes;
+//	}
 
-	public abstract double getTotalFare();
+//	public abstract double getTotalFare();
 	
 	
 }
