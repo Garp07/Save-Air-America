@@ -36,26 +36,6 @@ public class Invoice {
 		return sb.toString();
 	}
 	
-	private double calculateSubtotal() {
-		double subtotal = 0;
-		for(Service s : services) {
-			switch(s.getType()) {
-				case "SC": case "SA": case "SI":
-					subtotal += s.getCost();
-					break;
-				case "SR": 
-					// 5% discount if a ticket is purchased in same invoice
-					if(tickets.isEmpty()) {
-						subtotal += 1.00 * s.getCost();
-					} else {
-						subtotal += 0.95 * s.getCost();
-					}
-					break;
-			}
-		}
-		return subtotal;
-	}
-	
 	public String getCode() {
 		return code;
 	}
@@ -121,7 +101,16 @@ public class Invoice {
 		this.tickets = tickets;
 		this.services = services;
 		this.PNR = StandardUtils.generatePNR();
-		this.subtotal = calculateSubtotal();
+		for(Service s : services) {
+			subtotal += s.getSubtotal();
+			taxes += s.getTaxes();
+			total += s.getTotal();
+		}
+		for(Ticket s : tickets) {
+			subtotal += t.getSubtotal();
+			taxes += t.getTaxes();
+			total += t.getTotal();
+		}
 	}
 	
 	

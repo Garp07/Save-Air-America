@@ -108,11 +108,7 @@ public class PersonJDBC {
 				
 				addressID = rs.getInt("AddressID");
 				
-				if (addressID != 0) {
-					address = AddressJDBC.getAddress(addressID);
-				} else {
-					address = new Address("ONLINE", "ONLINE", "ONLINE", "ONLINE", "ONLINE");
-				}
+				address = AddressJDBC.getAddress(addressID);
 				
 				emails = EmailJDBC.getEmail(personID);
 				
@@ -128,8 +124,7 @@ public class PersonJDBC {
 //				}
 				
 			} else {
-				person = new Person("---", "---", "---", AddressJDBC.getAddress(0), "---");
-//				throw new SQLException("No associated person.");
+				throw new SQLException("No associated person.");
 			}
 			
 		} catch (SQLException e) {
@@ -137,6 +132,8 @@ public class PersonJDBC {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
+			if(rs != null)
+				try { rs.close(); } catch(SQLException ignored) {}
 			if(ps != null)
 				try { ps.close(); } catch(SQLException ignored) {}
 			if(conn != null)

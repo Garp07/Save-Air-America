@@ -8,13 +8,13 @@ abstract public class Service extends Product {
 	protected double taxes;
 	protected double total;
 	
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+//	public int getQuantity() {
+//		return quantity;
+//	}
+//
+//	public void setQuantity(int quantity) {
+//		this.quantity = quantity;
+//	}
 
 	//Service constructor
 	public Service(String code) {

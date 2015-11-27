@@ -1,5 +1,7 @@
 package com.airamerica.product.ticket;
 
+import java.util.ArrayList;
+
 import org.joda.time.DateTime;
 
 import com.airamerica.airport.Airport;
@@ -36,8 +38,9 @@ public class OffseasonTicket extends Ticket {
 	//OffseasonTicket constructor
 	public OffseasonTicket(String code, DateTime seasonStartDate, DateTime seasonEndDate, 
 			Airport depAirport, Airport arrAirport, DateTime depTime, DateTime arrTime, 
-			String flightNo, FlightClass flightClass, String aircraftType, double rebate) {
-		super(code, depAirport, arrAirport, depTime, arrTime, flightNo, flightClass, aircraftType);
+			String flightNo, FlightClass flightClass, String aircraftType, double rebate,
+			ArrayList<Seat> seats) {
+		super(code, depAirport, arrAirport, depTime, arrTime, flightNo, flightClass, aircraftType, seats);
 		this.seasonStartDate = seasonStartDate;
 		this.seasonEndDate = seasonEndDate;
 		this.rebate = rebate;

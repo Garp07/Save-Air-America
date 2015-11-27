@@ -34,16 +34,16 @@ public class SpecAssist extends Service {
 		this.total = this.subtotal + this.taxes;
 	}
 	
-	public SpecAssist(String code, String typeOfService) {
-		super(code);
-		this.typeOfService = typeOfService;
-		this.type = "SS";
-		this.quantity = 1;
-		
-		this.subtotal = 0;
-		this.taxes = 0;
-		this.total = this.subtotal + this.taxes;
-	}
+//	public SpecAssist(String code, String typeOfService) {
+//		super(code);
+//		this.typeOfService = typeOfService;
+//		this.type = "SS";
+//		this.quantity = 1;
+//		
+//		this.subtotal = 0;
+//		this.taxes = 0;
+//		this.total = this.subtotal + this.taxes;
+//	}
 	
 	public String toString() {
 		String personString = person.toString();

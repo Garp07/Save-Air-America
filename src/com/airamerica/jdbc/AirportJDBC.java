@@ -111,8 +111,8 @@ public class AirportJDBC {
 				airport = new Airport(airportCode, name, address, latDegs, latMins, lonDegs, lonMins, passengerFacilityFee);
 				
 			} else {
-				airport = new Airport("---", "---", AddressJDBC.getAddress(0), 0, 0, 0, 0, 0);
-//				throw new SQLException("No associated airport.");
+//				airport = new Airport("---", "---", AddressJDBC.getAddress(0), 0, 0, 0, 0, 0);
+				throw new SQLException("No associated airport.");
 			}
 			
 		} catch (SQLException e) {
@@ -120,6 +120,8 @@ public class AirportJDBC {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
+			if(rs != null)
+				try { rs.close(); } catch(SQLException ignored) {}
 			if(ps != null)
 				try { ps.close(); } catch(SQLException ignored) {}
 			if(conn != null)

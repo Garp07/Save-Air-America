@@ -20,7 +20,9 @@ abstract public class Ticket extends Product {
 	protected ArrayList<Seat> seats;
 	protected String ticketNote;
 	
-	public abstract double getCost();
+	protected double subtotal;
+	protected double taxes;
+	protected double total;
 	
 	public Airport getDepAirport() {
 		return depAirport;
@@ -104,7 +106,8 @@ abstract public class Ticket extends Product {
 
 	//Ticket Constructor
 	public Ticket(String code, Airport depAirport, Airport arrAirport, DateTime depTime, 
-			DateTime arrTime, String flightNo, FlightClass flightClass, String aircraftType) {
+			DateTime arrTime, String flightNo, FlightClass flightClass, String aircraftType, 
+			ArrayList<Seat> seats) {
 		super(code);
 		this.depAirport = depAirport;
 		this.arrAirport = arrAirport;
@@ -113,6 +116,8 @@ abstract public class Ticket extends Product {
 		this.flightNo = flightNo;
 		this.flightClass = flightClass;
 		this.aircraftType = aircraftType;
+		
+		this.seats = seats;
 	}
 	
 	public double getFlightDistance() {

@@ -21,17 +21,27 @@ public class Refreshment extends Service {
 	}
 	
 	//Refreshment constructor
-	public Refreshment(String code, String name, double cost) {
+	public Refreshment(String code, String name, double costPerUnit, int quantity) {
 		super(code);
 		this.name = name;
-		this.costPerUnit = cost;
+		this.costPerUnit = costPerUnit;
 		this.type = "SR";
+		
+		this.quantity = quantity;
+		
+		this.subtotal = quantity * costPerUnit;
+		this.taxes = 0.04 * subtotal;
+		this.total = subtotal + taxes;
 	}
 	
-	public double getCost() {
-		double cost = 0;
-		cost = (quantity)*(costPerUnit);
-		return cost;
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		String itemDescription = String.format("%s (%d units @ $%.2f/unit : 5%% off w/ ticket purchase)", name, quantity, costPerUnit);
+		
+		sb.append(String.format("%-10s %-60s $%10.2f $%10.2f $%10.2f", code, itemDescription, subtotal, taxes, total));		
+		
+		return sb.toString();
 	}
 	
 //	public double getServiceCost() {

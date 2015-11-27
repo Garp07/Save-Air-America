@@ -20,6 +20,7 @@ import com.airamerica.utils.NullString;
 public class InvoiceJDBC {
 	
 	public static ArrayList<Invoice> getInvoices() {
+		
 		ArrayList<Invoice> invoices = new ArrayList<Invoice>();
 		
 		Connection conn = DatabaseInfo.getConnection();
@@ -67,6 +68,8 @@ public class InvoiceJDBC {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
+			if(rs != null) 
+				try { rs.close(); } catch(SQLException ignored) {}
 			if(ps != null)
 				try { ps.close(); } catch(SQLException ignored) {}
 			if(conn != null)
