@@ -20,6 +20,42 @@ public class Invoice {
 	protected ArrayList<Service> services;
 	protected String PNR;
 	
+	private double subtotal;
+	private double fees;
+	private double taxes;
+	private double discount;
+	private double total;
+	
+	public String toStringDetailedReport() {
+		StringBuilder sb = new StringBuilder();
+		
+		for(Service s : services) {
+			sb.append(s.toString());
+		}
+		
+		return sb.toString();
+	}
+	
+	private double calculateSubtotal() {
+		double subtotal = 0;
+		for(Service s : services) {
+			switch(s.getType()) {
+				case "SC": case "SA": case "SI":
+					subtotal += s.getCost();
+					break;
+				case "SR": 
+					// 5% discount if a ticket is purchased in same invoice
+					if(tickets.isEmpty()) {
+						subtotal += 1.00 * s.getCost();
+					} else {
+						subtotal += 0.95 * s.getCost();
+					}
+					break;
+			}
+		}
+		return subtotal;
+	}
+	
 	public String getCode() {
 		return code;
 	}
@@ -85,6 +121,7 @@ public class Invoice {
 		this.tickets = tickets;
 		this.services = services;
 		this.PNR = StandardUtils.generatePNR();
+		this.subtotal = calculateSubtotal();
 	}
 	
 	

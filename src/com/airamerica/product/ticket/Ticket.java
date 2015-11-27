@@ -20,6 +20,8 @@ abstract public class Ticket extends Product {
 	protected ArrayList<Seat> seats;
 	protected String ticketNote;
 	
+	public abstract double getCost();
+	
 	public Airport getDepAirport() {
 		return depAirport;
 	}

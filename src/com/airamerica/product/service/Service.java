@@ -4,6 +4,9 @@ import com.airamerica.product.Product;
 
 abstract public class Service extends Product {
 	protected int quantity;
+	protected double subtotal;
+	protected double taxes;
+	protected double total;
 	
 	public int getQuantity() {
 		return quantity;
@@ -18,16 +21,19 @@ abstract public class Service extends Product {
 		super(code);
 	}
 	
-//	public abstract double getServiceCost();
+	public double getSubtotal() {
+		return subtotal;
+	}
 	
-//	public double getServiceTax() {
-//		double tax = this.getServiceCost()*0.04;
-//		return tax;
-//	}
-//	
-//	public double getServiceTotal() {
-//		double total = this.getServiceCost() + this.getServiceTax();
-//		return total;
-//	}
-//	
+	public double getTaxes() {
+		return taxes;
+	}
+	
+	public double getTotal() {
+		return total;
+	}
+	
+	@Override
+	public abstract String toString();
+	
 }

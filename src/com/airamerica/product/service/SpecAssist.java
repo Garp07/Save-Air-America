@@ -28,6 +28,10 @@ public class SpecAssist extends Service {
 		this.type = "SS";
 		this.quantity = 1;
 		this.person = person;
+		
+		this.subtotal = 0;
+		this.taxes = 0;
+		this.total = this.subtotal + this.taxes;
 	}
 	
 	public SpecAssist(String code, String typeOfService) {
@@ -35,11 +39,21 @@ public class SpecAssist extends Service {
 		this.typeOfService = typeOfService;
 		this.type = "SS";
 		this.quantity = 1;
+		
+		this.subtotal = 0;
+		this.taxes = 0;
+		this.total = this.subtotal + this.taxes;
 	}
 	
-//	public double getServiceCost() {
-//		double cost = 0;
-//		return cost;
-//	}
+	public String toString() {
+		String personString = person.toString();
+		String itemDescription = String.format("Special Assistance for [%s] (%s)", personString, typeOfService);
+		
+		//code, item description, subtotal, tax, total
+		StringBuilder sb = new StringBuilder();
+		sb.append(String.format("%-10s %-60s $%10.2f $%10.2f $%10.2f", code, itemDescription, subtotal, taxes, total));
+
+		return sb.toString();
+	}
 	
 }

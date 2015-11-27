@@ -57,6 +57,12 @@ public class Insurance extends Service {
 		this.costPerMile = costPerMile;
 		this.type = "SI";
 	}
+
+	public double getCost() {
+		double cost = 0;
+		cost = (quantity)*(ticket.getFlightDistance())*(costPerMile);
+		return cost;
+	}
 	
 //	public double getServiceCost() {
 //		double distance = this.ticket.getFlightDistance();

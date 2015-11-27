@@ -2,7 +2,7 @@ package com.airamerica.product.service;
 
 public class Refreshment extends Service {
 	private String name;
-	private double cost;
+	private double costPerUnit;
 
 	public String getName() {						
 		return name;
@@ -12,20 +12,26 @@ public class Refreshment extends Service {
 		this.name = name;
 	}
 	
-	public double getCost() {						
-		return cost;
+	public double getCostPerUnit() {						
+		return costPerUnit;
 	}
 	
 	public void setCost(double cost) {				
-		this.cost = cost;
+		this.costPerUnit = cost;
 	}
 	
 	//Refreshment constructor
 	public Refreshment(String code, String name, double cost) {
 		super(code);
 		this.name = name;
-		this.cost = cost;
+		this.costPerUnit = cost;
 		this.type = "SR";
+	}
+	
+	public double getCost() {
+		double cost = 0;
+		cost = (quantity)*(costPerUnit);
+		return cost;
 	}
 	
 //	public double getServiceCost() {
