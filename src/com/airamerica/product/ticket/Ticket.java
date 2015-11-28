@@ -24,6 +24,18 @@ abstract public class Ticket extends Product {
 	protected double taxes;
 	protected double total;
 	
+	public double getSubtotal() {
+		return subtotal;
+	}
+	
+	public double getTaxes() {
+		return taxes;
+	}
+	
+	public double getTotal() {
+		return total;
+	}
+	
 	public Airport getDepAirport() {
 		return depAirport;
 	}
@@ -131,6 +143,9 @@ abstract public class Ticket extends Product {
 		double c = 2*Math.asin(Math.sqrt(a));
 		return c*radiusEarth;
 	}
+	
+	@Override
+	public abstract String toString();
 
 //	public double getBasefare() {
 //		double fareRate = this.flightClass.getCostPerMile();

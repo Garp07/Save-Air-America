@@ -195,6 +195,7 @@ public class TicketJDBC {
 			ps = conn.prepareStatement(selectTicket);
 			
 			ps.setInt(1, invoiceID);
+			ps.setInt(2, ticketID);
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -249,20 +250,21 @@ public class TicketJDBC {
 			
 				switch (type) {
 					case "TO":
-						ticket = new OffseasonTicket(code, seasonStart, seasonEnd, depAirport, arrAirport, depTime, arrTime, flightNo, fc, aircraftType, rebate);
+						ticket = new OffseasonTicket(code, seasonStart, seasonEnd, depAirport, arrAirport,
+								depTime, arrTime, flightNo, fc, aircraftType, rebate, seats, travelDate);
 						break;
 					case "TA":
-						ticket = new AwardTicket(code, depAirport, arrAirport, depTime, arrTime, flightNo, fc, aircraftType, pointsPerMile);
+						ticket = new AwardTicket(code, depAirport, arrAirport, depTime, arrTime, 
+								flightNo, fc, aircraftType, pointsPerMile, seats);
 						break;
 					case "TS":
-						ticket = new StandardTicket(code, depAirport, arrAirport, depTime, arrTime, flightNo, fc, aircraftType);
+						ticket = new StandardTicket(code, depAirport, arrAirport, depTime, arrTime,
+								flightNo, fc, aircraftType, seats);
 						break;
 				}
 	
 				ticket.setTravelDate(travelDate);
-				ticket.setSeats(seats);
 				ticket.setTicketNote(ticketNote);
-				ticket.calculate();
 				
 			}
 		} catch (SQLException e) {
@@ -370,23 +372,25 @@ public class TicketJDBC {
 				seats = SeatJDBC.getSeats(invoiceID, productID);
 			
 				if (type.equals("TS")) {
-					ticket = new StandardTicket(code, depAirport, arrAirport, depTime, arrTime, flightNo, fc, aircraftType);
+					ticket = new StandardTicket(code, depAirport, arrAirport, depTime, arrTime, 
+							flightNo, fc, aircraftType, seats);
 					
 				} else if (type.equals("TO")) {
-					ticket = new OffseasonTicket(code, seasonStart, seasonEnd, depAirport, arrAirport, depTime, arrTime, flightNo, fc, aircraftType, rebate);
+					ticket = new OffseasonTicket(code, seasonStart, seasonEnd, depAirport, arrAirport,
+							depTime, arrTime, flightNo, fc, aircraftType, rebate, seats, travelDate);
 					
 				} else {
-					ticket = new AwardTicket(code, depAirport, arrAirport, depTime, arrTime, flightNo, fc, aircraftType, pointsPerMile);
+					ticket = new AwardTicket(code, depAirport, arrAirport, depTime, arrTime, 
+							flightNo, fc, aircraftType, pointsPerMile, seats);
 
 				}	
 				
 				ticket.setTravelDate(travelDate);
-				ticket.setSeats(seats);
 				ticket.setTicketNote(ticketNote);
 				
 			} else {
-				ticket = new StandardTicket("---", AirportJDBC.getAirport(0), AirportJDBC.getAirport(0), NullString.CheckNullTime(null), NullString.CheckNullTime(null), "---", new Economy(), "---");
-//				throw new SQLException("No associated ticket.");
+//				ticket = new StandardTicket("---", AirportJDBC.getAirport(0), AirportJDBC.getAirport(0), NullString.CheckNullTime(null), NullString.CheckNullTime(null), "---", new Economy(), "---");
+				throw new SQLException("No associated ticket.");
 			}
 			
 			

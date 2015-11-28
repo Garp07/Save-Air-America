@@ -51,7 +51,7 @@ public class SpecAssist extends Service {
 		
 		//code, item description, subtotal, tax, total
 		StringBuilder sb = new StringBuilder();
-		sb.append(String.format("%-10s %-60s $%10.2f $%10.2f $%10.2f", code, itemDescription, subtotal, taxes, total));
+		sb.append(String.format("%-10s %-70s $%10.2f $%10.2f $%10.2f \n", code, itemDescription, subtotal, taxes, total));
 
 		return sb.toString();
 	}

@@ -39,7 +39,7 @@ public class Refreshment extends Service {
 		StringBuilder sb = new StringBuilder();
 		String itemDescription = String.format("%s (%d units @ $%.2f/unit : 5%% off w/ ticket purchase)", name, quantity, costPerUnit);
 		
-		sb.append(String.format("%-10s %-60s $%10.2f $%10.2f $%10.2f", code, itemDescription, subtotal, taxes, total));		
+		sb.append(String.format("%-10s %-70s $%10.2f $%10.2f $%10.2f \n", code, itemDescription, subtotal, taxes, total));		
 		
 		return sb.toString();
 	}

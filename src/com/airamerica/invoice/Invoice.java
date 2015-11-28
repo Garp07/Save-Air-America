@@ -29,9 +29,28 @@ public class Invoice {
 	public String toStringDetailedReport() {
 		StringBuilder sb = new StringBuilder();
 		
+		for(Ticket t : tickets) {
+			sb.append(t.toString());
+		}
+		
 		for(Service s : services) {
 			sb.append(s.toString());
 		}
+		
+		sb.append(String.format("SUB-TOTALS %70s $%10.2f $%10.2f $%10.2f \n", " ", subtotal, taxes, subtotal + taxes));
+		switch (customer.getType()) {
+			case "V": 
+				sb.append(String.format("DISCOUNT ( NO TAX ) %85s $%10.2f \n", " ", discount));
+				break;
+			case "G":
+				sb.append(String.format("DISCOUNT ( NO DISCOUNT ) %80s $%10.2f \n", " ", discount));
+				break;
+			case "C":
+				sb.append(String.format("DISCOUNT ( 12%% OFF SUB-TOTAL ) %74s $%10.2f \n", " ", discount));
+				break;
+		}
+		sb.append(String.format("ADDITIONAL FEE %90s $%10.2f \n", " ", fees));
+		sb.append(String.format("TOTAL %99s $%10.2f \n", " ", total));
 		
 		return sb.toString();
 	}
@@ -102,15 +121,43 @@ public class Invoice {
 		this.services = services;
 		this.PNR = StandardUtils.generatePNR();
 		for(Service s : services) {
-			subtotal += s.getSubtotal();
+			switch (s.getType()) {
+				case "SI":
+					if(!tickets.isEmpty()) {
+						subtotal += 0.95 * s.getSubtotal();
+						break;
+					}
+				default:
+					subtotal += s.getSubtotal();
+					break;
+			}
 			taxes += s.getTaxes();
 			total += s.getTotal();
 		}
-		for(Ticket s : tickets) {
+		for(Ticket t : tickets) {
 			subtotal += t.getSubtotal();
 			taxes += t.getTaxes();
 			total += t.getTotal();
 		}
+		
+		switch (this.customer.getType()) {
+			case "V":
+				discount = -taxes;
+				fees = 0;
+				break;
+			case "C":
+				discount = -0.12 * subtotal;
+				fees = 40;
+				break;
+			case "G":
+				discount = 0;
+				fees = 0;
+				break;
+		}
+		
+		total += discount;
+		total += fees;
+		
 	}
 	
 	

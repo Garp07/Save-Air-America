@@ -35,9 +35,9 @@ public class CheckedBaggage extends Service {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		
-		String itemDescription = String.format("Baggage (%d units @ $%.2f for 1st and $%.2f onwards)", quantity, 25, 35);
+		String itemDescription = String.format("Baggage (%d units @ $%.2f for 1st and $%.2f onwards)", quantity, 25.0, 35.0);
 		
-		sb.append(String.format("%-10s %-60s $%10.2f $%10.2f $%10.2f", code, itemDescription, subtotal, taxes, total));
+		sb.append(String.format("%-10s %-70s $%10.2f $%10.2f $%10.2f \n", code, itemDescription, subtotal, taxes, total));
 		
 		return sb.toString();
 	}
