@@ -28,7 +28,7 @@ abstract public class Ticket extends Product {
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append(String.format("%-20s %-20s %-20s %-30s %-30s %-20s %n",
-				travelDate, flightNo, flightClass, depAirport.getAddress().getCityState(), arrAirport.getAddress().getCityState(), aircraftType));
+				travelDate, flightNo, flightClass.getType(), depAirport.getAddress().getCityState(), arrAirport.getAddress().getCityState(), aircraftType));
 		
 		sb.append(String.format("%-20s %-20s %-20s (%-3s)%-25s (%-3s)%-8s %-20s %n",
 				" ", " ", " ", depAirport.getAirportCode(), depTime, arrAirport.getAirportCode(), arrTime, " "));

@@ -61,7 +61,7 @@ public class SortedList<T> implements Iterable<T> {
 			this.addToStart(t);
 		} 
 		// first element
-		else if(this.comparator.compare(head.getObject(), node.getObject()) < 0) {
+		else if(this.comparator.compare(head.getObject(), node.getObject()) > 0) {
 			this.addToStart(t);
 		} 
 		// loop through list trying to find where the node goes
@@ -73,10 +73,12 @@ public class SortedList<T> implements Iterable<T> {
 				} else {
 					SortedListNode previous = newNode.getPrevious();
 					previous.setNext(node);
-					node.setPrevious(previous);
-					
-					newNode.setPrevious(node);
 					node.setNext(newNode);
+					
+					node.setPrevious(previous);
+					newNode.setPrevious(node);
+					
+					break;
 				}
 			}
 			// if node goes at the end of the list
@@ -84,9 +86,6 @@ public class SortedList<T> implements Iterable<T> {
 				this.addToEnd(t);
 			}
 		}
-		
-		
-		
 		
 	}
 	

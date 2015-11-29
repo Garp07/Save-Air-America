@@ -24,7 +24,7 @@ public class CheckedBaggage extends Service {
 		if(this.quantity == 1) {
 			this.subtotal = 25;
 		} else {
-			this.subtotal = 25 + (quantity - 1) * 25;
+			this.subtotal = 25 + (quantity - 1) * 35;
 		}
 		this.taxes = 0.04 * subtotal;
 		this.total = subtotal + taxes;

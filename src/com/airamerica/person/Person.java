@@ -85,7 +85,11 @@ public class Person {
 	
 	@Override
 	public String toString() {
-		return lastName + ", " + firstName;
+		if(firstName.equalsIgnoreCase("online")) {
+			return "ONLINE";
+		} else {
+			return lastName + ", " + firstName;
+		}
 	}
 	
 }

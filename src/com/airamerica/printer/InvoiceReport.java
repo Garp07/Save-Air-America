@@ -4,59 +4,109 @@ import java.util.ArrayList;
 
 import com.airamerica.invoice.Invoice;
 import com.airamerica.jdbc.InvoiceJDBC;
+import com.airamerica.list.SortedList;
 
 public class InvoiceReport {
 
+	private static double subtotal = 0;
+	private static double fees = 0;
+	private static double taxes = 0;
+	private static double discount = 0;
+	private static double total = 0;
+	
 	public static void main(String[] args) {
-//		AirportConverter airports = new AirportConverter("data/Airports.dat");					
-//		ArrayList<Airport> airportsArray = airports.parseAirports();
-//		
-//		//Create array list of persons
-//		PersonConverter persons = new PersonConverter("data/Persons.dat");						
-//		ArrayList<Person> personsArray = persons.parsePersons();
-//		
-//		/* 
-//		 * Create array list of products - first go through and find all tickets, 
-//		 * then go through file again to make complete objects
-//		 */
-//		ProductConverter products = new ProductConverter("data/Products.dat", airportsArray);	
-//		ArrayList<Ticket> ticketsArray = products.parseTickets();
-//		products = new ProductConverter("data/Products.dat", airportsArray, ticketsArray);
-//		ArrayList<Product> productsArray = products.parseProducts();
-//		
-//		//Create array list of customers
-//		CustomerConverter customers = new CustomerConverter("data/Customers.dat", personsArray);				
-//		ArrayList<Customer> customersArray = customers.parseCustomers();
-//		
-//		InvoiceConverter invoices = new InvoiceConverter("data/Invoices.dat", productsArray, 
-//				customersArray, personsArray);
-//		ArrayList<Invoice> invoicesArray = invoices.parseInvoices();
-//	
-//		ArrayList<Invoice> invoicesArray = InvoiceJDBC.getInvoices();
-//		SummaryPrinter summary = new SummaryPrinter();
-//		InvoicePrinter singleInvoice = new InvoicePrinter();
-//		
-//		
-//		
-//		
-//		summary.print(invoicesArray);
-//		System.out.printf("%n");
-//		System.out.printf("%n");
-//		for(Invoice i : invoicesArray) {
-//			singleInvoice.print(i);
-//			System.out.printf("%n");
-//			System.out.printf("%n");
-//		}
 		
+		ArrayList<Invoice> originalInvoices = InvoiceJDBC.getInvoices();
 		
-		//---------------------------
+		System.out.println("DONE with db");
 		
-		ArrayList<Invoice> invoices = InvoiceJDBC.getInvoices();
+		//sort by customer name
+		SortedList<Invoice> invoicesByCustomerName = new SortedList<Invoice>(new Invoice.SortByCustomerName());
 		
-		for(Invoice i : invoices) {
-			i.printDetailedReport();
+		for(Invoice i : originalInvoices) {
+			invoicesByCustomerName.add(i);
 		}
-		System.out.println("DONE");
+		
+		System.out.println("DONE ordering");
+		
+		System.out.println("Ordered by Customer Name");
+		
+		Invoice.printSummaryHeader();
+		for(Invoice i : invoicesByCustomerName) {
+			i.printSummary();
+			subtotal += i.getSubtotal();
+			fees += i.getFees();
+			taxes += i.getTaxes();
+			discount += i.getDiscount();
+			total += i.getTotal();
+		}
+		
+		Invoice.printSummaryFooter();
+		printSummaryTotals();
+		
+		clearTotals();
+	
+		// Sort by Totals
+		SortedList<Invoice> invoicesByTotals = new SortedList<Invoice>(new Invoice.SortByInvoiceTotal());
+		
+		for(Invoice i : originalInvoices) {
+			invoicesByTotals.add(i);
+		}
+		
+		System.out.println("Ordered by Totals");
+		
+		Invoice.printSummaryHeader();
+		for(Invoice i : invoicesByTotals) {
+			i.printSummary();
+			subtotal += i.getSubtotal();
+			fees += i.getFees();
+			taxes += i.getTaxes();
+			discount += i.getDiscount();
+			total += i.getTotal();
+		}
+		
+		Invoice.printSummaryFooter();
+		printSummaryTotals();
+		
+		clearTotals();
+		
+		// Sort by Customer Type then SalesPerson
+		SortedList<Invoice> invoicesByCustomerTypeSalesperson = new SortedList<Invoice>(new Invoice.SortByCustomerThenPerson());
+		
+		for(Invoice i : originalInvoices) {
+			invoicesByCustomerTypeSalesperson.add(i);
+		}
+		
+		System.out.println("Ordered by Customer then Salesperson");
+		
+		Invoice.printSummaryHeader();
+		for(Invoice i : invoicesByCustomerTypeSalesperson) {
+			i.printSummary();
+			subtotal += i.getSubtotal();
+			fees += i.getFees();
+			taxes += i.getTaxes();
+			discount += i.getDiscount();
+			total += i.getTotal();
+		}
+		
+		Invoice.printSummaryFooter();
+		printSummaryTotals();
+		
+		clearTotals();
+		
+	}
+	
+	private static void printSummaryTotals() {
+		System.out.printf("%-92s $%10.2f $%10.2f $%10.2f $%10.2f $%10.2f %n", "TOTALS", subtotal, fees, taxes,
+				discount, total);
+	}
+	
+	private static void clearTotals() {
+		subtotal = 0;
+		fees = 0;
+		taxes = 0;
+		discount = 0;
+		total = 0;
 	}
 		
 //	private static String generateSummaryReport() {

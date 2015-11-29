@@ -15,7 +15,7 @@ public class StandardTicket extends Ticket {
 		this.type = "TS";
 		
 		this.subtotal = flightClass.getCostPerMile() * seats.size() * getFlightDistance();
-		this.taxes = 0.04 * subtotal;
+		this.taxes = 0.075 * subtotal + seats.size() * (4.00 + 5.60 + arrAirport.getPassengerFacilityFee());
 		this.total = subtotal + taxes;
 	}
 	

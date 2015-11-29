@@ -48,12 +48,12 @@ public class OffseasonTicket extends Ticket {
 		
 		if(travelDate.isBefore(seasonEndDate) && travelDate.isAfter(seasonStartDate)) {
 			this.rebate = rebate;
-			this.subtotal = (1-rebate) * flightClass.getCostPerMile() * seats.size() * getFlightDistance() + 20;
+			this.subtotal = (1-this.rebate) * flightClass.getCostPerMile() * seats.size() * getFlightDistance() + 20;
 		} else {
 			this.rebate = 0;
-			this.subtotal = (1-rebate) * flightClass.getCostPerMile() * seats.size() * getFlightDistance() + 20;
+			this.subtotal = (1-this.rebate) * flightClass.getCostPerMile() * seats.size() * getFlightDistance() + 20;
 		}
-		this.taxes = 0.04 * subtotal;
+		this.taxes = 0.075 * this.subtotal + seats.size() * (4.00 + 5.60 + arrAirport.getPassengerFacilityFee());
 		this.total = subtotal + taxes;
 	}
 	

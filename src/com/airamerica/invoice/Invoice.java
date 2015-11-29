@@ -28,11 +28,50 @@ public class Invoice {
 	private double discount;
 	private double total;
 	
+	public double getSubtotal() {
+		return subtotal;
+	}
+
+	public void setSubtotal(double subtotal) {
+		this.subtotal = subtotal;
+	}
+
+	public double getFees() {
+		return fees;
+	}
+
+	public void setFees(double fees) {
+		this.fees = fees;
+	}
+
+	public double getTaxes() {
+		return taxes;
+	}
+
+	public void setTaxes(double taxes) {
+		this.taxes = taxes;
+	}
+
+	public double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(double discount) {
+		this.discount = discount;
+	}
+
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
 	
 	/*
 	 * Sorts by customer name alphabetically
 	 */
-	public class SortByCustomerName implements Comparator<Invoice> {
+	public static class SortByCustomerName implements Comparator<Invoice> {
 
 		@Override
 		public int compare(Invoice arg0, Invoice arg1) {
@@ -48,7 +87,7 @@ public class Invoice {
 	/*
 	 * Sorts from highest invoice to lowest invoice
 	 */
-	public class SortByInvoiceTotal implements Comparator<Invoice> {
+	public static class SortByInvoiceTotal implements Comparator<Invoice> {
 
 		@Override
 		public int compare(Invoice arg0, Invoice arg1) {
@@ -66,16 +105,69 @@ public class Invoice {
 	/*
 	 * Sorts by customer type and then by the sales person name
 	 */
-	public class SortByCustomerThenPerson implements Comparator<Invoice> {
+	public static class SortByCustomerThenPerson implements Comparator<Invoice> {
 
 		@Override
 		public int compare(Invoice arg0, Invoice arg1) {
-			// TODO Auto-generated method stub
-			return 0;
+			
+			// customer type
+			if(arg0.customer.getType().equalsIgnoreCase(arg1.customer.getType())) {
+				
+				// salesperson last name
+				if(arg0.person.getLastName().equalsIgnoreCase(arg1.person.getLastName())) {
+					
+					// salesperson first name
+					if(arg0.person.getFirstName().equalsIgnoreCase(arg1.person.getFirstName())) {
+						return 0;
+					} else {
+						return arg0.person.getFirstName().compareToIgnoreCase(arg1.person.getFirstName());
+					}
+					
+				} else {
+					
+					return arg0.person.getLastName().compareToIgnoreCase(arg1.person.getLastName());
+					
+				}
+				
+			} else {
+				
+				return arg0.customer.getType().compareToIgnoreCase(arg1.customer.getType());
+				
+			}
 		}
 		
 	}
 	
+	public static void printSummaryHeader() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Executive Summary Report\n");
+		sb.append("=========================\n");
+		sb.append(String.format("%-10s %-50s %-30s %11s %11s %11s %11s %11s %n", "Invoice", "Customer", "Salesperson", "Subtotal", "Fees", "Taxes",
+				"Discount", "Total"));
+		
+		System.out.print(sb.toString());
+	}
+	
+	public static void printSummaryFooter() {
+		System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------");
+	}
+	
+	public void printSummary() {
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append(String.format("%-10s %-50s %-30s $%10.2f $%10.2f $%10.2f $%10.2f $%10.2f %n", 
+				code, customer.getName() + " [" + customer.getTypeString() + "]", person.toString(), 
+				subtotal, fees, taxes, discount, total));
+		
+		
+		
+		System.out.print(sb.toString());
+	}
+	
+	/*
+	 * TODO
+	 * Refactored method from previous assignment, implementation not yet complete
+	 */
 	public void printDetailedReport() {
 		
 		StringBuilder sb = new StringBuilder();
@@ -210,6 +302,7 @@ public class Invoice {
 			taxes += s.getTaxes();
 			total += s.getTotal();
 		}
+		
 		for(Ticket t : tickets) {
 			subtotal += t.getSubtotal();
 			taxes += t.getTaxes();

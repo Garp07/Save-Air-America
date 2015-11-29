@@ -28,7 +28,7 @@ public class AwardTicket extends Ticket {
 		this.type = "TA";
 		
 		this.subtotal = 30;
-		this.taxes = 0.04 * seats.size() * flightClass.getCostPerMile() * getFlightDistance();
+		this.taxes = 0.075 * this.subtotal + seats.size() * (4.00 + 5.60 + arrAirport.getPassengerFacilityFee());
 		this.total = subtotal + taxes;
 	}
 	

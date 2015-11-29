@@ -57,4 +57,15 @@ abstract public class Customer {
 		this.airlineMiles = airlineMiles;
 	}
 	
+	public String getTypeString() {
+		switch (type) {
+			case "V": 
+				return "Government";
+			case "G":
+				return "General";
+			case "C":
+				return "Corporate";
+		}
+		return "Error";
+	}
 }
