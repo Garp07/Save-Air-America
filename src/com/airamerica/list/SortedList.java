@@ -117,7 +117,29 @@ public class SortedList<T> implements Iterable<T> {
 			head = node;
 		}
 	}
-
+	
+	public void remove(int positiion) {
+		
+	}
+	
+	public T getObject(int position) {
+		return getNode(position).getObject();
+	}
+	
+	public SortedListNode getNode(int position) {
+		SortedListNode node = head;
+		
+		for(int i=0; i<position; i++) {
+			if(node.getNext() == null) {
+				return null;
+			}
+			
+			node = node.getNext();
+		}
+		
+		return node.getNext();
+	}
+	
 	@Override
 	public Iterator<T> iterator() {
 		return new Iterator<T>() {

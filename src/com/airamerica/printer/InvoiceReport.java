@@ -54,7 +54,7 @@ public class InvoiceReport {
 		ArrayList<Invoice> invoices = InvoiceJDBC.getInvoices();
 		
 		for(Invoice i : invoices) {
-			System.out.println(i.toStringDetailedReport() + "\n");
+			i.printDetailedReport();
 		}
 		System.out.println("DONE");
 	}

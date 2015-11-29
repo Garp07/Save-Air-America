@@ -24,6 +24,29 @@ abstract public class Ticket extends Product {
 	protected double taxes;
 	protected double total;
 	
+	public String toStringFlightInfo() {
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append(String.format("%-20s %-20s %-20s %-30s %-30s %-20s %n",
+				travelDate, flightNo, flightClass, depAirport.getAddress().getCityState(), arrAirport.getAddress().getCityState(), aircraftType));
+		
+		sb.append(String.format("%-20s %-20s %-20s (%-3s)%-25s (%-3s)%-8s %-20s %n",
+				" ", " ", " ", depAirport.getAirportCode(), depTime, arrAirport.getAirportCode(), arrTime, " "));
+		
+		// seat info
+		sb.append(String.format("%-15s %-20s %-10s %-10s %n", " ", "Passenger", "Age", "Seat No."));
+		for(Seat s : seats) {
+			sb.append(s.toStringSeatInfo());
+		}
+	
+		//Notes are optional, implement conditional later
+		sb.append(String.format("%-10s *%-50s %n", " ", ticketNote));
+		
+		sb.append("-----------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+		
+		return sb.toString();
+	}
+	
 	public double getSubtotal() {
 		return subtotal;
 	}

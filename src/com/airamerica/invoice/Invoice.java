@@ -76,9 +76,30 @@ public class Invoice {
 		
 	}
 	
-	public String toStringDetailedReport() {
+	public void printDetailedReport() {
+		
 		StringBuilder sb = new StringBuilder();
 		
+		//invoice information
+		sb.append(String.format("Invoice %-10s \n", code));
+		sb.append("-----------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+		sb.append(String.format("%-82s %-10s \n", "Air America", "PNR"));
+		sb.append(String.format("Issue Date: %-70s %-10s \n", invoiceDate, PNR));
+		sb.append("-----------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+		
+		sb.append("FLIGHT INFORMATION");
+		sb.append(String.format("%-20s %-20s %-20s %-30s %-30s %-20s %n", 
+				"Flight Date", "Flight No.", "Class", "Departing City and Time", "Arriving City and Time", "Aircraft"));
+		
+		// ticket and seat information
+		for(Ticket t : tickets) {
+			sb.append(t.toStringFlightInfo());
+		}
+		
+		// customer information
+		//TODO
+	
+		// product summary
 		for(Ticket t : tickets) {
 			sb.append(t.toString());
 		}
@@ -87,6 +108,7 @@ public class Invoice {
 			sb.append(s.toString());
 		}
 		
+		//totals
 		sb.append(String.format("SUB-TOTALS %70s $%10.2f $%10.2f $%10.2f \n", " ", subtotal, taxes, subtotal + taxes));
 		switch (customer.getType()) {
 			case "V": 
@@ -102,7 +124,7 @@ public class Invoice {
 		sb.append(String.format("ADDITIONAL FEE %90s $%10.2f \n", " ", fees));
 		sb.append(String.format("TOTAL %99s $%10.2f \n", " ", total));
 		
-		return sb.toString();
+		System.out.print(sb.toString());
 	}
 	
 	public String getCode() {
@@ -160,7 +182,10 @@ public class Invoice {
 	public void setPNR(String PNR) {
 		this.PNR = PNR;
 	}
-
+	
+	/*
+	 * invoice totals are calculated upon construction
+	 */
 	public Invoice(String code, Customer customer, Person person, DateTime invoiceDate,
 			ArrayList<Ticket> tickets, ArrayList<Service> services) {
 		this.code = code;
