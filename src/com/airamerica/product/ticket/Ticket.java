@@ -20,6 +20,45 @@ abstract public class Ticket extends Product {
 	protected ArrayList<Seat> seats;
 	protected String ticketNote;
 	
+	protected double subtotal;
+	protected double taxes;
+	protected double total;
+	
+	public String toStringFlightInfo() {
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append(String.format("%-20s %-20s %-20s %-30s %-30s %-20s %n",
+				travelDate, flightNo, flightClass.getType(), depAirport.getAddress().getCityState(), arrAirport.getAddress().getCityState(), aircraftType));
+		
+		sb.append(String.format("%-20s %-20s %-20s (%-3s)%-25s (%-3s)%-8s %-20s %n",
+				" ", " ", " ", depAirport.getAirportCode(), depTime, arrAirport.getAirportCode(), arrTime, " "));
+		
+		// seat info
+		sb.append(String.format("%-15s %-20s %-10s %-10s %n", " ", "Passenger", "Age", "Seat No."));
+		for(Seat s : seats) {
+			sb.append(s.toStringSeatInfo());
+		}
+	
+		//Notes are optional, implement conditional later
+		sb.append(String.format("%-10s *%-50s %n", " ", ticketNote));
+		
+		sb.append("-----------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+		
+		return sb.toString();
+	}
+	
+	public double getSubtotal() {
+		return subtotal;
+	}
+	
+	public double getTaxes() {
+		return taxes;
+	}
+	
+	public double getTotal() {
+		return total;
+	}
+	
 	public Airport getDepAirport() {
 		return depAirport;
 	}
@@ -102,7 +141,8 @@ abstract public class Ticket extends Product {
 
 	//Ticket Constructor
 	public Ticket(String code, Airport depAirport, Airport arrAirport, DateTime depTime, 
-			DateTime arrTime, String flightNo, FlightClass flightClass, String aircraftType) {
+			DateTime arrTime, String flightNo, FlightClass flightClass, String aircraftType, 
+			ArrayList<Seat> seats) {
 		super(code);
 		this.depAirport = depAirport;
 		this.arrAirport = arrAirport;
@@ -111,6 +151,8 @@ abstract public class Ticket extends Product {
 		this.flightNo = flightNo;
 		this.flightClass = flightClass;
 		this.aircraftType = aircraftType;
+		
+		this.seats = seats;
 	}
 	
 	public double getFlightDistance() {
@@ -124,6 +166,9 @@ abstract public class Ticket extends Product {
 		double c = 2*Math.asin(Math.sqrt(a));
 		return c*radiusEarth;
 	}
+	
+	@Override
+	public abstract String toString();
 
 //	public double getBasefare() {
 //		double fareRate = this.flightClass.getCostPerMile();

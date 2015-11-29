@@ -9,6 +9,10 @@ public class Seat {
 	private int age;
 	private String nationality;
 	
+	public String toStringSeatInfo() {
+		return String.format("%-15s %-20s %-10s %-10s %n", " ", person, age, seatNumber);
+	}
+	
 	public String getSeatNumber() {
 		return seatNumber;
 	}

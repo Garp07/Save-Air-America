@@ -45,8 +45,8 @@ public class AddressJDBC {
 				address = new Address(street, city, state, zipcode, country);
 				
 			} else {
-				address = new Address("---", "---", "---", "---", "---");
-//				throw new SQLException("No Address");
+//				address = new Address("---", "---", "---", "---", "---");
+				throw new SQLException("No Address");
 			}
 			
 		} catch (SQLException e) {

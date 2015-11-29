@@ -44,6 +44,7 @@ public class ServiceJDBC {
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
+				
 				code = NullString.CheckNullString(rs.getString("ProductCode"));
 				
 				insuranceName = NullString.CheckNullString(rs.getString("InsuranceName"));
@@ -70,21 +71,18 @@ public class ServiceJDBC {
 				
 				
 				if (type.equals("SC")) {
-					service = new CheckedBaggage(code, ticket); //Need to go back and add ticket attribute to CB class as well as a column in the DB
-					service.setQuantity(quantity);
+					service = new CheckedBaggage(code, ticket, quantity); //Need to go back and add ticket attribute to CB class as well as a column in the DB
 		
 				} else if (type.equals("SI")) {
 					ticket = TicketJDBC.getInsuranceTicket(invoiceID, ticketID);
-					service = new Insurance(code, insuranceName, ageClass, costPerMile, ticket);
-					service.setQuantity(quantity);
+					service = new Insurance(code, insuranceName, ageClass, costPerMile, ticket, quantity);
 				
 				} else if (type.equals("SS")) {
 					person = PersonJDBC.getPerson(personID);
 					service = new SpecAssist(code, typeOfService, person);
 				
 				} else {
-					service = new Refreshment(code, refreshmentName, cost);
-					service.setQuantity(quantity);
+					service = new Refreshment(code, refreshmentName, cost, quantity);
 					
 				}
 				

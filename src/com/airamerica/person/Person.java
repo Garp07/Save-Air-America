@@ -83,4 +83,13 @@ public class Person {
 		this.phoneNumber = phoneNumber;
 	}
 	
+	@Override
+	public String toString() {
+		if(firstName.equalsIgnoreCase("online")) {
+			return "ONLINE";
+		} else {
+			return lastName + ", " + firstName;
+		}
+	}
+	
 }

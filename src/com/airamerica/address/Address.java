@@ -7,6 +7,10 @@ public class Address {
 	private String zipcode;
 	private String country;
 	
+	public String getCityState() {
+		return city + ", " + state;
+	}
+	
 	//Address constructor
 	public Address(String street, String city, String state, String zipcode, String country) {
 		this.setStreet(street);

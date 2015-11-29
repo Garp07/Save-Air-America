@@ -107,17 +107,21 @@ public class CustomerJDBC {
 				
 				primaryContact = PersonJDBC.getPerson(primaryContactID);
 				
-				if (type.equals("G")) {
-					customer = new General(code, primaryContact, name, airlineMiles);
-				} else if (type.equals("V")) {
-					customer = new Government(code, primaryContact, name, airlineMiles);
-				} else {
-					customer = new Corporate(code, primaryContact, name, airlineMiles);
+				switch (type) {
+					case "G":
+						customer = new General(code, primaryContact, name, airlineMiles);
+						break;
+					case "V":
+						customer = new Government(code, primaryContact, name, airlineMiles);
+						break;
+					case "C":
+						customer = new Corporate(code, primaryContact, name, airlineMiles);
+						break;
 				}
 			
 			} else {
-				customer = new General("---", PersonJDBC.getPerson(0), "---", 0);
-//				throw new SQLException("No associated customer.");
+//				customer = new General("---", PersonJDBC.getPerson(0), "---", 0);
+				throw new SQLException("No associated customer.");
 			}
 			
 		} catch (SQLException e) {
