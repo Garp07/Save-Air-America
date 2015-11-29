@@ -1,11 +1,13 @@
 package com.airamerica.invoice;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import org.joda.time.DateTime;
 
 import com.airamerica.customer.Customer;
 import com.airamerica.person.Person;
+import com.airamerica.product.service.Refreshment;
 import com.airamerica.product.service.Service;
 import com.airamerica.product.ticket.Ticket;
 import com.airamerica.utils.StandardUtils;
@@ -25,6 +27,54 @@ public class Invoice {
 	private double taxes;
 	private double discount;
 	private double total;
+	
+	
+	/*
+	 * Sorts by customer name alphabetically
+	 */
+	public class SortByCustomerName implements Comparator<Invoice> {
+
+		@Override
+		public int compare(Invoice arg0, Invoice arg1) {
+			if(arg0.customer.getName().equals(arg1.customer.getName())) {
+				return 0;
+			} else {
+				return arg0.customer.getName().compareTo(arg1.customer.getName()); 
+			}
+		}
+		
+	}
+	
+	/*
+	 * Sorts from highest invoice to lowest invoice
+	 */
+	public class SortByInvoiceTotal implements Comparator<Invoice> {
+
+		@Override
+		public int compare(Invoice arg0, Invoice arg1) {
+			if(arg0.total == arg1.total) {
+				return 0;
+			} else if(arg0.total > arg1.total){
+				return -1;
+			} else {
+				return 1;
+			}
+		}
+		
+	}
+	
+	/*
+	 * Sorts by customer type and then by the sales person name
+	 */
+	public class SortByCustomerThenPerson implements Comparator<Invoice> {
+
+		@Override
+		public int compare(Invoice arg0, Invoice arg1) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+		
+	}
 	
 	public String toStringDetailedReport() {
 		StringBuilder sb = new StringBuilder();
@@ -122,9 +172,10 @@ public class Invoice {
 		this.PNR = StandardUtils.generatePNR();
 		for(Service s : services) {
 			switch (s.getType()) {
-				case "SI":
+				case "SR":
 					if(!tickets.isEmpty()) {
 						subtotal += 0.95 * s.getSubtotal();
+						((Refreshment)s).setSubtotal(0.95 * s.getSubtotal());
 						break;
 					}
 				default:

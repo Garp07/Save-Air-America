@@ -34,6 +34,12 @@ public class Refreshment extends Service {
 		this.total = subtotal + taxes;
 	}
 	
+	public void setSubtotal(double subtotal) {
+		this.subtotal = subtotal;
+		this.taxes = 0.04 * this.subtotal;
+		this.total = this.subtotal + taxes;
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

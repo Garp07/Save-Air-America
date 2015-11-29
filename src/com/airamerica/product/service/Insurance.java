@@ -67,7 +67,7 @@ public class Insurance extends Service {
 		StringBuilder sb = new StringBuilder();
 		
 		String itemDescription = String.format("Insurance %s(%s)", name, ageClass);
-		String itemCostDescription = String.format("(%d units @ $%.2f/mile for $%.2f miles)", 
+		String itemCostDescription = String.format("(%d units @ $%.2f/mile for %.2f miles)", 
 				quantity, costPerMile, ticket.getFlightDistance());
 	
 		sb.append(String.format("%-10s %-70s $%10.2f $%10.2f $%10.2f \n", code, itemDescription, subtotal, taxes, total));
